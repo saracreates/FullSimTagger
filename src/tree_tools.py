@@ -1,0 +1,101 @@
+import sys
+import math
+import ROOT
+from array import array
+from ROOT import TFile, TTree
+import numpy as np
+from podio import root_io
+import edm4hep
+
+
+def initialize(t):
+    event_number = array("i", [0])
+    n_hit = array("i", [0])
+    n_part = array("i", [0])
+
+    hit_chis = ROOT.std.vector("float")()
+    hit_x = ROOT.std.vector("float")()
+    hit_y = ROOT.std.vector("float")()
+    hit_z = ROOT.std.vector("float")()
+    hit_px = ROOT.std.vector("float")()
+    hit_py = ROOT.std.vector("float")()
+    hit_pz = ROOT.std.vector("float")()
+
+    t.Branch("event_number", event_number, "event_number/I")
+    t.Branch("n_hit", n_hit, "n_hit/I")
+    t.Branch("n_part", n_part, "n_part/I")
+
+    t.Branch("hit_chis", hit_chis)
+    t.Branch("hit_x", hit_x)
+    t.Branch("hit_y", hit_y)
+    t.Branch("hit_z", hit_z)
+    t.Branch("hit_px", hit_px)
+    t.Branch("hit_py", hit_py)
+    t.Branch("hit_pz", hit_pz)
+
+    dic = {
+        "hit_chis": hit_chis,
+        "hit_x": hit_x,
+        "hit_y": hit_y,
+        "hit_z": hit_z,
+        "hit_px": hit_px,
+        "hit_py": hit_py,
+        "hit_pz": hit_pz,
+    }
+    return (event_number, n_hit, n_part, dic, t)
+
+
+def clear_dic(dic):
+    for key in dic:
+        dic[key].clear()
+    return dic
+
+
+def store_jet(event, debug, dic, event_number, t):
+    """The jets have the following args that can be accessed with dir(jets)
+    ['__add__', '__assign__', '__bool__', '__class__', '__delattr__', '__destruct__',
+    '__dict__', '__dir__', '__dispatch__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__',
+    '__gt__', '__hash__', '__init__', '__init_subclass__', '__invert__', '__le__', '__lt__', '__module__',
+    '__mul__', '__ne__', '__neg__', '__new__', '__pos__', '__python_owns__', '__radd__', '__reduce__',
+    '__reduce_ex__', '__repr__', '__rmul__', '__rsub__', '__rtruediv__', '__setattr__', '__sizeof__',
+    '__smartptr__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__weakref__',
+    'addToClusters', 'addToParticleIDs', 'addToParticles', 'addToTracks', 'clone', 'clusters_begin',
+    'clusters_end', 'clusters_size', 'covMatrix', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy',
+    'getGoodnessOfPID', 'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs',
+    'getParticles', 'getReferencePoint', 'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable'
+    , 'isCompound', 'momentum', 'operator ReconstructedParticle', 'particleIDs_begin', 'particleIDs_end'
+    , 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'referencePoint',
+    'setCharge', 'setCovMatrix', 'setEnergy', 'setGoodnessOfPID', 'setMass', 'setMomentum',
+    'setParticleIDUsed', 'setReferencePoint', 'setStartVertex', 'setType', 'tracks_begin',
+    'tracks_end', 'tracks_size', 'unlink']
+
+    Args:
+        event (_type_): single event from the input rootfile
+        debug (_type_): debug flat
+        dic (_type_): dic with tree information for output root file
+
+    Returns:
+        _type_: _description_
+    """
+
+    RefinedVertexJets = "RefinedVertexJets"
+
+    if debug:
+        print("")
+    for j, jet in enumerate(event.get(RefinedVertexJets)):
+
+        # Use dir(jet) to print all available bindings
+        print(dir(jet))
+
+        # break
+        # Extract the jet momentum
+        jet_momentum = jet.getMomentum()
+        print(jet_momentum.x, jet_momentum.y)
+        particles_jet = jet.getParticles()
+
+        # because we want to go from an event based tree to a jet based tree for each jet we add an event
+        event_number[0] += 1
+        # this needs to be updates to fill the tree with the info as in the fastsim rootfile
+        # t.Fill()
+
+    return dic, event_number, t
