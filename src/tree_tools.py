@@ -8,6 +8,19 @@ from podio import root_io
 import edm4hep
 
 
+def PDG_ID_to_bool(number: int) -> dict:
+    """Following https://pdg.lbl.gov/2007/reviews/montecarlorpp.pdf """
+    particle_map = {
+        1: {"recojet_isU": True, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
+        2: {"recojet_isU": False, "recojet_isD": True, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
+        3: {"recojet_isU": False, "recojet_isD": False, "recojet_isS": True, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
+        4: {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": True, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
+        5: {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": True, "recojet_isTAU": False, "recojet_isG": False},
+        15: {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": True, "recojet_isG": False},
+        21: {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": True},
+    }
+    return particle_map.get(number, {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False})
+
 def initialize(t):
     event_number = array("i", [0])
     n_hit = array("i", [0])
@@ -33,19 +46,37 @@ def initialize(t):
     t.Branch("hit_py", hit_py)
     t.Branch("hit_pz", hit_pz)
     
-    # parameters from fast sim to be reproduced in full sim
-    jet_p = ROOT.std.vector("float")()
-    t.Branch("jet_p", jet_p)
-    jet_E = ROOT.std.vector("float")()
-    t.Branch("jet_E", jet_E)
-    jet_mass = ROOT.std.vector("float")()
-    t.Branch("jet_mass", jet_mass)
-    jet_nconst = ROOT.std.vector("int")()
-    t.Branch("jet_nconst", jet_nconst)
-    jet_theta = ROOT.std.vector("float")()
-    t.Branch("jet_theta", jet_theta)
-    jet_phi = ROOT.std.vector("float")()
-    t.Branch("jet_phi", jet_phi)
+    # Parameters from fast sim to be reproduced in full sim
+    
+    # Jet parameters
+    jet_p = array("f", [0])
+    t.Branch("jet_p", jet_p, "jet_p/F")
+    jet_E = array("f", [0])
+    t.Branch("jet_E", jet_E, "jet_E/F")
+    jet_mass = array("f", [0])
+    t.Branch("jet_mass", jet_mass, "jet_mass/F")
+    jet_nconst = array("i", [0])
+    t.Branch("jet_nconst", jet_nconst, "jet_nconst/I")
+    jet_theta = array("f", [0])
+    t.Branch("jet_theta", jet_theta, "jet_theta/F")
+    jet_phi = array("f", [0])
+    t.Branch("jet_phi", jet_phi, "jet_phi/F")
+    # MC truth particle IDs
+    recojet_isG = array("B", [0])
+    t.Branch("recojet_isG", recojet_isG, "recojet_isG/B")
+    recojet_isU = array("B", [0])
+    t.Branch("recojet_isU", recojet_isU, "recojet_isU/B")
+    recojet_isD = array("B", [0])
+    t.Branch("recojet_isD", recojet_isD, "recojet_isD/B")
+    recojet_isS = array("B", [0])
+    t.Branch("recojet_isS", recojet_isS, "recojet_isS/B")
+    recojet_isC = array("B", [0])
+    t.Branch("recojet_isC", recojet_isC, "recojet_isC/B")
+    recojet_isB = array("B", [0])
+    t.Branch("recojet_isB", recojet_isB, "recojet_isB/B")
+    recojet_isTAU = array("B", [0])
+    t.Branch("recojet_isTAU", recojet_isTAU, "recojet_isTAU/B")
+    
 
     dic = {
         "hit_chis": hit_chis,
@@ -60,13 +91,24 @@ def initialize(t):
         "jet_mass": jet_mass,
         "jet_nconst": jet_nconst,
         "jet_theta": jet_theta,
-        "jet_phi": jet_phi
+        "jet_phi": jet_phi,
+        "recojet_isG": recojet_isG,
+        "recojet_isU": recojet_isU,
+        "recojet_isD": recojet_isD,
+        "recojet_isS": recojet_isS,
+        "recojet_isC": recojet_isC,
+        "recojet_isB": recojet_isB,
+        "recojet_isTAU": recojet_isTAU
     }
     return (event_number, n_hit, n_part, dic, t)
 
 def clear_dic(dic):
+    scalars = ["jet_p", "jet_E", "jet_mass", "jet_nconst", "jet_theta", "jet_phi", "recojet_isG", "recojet_isU", "recojet_isD", "recojet_isS", "recojet_isC", "recojet_isB", "recojet_isTAU"]
     for key in dic:
-        dic[key].clear()
+        if key in scalars:
+            dic[key][0] = 0
+        else:
+            dic[key].clear()
     return dic
 
 
@@ -123,17 +165,25 @@ def store_jet(event, debug, dic, event_number, t):
         # because we want to go from an event based tree to a jet based tree for each jet we add an event
         event_number[0] += 1
         
+        
+        #print(jet.getCovMatrix()) # Covariance matrix but only filled with zeros 
+
+        MC_type = PDG_ID_to_bool(jet.getType()) # returns a dictionary with the particle type
+        for key in MC_type:
+            dic[key][0] = MC_type[key]
+        
+        
         # calculate angles
         jet_theta = np.arcsin(np.sqrt(jet_momentum.x**2 + jet_momentum.y**2)/np.sqrt(jet_momentum.x**2 + jet_momentum.y**2 + jet_momentum.z**2))
         jet_phi = np.arccos(jet_momentum.x/np.sqrt(jet_momentum.x**2 + jet_momentum.y**2))
         
-        # fill branches of tree
-        dic["jet_p"].push_back(np.sqrt(jet_momentum.x**2 + jet_momentum.y**2 + jet_momentum.z**2))
-        dic["jet_E"].push_back(jet.getEnergy())
-        dic["jet_mass"].push_back(jet.getMass())
-        dic["jet_nconst"].push_back(particles_jet.size())
-        dic["jet_theta"].push_back(jet_theta)
-        dic["jet_phi"].push_back(jet_phi)
+        # Fill branches of the tree
+        dic["jet_p"][0] = np.sqrt(jet_momentum.x**2 + jet_momentum.y**2 + jet_momentum.z**2)
+        dic["jet_E"][0] = jet.getEnergy()
+        dic["jet_mass"][0] = jet.getMass()
+        dic["jet_nconst"][0] = particles_jet.size()
+        dic["jet_theta"][0] = jet_theta
+        dic["jet_phi"][0] = jet_phi
         
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
         t.Fill()
