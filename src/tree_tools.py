@@ -7,6 +7,38 @@ import numpy as np
 from podio import root_io
 import edm4hep
 
+charged_hadrons_pdg_ids = [
+    211,   # pi+
+    -211,  # pi-
+    321,   # K+
+    -321,  # K-
+    2212,  # p
+    -2212, # p̅
+    3222,  # Σ+
+    -3222, # Σ-
+    3122,  # Λ
+    -3122, # Λ̅
+    # Add more PDG IDs for other charged hadrons as needed
+]
+neutral_hadrons_pdg_ids = [
+    111,   # π0
+    130,   # K0_L
+    310,   # K0_S
+    311,   # K0
+    2112,  # n
+    -2112, # n̅
+    3122,  # Λ
+    -3122, # Λ̅
+    3212,  # Σ0
+    -3212, # Σ̅0
+    3322,  # Ξ0
+    -3322, # Ξ̅0
+    3334,  # Ω-
+    -3334, # Ω̅+
+    # Add more PDG IDs for other neutral hadrons as needed
+]
+
+
 
 def PDG_ID_to_bool(number: int) -> dict:
     """Following https://pdg.lbl.gov/2007/reviews/montecarlorpp.pdf """
@@ -21,6 +53,19 @@ def PDG_ID_to_bool(number: int) -> dict:
     }
     return particle_map.get(number, {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False})
 
+def PDG_ID_to_bool_particles(number: int) -> dict:
+    particle_map = {
+        11: {"pfcand_isEl": True, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False},
+        13: {"pfcand_isEl": False, "pfcand_isMu": True, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False},
+        22: {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": True, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False},
+        # Add mappings for charged and neutral hadrons
+        **{pdg_id: {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": True, "pfcand_isChargedHad": False} for pdg_id in neutral_hadrons_pdg_ids},
+        **{pdg_id: {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": True} for pdg_id in charged_hadrons_pdg_ids}
+    }
+    return particle_map.get(number, {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False})
+
+       
+        
 def initialize(t):
     event_number = array("i", [0])
     n_hit = array("i", [0])
@@ -61,7 +106,7 @@ def initialize(t):
     t.Branch("jet_theta", jet_theta, "jet_theta/F")
     jet_phi = array("f", [0])
     t.Branch("jet_phi", jet_phi, "jet_phi/F")
-    # MC truth particle IDs
+    # MC truth jet IDs
     recojet_isG = array("B", [0])
     t.Branch("recojet_isG", recojet_isG, "recojet_isG/B")
     recojet_isU = array("B", [0])
@@ -76,6 +121,30 @@ def initialize(t):
     t.Branch("recojet_isB", recojet_isB, "recojet_isB/B")
     recojet_isTAU = array("B", [0])
     t.Branch("recojet_isTAU", recojet_isTAU, "recojet_isTAU/B")
+    # particles in jet
+    pfcand_e = ROOT.std.vector("float")()
+    t.Branch("pfcand_e", pfcand_e)
+    pfcand_p = ROOT.std.vector("float")()
+    t.Branch("pfcand_p", pfcand_p)
+    pfcand_theta = ROOT.std.vector("float")()
+    t.Branch("pfcand_theta", pfcand_theta)
+    pfcand_phi = ROOT.std.vector("float")()
+    t.Branch("pfcand_phi", pfcand_phi)
+    pfcand_type = ROOT.std.vector("int")()
+    t.Branch("pfcand_type", pfcand_type)
+    pfcand_charge = ROOT.std.vector("float")()
+    t.Branch("pfcand_charge", pfcand_charge)
+    pfcand_isEl = ROOT.std.vector("bool")()
+    t.Branch("pfcand_isEl", pfcand_isEl)
+    pfcand_isMu = ROOT.std.vector("bool")()
+    t.Branch("pfcand_isMu", pfcand_isMu)
+    pfcand_isGamma = ROOT.std.vector("bool")()
+    t.Branch("pfcand_isGamma", pfcand_isGamma)
+    pfcand_isNeutralHad = ROOT.std.vector("bool")()
+    t.Branch("pfcand_isNeutralHad", pfcand_isNeutralHad)
+    pfcand_isChargedHad = ROOT.std.vector("bool")()
+    t.Branch("pfcand_isChargedHad", pfcand_isChargedHad)
+    
     
 
     dic = {
@@ -98,7 +167,18 @@ def initialize(t):
         "recojet_isS": recojet_isS,
         "recojet_isC": recojet_isC,
         "recojet_isB": recojet_isB,
-        "recojet_isTAU": recojet_isTAU
+        "recojet_isTAU": recojet_isTAU,
+        "pfcand_e": pfcand_e,
+        "pfcand_p": pfcand_p,
+        "pfcand_theta": pfcand_theta,
+        "pfcand_phi": pfcand_phi,
+        "pfcand_type": pfcand_type,
+        "pfcand_charge": pfcand_charge,
+        "pfcand_isEl": pfcand_isEl,
+        "pfcand_isMu": pfcand_isMu,
+        "pfcand_isGamma": pfcand_isGamma,
+        "pfcand_isNeutralHad": pfcand_isNeutralHad,
+        "pfcand_isChargedHad": pfcand_isChargedHad,
     }
     return (event_number, n_hit, n_part, dic, t)
 
@@ -167,10 +247,6 @@ def store_jet(event, debug, dic, event_number, t):
         
         
         #print(jet.getCovMatrix()) # Covariance matrix but only filled with zeros 
-
-        MC_type = PDG_ID_to_bool(jet.getType()) # returns a dictionary with the particle type
-        for key in MC_type:
-            dic[key][0] = MC_type[key]
         
         
         # calculate angles
@@ -184,6 +260,39 @@ def store_jet(event, debug, dic, event_number, t):
         dic["jet_nconst"][0] = particles_jet.size()
         dic["jet_theta"][0] = jet_theta
         dic["jet_phi"][0] = jet_phi
+        # MC truth particle IDs
+        MC_type = PDG_ID_to_bool(jet.getType()) # returns a dictionary with the particle type
+        for key in MC_type:
+            dic[key][0] = MC_type[key]
+            
+        for i, part in enumerate(particles_jet):
+            particle = particles_jet.at(i)
+            #print(dir(particle)) # print all available bindings for particle
+            """
+            ['__add__', '__assign__', '__bool__', '__class__', '__delattr__', '__destruct__', '__dict__', '__dir__', '__dispatch__', 
+            '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', 
+            '__invert__', '__le__', '__lt__', '__module__', '__mul__', '__ne__', '__neg__', '__new__', '__pos__', '__python_owns__', 
+            '__radd__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__rsub__', '__rtruediv__', '__setattr__', '__sizeof__', 
+            '__smartptr__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__weakref__', 'clone', 'clusters_begin', 
+            'clusters_end', 'clusters_size', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 'getGoodnessOfPID', 
+            'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 'getReferencePoint', 
+            'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'makeEmpty', 'particleIDs_begin', 
+            'particleIDs_end', 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'tracks_begin', 'tracks_end', 
+            'tracks_size', 'unlink']
+            """
+            particle_momentum = particle.getMomentum()
+            dic["pfcand_e"].push_back(particle.getEnergy())
+            dic["pfcand_p"].push_back(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2))
+            dic["pfcand_theta"].push_back(np.arcsin(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2)/np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2)))
+            dic["pfcand_phi"].push_back(np.arccos(particle_momentum.x/np.sqrt(particle_momentum.x**2 + particle_momentum.y**2)))
+            
+            dic["pfcand_type"].push_back(particle.getType())
+            dic["pfcand_charge"].push_back(particle.getCharge()) 
+            MC_particle_type = PDG_ID_to_bool_particles(particle.getType()) # dictionary with the particle type (bool)
+            for key in MC_particle_type:
+                dic[key].push_back(MC_particle_type[key])
+            
+
         
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
         t.Fill()
