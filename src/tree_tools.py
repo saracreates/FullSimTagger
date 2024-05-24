@@ -42,6 +42,10 @@ def initialize(t):
     t.Branch("jet_mass", jet_mass, "jet_mass/F")
     jet_nconst = ROOT.std.vector("int")()
     t.Branch("jet_nconst", jet_nconst, "jet_nconst/I")
+    jet_theta = ROOT.std.vector("float")()
+    t.Branch("jet_theta", jet_theta, "jet_theta/F")
+    jet_phi = ROOT.std.vector("float")()
+    t.Branch("jet_phi", jet_phi, "jet_phi/F")
 
     dic = {
         "hit_chis": hit_chis,
@@ -54,7 +58,9 @@ def initialize(t):
         "jet_p": jet_p,
         "jet_E": jet_E,
         "jet_mass": jet_mass,
-        "jet_nconst": jet_nconst
+        "jet_nconst": jet_nconst,
+        "jet_theta": jet_theta,
+        "jet_phi": jet_phi
     }
     return (event_number, n_hit, n_part, dic, t)
 
@@ -96,7 +102,7 @@ def store_jet(event, debug, dic, event_number, t):
 
     if debug:
         print("")
-    for j, jet in enumerate(event.get(RefinedVertexJets)):
+    for j, jet in enumerate(event.get(RefinedVertexJets)): # loop over the two jets
 
         # Use dir(jet) to print all available bindings
         # print(dir(jet))
@@ -117,13 +123,23 @@ def store_jet(event, debug, dic, event_number, t):
         # because we want to go from an event based tree to a jet based tree for each jet we add an event
         event_number[0] += 1
         
+        # calculate angles
+        jet_theta = np.arcsin(np.sqrt(jet_momentum.x**2 + jet_momentum.y**2)/np.sqrt(jet_momentum.x**2 + jet_momentum.y**2 + jet_momentum.z**2))
+        jet_phi = np.arccos(jet_momentum.x/np.sqrt(jet_momentum.x**2 + jet_momentum.y**2))
+        
         # fill branches of tree
         dic["jet_p"].push_back(np.sqrt(jet_momentum.x**2 + jet_momentum.y**2 + jet_momentum.z**2))
         dic["jet_E"].push_back(jet.getEnergy())
         dic["jet_mass"].push_back(jet.getMass())
+        print(particles_jet.size())
         dic["jet_nconst"].push_back(particles_jet.size())
+        dic["jet_theta"].push_back(jet_theta)
+        dic["jet_phi"].push_back(jet_phi)
+        
         
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
         t.Fill()
+        # Clear the dictionary for the next jet
+        clear_dic(dic)
 
     return dic, event_number, t
