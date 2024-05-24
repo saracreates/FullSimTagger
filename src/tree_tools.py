@@ -35,17 +35,17 @@ def initialize(t):
     
     # parameters from fast sim to be reproduced in full sim
     jet_p = ROOT.std.vector("float")()
-    t.Branch("jet_p", jet_p, "jet_p/F")
+    t.Branch("jet_p", jet_p)
     jet_E = ROOT.std.vector("float")()
-    t.Branch("jet_E", jet_E, "jet_E/F")
+    t.Branch("jet_E", jet_E)
     jet_mass = ROOT.std.vector("float")()
-    t.Branch("jet_mass", jet_mass, "jet_mass/F")
+    t.Branch("jet_mass", jet_mass)
     jet_nconst = ROOT.std.vector("int")()
-    t.Branch("jet_nconst", jet_nconst, "jet_nconst/I")
+    t.Branch("jet_nconst", jet_nconst)
     jet_theta = ROOT.std.vector("float")()
-    t.Branch("jet_theta", jet_theta, "jet_theta/F")
+    t.Branch("jet_theta", jet_theta)
     jet_phi = ROOT.std.vector("float")()
-    t.Branch("jet_phi", jet_phi, "jet_phi/F")
+    t.Branch("jet_phi", jet_phi)
 
     dic = {
         "hit_chis": hit_chis,
@@ -63,7 +63,6 @@ def initialize(t):
         "jet_phi": jet_phi
     }
     return (event_number, n_hit, n_part, dic, t)
-
 
 def clear_dic(dic):
     for key in dic:
@@ -103,6 +102,7 @@ def store_jet(event, debug, dic, event_number, t):
     if debug:
         print("")
     for j, jet in enumerate(event.get(RefinedVertexJets)): # loop over the two jets
+        clear_dic(dic) # clear the dictionary for new jet
 
         # Use dir(jet) to print all available bindings
         # print(dir(jet))
@@ -131,15 +131,11 @@ def store_jet(event, debug, dic, event_number, t):
         dic["jet_p"].push_back(np.sqrt(jet_momentum.x**2 + jet_momentum.y**2 + jet_momentum.z**2))
         dic["jet_E"].push_back(jet.getEnergy())
         dic["jet_mass"].push_back(jet.getMass())
-        print(particles_jet.size())
         dic["jet_nconst"].push_back(particles_jet.size())
         dic["jet_theta"].push_back(jet_theta)
         dic["jet_phi"].push_back(jet_phi)
         
-        
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
         t.Fill()
-        # Clear the dictionary for the next jet
-        clear_dic(dic)
 
     return dic, event_number, t
