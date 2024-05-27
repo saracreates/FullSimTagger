@@ -41,7 +41,7 @@ neutral_hadrons_pdg_ids = [
 
 
 def PDG_ID_to_bool(number: int) -> dict:
-    """Following https://pdg.lbl.gov/2007/reviews/montecarlorpp.pdf """
+    """Using https://pdg.lbl.gov/2007/reviews/montecarlorpp.pdf """
     particle_map = {
         1: {"recojet_isU": True, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
         2: {"recojet_isU": False, "recojet_isD": True, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
@@ -144,6 +144,24 @@ def initialize(t):
     t.Branch("pfcand_isNeutralHad", pfcand_isNeutralHad)
     pfcand_isChargedHad = ROOT.std.vector("bool")()
     t.Branch("pfcand_isChargedHad", pfcand_isChargedHad)
+    #count number of particles in jet
+    jet_nmu = array("i", [0])
+    t.Branch("jet_nmu", jet_nmu, "jet_nmu/I")
+    jet_nel = array("i", [0])
+    t.Branch("jet_nel", jet_nel, "jet_nel/I")
+    jet_ngamma = array("i", [0])
+    t.Branch("jet_ngamma", jet_ngamma, "jet_ngamma/I")
+    jet_nnhad = array("i", [0])
+    t.Branch("jet_nnhad", jet_nnhad, "jet_nnhad/I")
+    jet_nchad = array("i", [0])
+    t.Branch("jet_nchad", jet_nchad, "jet_nchad/I")
+    pfcand_erel_log = ROOT.std.vector("float")()
+    t.Branch("pfcand_erel_log", pfcand_erel_log)
+    pfcand_phirel = ROOT.std.vector("float")()
+    t.Branch("pfcand_phirel", pfcand_phirel)
+    pfcand_thetarel = ROOT.std.vector("float")()
+    t.Branch("pfcand_thetarel", pfcand_thetarel)
+   
     
     
 
@@ -179,11 +197,21 @@ def initialize(t):
         "pfcand_isGamma": pfcand_isGamma,
         "pfcand_isNeutralHad": pfcand_isNeutralHad,
         "pfcand_isChargedHad": pfcand_isChargedHad,
+        "jet_nmu": jet_nmu,
+        "jet_nel": jet_nel,
+        "jet_ngamma": jet_ngamma,
+        "jet_nnhad": jet_nnhad,
+        "jet_nchad": jet_nchad,
+        "pfcand_erel_log": pfcand_erel_log,
+        "pfcand_phirel": pfcand_phirel,
+        "pfcand_thetarel": pfcand_thetarel
     }
     return (event_number, n_hit, n_part, dic, t)
 
 def clear_dic(dic):
-    scalars = ["jet_p", "jet_E", "jet_mass", "jet_nconst", "jet_theta", "jet_phi", "recojet_isG", "recojet_isU", "recojet_isD", "recojet_isS", "recojet_isC", "recojet_isB", "recojet_isTAU"]
+    scalars = ["jet_p", "jet_E", "jet_mass", "jet_nconst", "jet_theta", "jet_phi", \
+        "recojet_isG", "recojet_isU", "recojet_isD", "recojet_isS", "recojet_isC", "recojet_isB", "recojet_isTAU", \
+        "jet_nmu", "jet_nel", "jet_ngamma", "jet_nnhad", "jet_nchad"]
     for key in dic:
         if key in scalars:
             dic[key][0] = 0
@@ -242,8 +270,6 @@ def store_jet(event, debug, dic, event_number, t):
         '__rtruediv__', '__setattr__', '__sizeof__', '__smartptr__', '__str__', '__sub__', '__subclasshook__', '__truediv__', 
         '__weakref__', 'at', 'begin', 'empty', 'end', 'size']
         """
-        # because we want to go from an event based tree to a jet based tree for each jet we add an event
-        event_number[0] += 1
         
         
         #print(jet.getCovMatrix()) # Covariance matrix but only filled with zeros 
@@ -285,16 +311,23 @@ def store_jet(event, debug, dic, event_number, t):
             dic["pfcand_p"].push_back(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2))
             dic["pfcand_theta"].push_back(np.arcsin(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2)/np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2)))
             dic["pfcand_phi"].push_back(np.arccos(particle_momentum.x/np.sqrt(particle_momentum.x**2 + particle_momentum.y**2)))
-            
             dic["pfcand_type"].push_back(particle.getType())
             dic["pfcand_charge"].push_back(particle.getCharge()) 
             MC_particle_type = PDG_ID_to_bool_particles(particle.getType()) # dictionary with the particle type (bool)
             for key in MC_particle_type:
                 dic[key].push_back(MC_particle_type[key])
+            # calculate relative values
+            dic["pfcand_erel_log"].push_back(np.log(dic["pfcand_e"][-1]/dic["jet_E"][0]))
+            dic["pfcand_phirel"].push_back(dic["pfcand_phi"][-1] - dic["jet_phi"][0]) 
+            dic["pfcand_thetarel"].push_back(dic["pfcand_theta"][-1] - dic["jet_theta"][0])
             
-
-        
+            # get tracks of each particle (should be only one track)
+            tracks = particle.getTracks()
+            #print(dir(tracks))
+            
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
         t.Fill()
+        # because we want to go from an event based tree to a jet based tree for each jet we add an event
+        event_number[0] += 1
 
     return dic, event_number, t
