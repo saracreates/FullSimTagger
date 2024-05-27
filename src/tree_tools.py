@@ -7,41 +7,10 @@ import numpy as np
 from podio import root_io
 import edm4hep
 
-charged_hadrons_pdg_ids = [
-    211,   # pi+
-    -211,  # pi-
-    321,   # K+
-    -321,  # K-
-    2212,  # p
-    -2212, # p̅
-    3222,  # Σ+
-    -3222, # Σ-
-    3122,  # Λ
-    -3122, # Λ̅
-    # Add more PDG IDs for other charged hadrons as needed
-]
-neutral_hadrons_pdg_ids = [
-    111,   # π0
-    130,   # K0_L
-    310,   # K0_S
-    311,   # K0
-    2112,  # n
-    -2112, # n̅
-    3122,  # Λ
-    -3122, # Λ̅
-    3212,  # Σ0
-    -3212, # Σ̅0
-    3322,  # Ξ0
-    -3322, # Ξ̅0
-    3334,  # Ω-
-    -3334, # Ω̅+
-    # Add more PDG IDs for other neutral hadrons as needed
-]
-
 
 
 def PDG_ID_to_bool(number: int) -> dict:
-    """Using https://pdg.lbl.gov/2007/reviews/montecarlorpp.pdf """
+    """Maps the PDG ID to the particle type for jets using https://pdg.lbl.gov/2007/reviews/montecarlorpp.pdf """
     particle_map = {
         1: {"recojet_isU": True, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
         2: {"recojet_isU": False, "recojet_isD": True, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
@@ -53,15 +22,22 @@ def PDG_ID_to_bool(number: int) -> dict:
     }
     return particle_map.get(number, {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False})
 
-def PDG_ID_to_bool_particles(number: int) -> dict:
+def PDG_ID_to_bool_particles(number: int, ntracks: int) -> dict:
+    """Maps the PDG ID to the particle type for particles in jet"""
     particle_map = {
         11: {"pfcand_isEl": True, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False},
+        -11: {"pfcand_isEl": True, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False},
         13: {"pfcand_isEl": False, "pfcand_isMu": True, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False},
+        -13: {"pfcand_isEl": False, "pfcand_isMu": True, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False},
         22: {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": True, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False},
-        # Add mappings for charged and neutral hadrons
-        **{pdg_id: {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": True, "pfcand_isChargedHad": False} for pdg_id in neutral_hadrons_pdg_ids},
-        **{pdg_id: {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": True} for pdg_id in charged_hadrons_pdg_ids}
-    }
+    } 
+    # Mappings for charged and neutral hadrons
+    if number not in [-11, 11, -13, 13, 22]:
+        if ntracks == 0:
+            return {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": True, "pfcand_isChargedHad": False}
+        else:
+            return {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": True}
+    # mapping for leptons and photon
     return particle_map.get(number, {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False})
 
        
@@ -161,6 +137,54 @@ def initialize(t):
     t.Branch("pfcand_phirel", pfcand_phirel)
     pfcand_thetarel = ROOT.std.vector("float")()
     t.Branch("pfcand_thetarel", pfcand_thetarel)
+    # Covariance parameters of helix!
+    pfcand_dptdpt = ROOT.std.vector("float")()
+    t.Branch("pfcand_dptdpt", pfcand_dptdpt)
+    pfcand_detadeta = ROOT.std.vector("float")()
+    t.Branch("pfcand_detadeta", pfcand_detadeta)
+    pfcand_dphidphi = ROOT.std.vector("float")()
+    t.Branch("pfcand_dphidphi", pfcand_dphidphi)
+    pfcand_dxydxy = ROOT.std.vector("float")()
+    t.Branch("pfcand_dxydxy", pfcand_dxydxy)
+    pfcand_dzdz = ROOT.std.vector("float")()
+    t.Branch("pfcand_dzdz", pfcand_dzdz)
+    pfcand_dxydz = ROOT.std.vector("float")()
+    t.Branch("pfcand_dxydz", pfcand_dxydz)
+    pfcand_dphidxy = ROOT.std.vector("float")()
+    t.Branch("pfcand_dphidxy", pfcand_dphidxy)
+    pfcand_dlambdadz = ROOT.std.vector("float")()
+    t.Branch("pfcand_dlambdadz", pfcand_dlambdadz)
+    pfcand_dxyc = ROOT.std.vector("float")()
+    t.Branch("pfcand_dxyc", pfcand_dxyc)
+    pfcand_dxyctgtheta = ROOT.std.vector("float")()
+    t.Branch("pfcand_dxyctgtheta", pfcand_dxyctgtheta)
+    pfcand_phic = ROOT.std.vector("float")()
+    t.Branch("pfcand_phic", pfcand_phic) 
+    pfcand_phidz = ROOT.std.vector("float")()
+    t.Branch("pfcand_phidz", pfcand_phidz)   
+    pfcand_phictgtheta = ROOT.std.vector("float")()
+    t.Branch("pfcand_phictgtheta", pfcand_phictgtheta)  
+    pfcand_cdz = ROOT.std.vector("float")()
+    t.Branch("pfcand_cdz", pfcand_cdz) 
+    pfcand_cctgtheta = ROOT.std.vector("float")()
+    t.Branch("pfcand_cctgtheta", pfcand_cctgtheta) 
+    # discplacement paramters of the track  
+    pfcand_dxy = ROOT.std.vector("float")()
+    t.Branch("pfcand_dxy", pfcand_dxy)
+    pfcand_dz = ROOT.std.vector("float")()
+    t.Branch("pfcand_dz", pfcand_dz)
+    pfcand_btagSip2dVal = ROOT.std.vector("float")()
+    t.Branch("pfcand_btagSip2dVal", pfcand_btagSip2dVal)
+    pfcand_btagSip2dSig = ROOT.std.vector("float")()
+    t.Branch("pfcand_btagSip2dSig", pfcand_btagSip2dSig)
+    pfcand_btagSip3dVal = ROOT.std.vector("float")()
+    t.Branch("pfcand_btagSip3dVal", pfcand_btagSip3dVal)
+    pfcand_btagSip3dSig = ROOT.std.vector("float")()
+    t.Branch("pfcand_btagSip3dSig", pfcand_btagSip3dSig)
+    pfcand_btagJetDistVal = ROOT.std.vector("float")()
+    t.Branch("pfcand_btagJetDistVal", pfcand_btagJetDistVal)
+    pfcand_btagJetDistSig = ROOT.std.vector("float")()
+    t.Branch("pfcand_btagJetDistSig", pfcand_btagJetDistSig)
    
     
     
@@ -204,7 +228,31 @@ def initialize(t):
         "jet_nchad": jet_nchad,
         "pfcand_erel_log": pfcand_erel_log,
         "pfcand_phirel": pfcand_phirel,
-        "pfcand_thetarel": pfcand_thetarel
+        "pfcand_thetarel": pfcand_thetarel,
+        "pfcand_dptdpt": pfcand_dptdpt,
+        "pfcand_detadeta": pfcand_detadeta,
+        "pfcand_dphidphi": pfcand_dphidphi,
+        "pfcand_dxydxy": pfcand_dxydxy,
+        "pfcand_dzdz": pfcand_dzdz,
+        "pfcand_dxydz": pfcand_dxydz,
+        "pfcand_dphidxy": pfcand_dphidxy,
+        "pfcand_dlambdadz": pfcand_dlambdadz,
+        "pfcand_dxyc": pfcand_dxyc,
+        "pfcand_dxyctgtheta": pfcand_dxyctgtheta,
+        "pfcand_phic": pfcand_phic,
+        "pfcand_phidz": pfcand_phidz,
+        "pfcand_phictgtheta": pfcand_phictgtheta,
+        "pfcand_cdz": pfcand_cdz,
+        "pfcand_cctgtheta": pfcand_cctgtheta,
+        "pfcand_dxy": pfcand_dxy,
+        "pfcand_dz": pfcand_dz,
+        "pfcand_btagSip2dVal": pfcand_btagSip2dVal,
+        "pfcand_btagSip2dSig": pfcand_btagSip2dSig,
+        "pfcand_btagSip3dVal": pfcand_btagSip3dVal,
+        "pfcand_btagSip3dSig": pfcand_btagSip3dSig,
+        "pfcand_btagJetDistVal": pfcand_btagJetDistVal,
+        "pfcand_btagJetDistSig": pfcand_btagJetDistSig
+        
     }
     return (event_number, n_hit, n_part, dic, t)
 
@@ -286,7 +334,7 @@ def store_jet(event, debug, dic, event_number, t):
         dic["jet_nconst"][0] = particles_jet.size()
         dic["jet_theta"][0] = jet_theta
         dic["jet_phi"][0] = jet_phi
-        # MC truth particle IDs
+        # MC truth jet particle IDs
         MC_type = PDG_ID_to_bool(jet.getType()) # returns a dictionary with the particle type
         for key in MC_type:
             dic[key][0] = MC_type[key]
@@ -313,18 +361,66 @@ def store_jet(event, debug, dic, event_number, t):
             dic["pfcand_phi"].push_back(np.arccos(particle_momentum.x/np.sqrt(particle_momentum.x**2 + particle_momentum.y**2)))
             dic["pfcand_type"].push_back(particle.getType())
             dic["pfcand_charge"].push_back(particle.getCharge()) 
-            MC_particle_type = PDG_ID_to_bool_particles(particle.getType()) # dictionary with the particle type (bool)
+            MC_particle_type = PDG_ID_to_bool_particles(particle.getType(), particle.getTracks().size()) # dictionary with the particle type (bool)
             for key in MC_particle_type:
                 dic[key].push_back(MC_particle_type[key])
             # calculate relative values
             dic["pfcand_erel_log"].push_back(np.log(dic["pfcand_e"][-1]/dic["jet_E"][0]))
-            dic["pfcand_phirel"].push_back(dic["pfcand_phi"][-1] - dic["jet_phi"][0]) 
-            dic["pfcand_thetarel"].push_back(dic["pfcand_theta"][-1] - dic["jet_theta"][0])
+            dic["pfcand_phirel"].push_back(dic["pfcand_phi"][-1] - dic["jet_phi"][0]) # same as in  rv::RVec<FCCAnalysesJetConstituentsData> get_phirel_cluster in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
+            dic["pfcand_thetarel"].push_back(dic["pfcand_theta"][-1] - dic["jet_theta"][0]) 
             
             # get tracks of each particle (should be only one track)
             tracks = particle.getTracks()
             #print(dir(tracks))
-            
+            """
+            ['__add__', '__assign__', '__bool__', '__class__', '__delattr__', '__destruct__', '__dict__', '__dir__', 
+            '__dispatch__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', 
+            '__init_subclass__', '__invert__', '__iter__', '__le__', '__len__', '__lt__', '__module__', '__mul__', '__ne__', '__neg__', '__new__', 
+            '__pos__', '__python_owns__', '__radd__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__rsub__', '__rtruediv__', '__setattr__', 
+            '__sizeof__', '__smartptr__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__weakref__', 'at', 'begin', 'empty', 'end', 'size']
+            """
+            #print(dir(tracks.at(0)))
+            """
+            ['__add__', '__assign__', '__bool__', '__class__', '__delattr__', '__destruct__', '__dict__', '__dir__', '__dispatch__', '__doc__', '__eq__', 
+            '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__invert__', '__le__', '__lt__', 
+            '__module__', '__mul__', '__ne__', '__neg__', '__new__', '__pos__', '__python_owns__', '__radd__', '__reduce__', '__reduce_ex__', 
+            '__repr__', '__rmul__', '__rsub__', '__rtruediv__', '__setattr__', '__sizeof__', '__smartptr__', '__str__', '__sub__', 
+            '__subclasshook__', '__truediv__', '__weakref__', 'clone', 'dxQuantities_begin', 'dxQuantities_end', 'dxQuantities_size', 
+            'getChi2', 'getDEdx', 'getDEdxError', 'getDxQuantities', 'getNdf', 'getObjectID', 'getRadiusOfInnermostHit', 'getSubdetectorHitNumbers', 
+            'getTrackStates', 'getTrackerHits', 'getTracks', 'getType', 'id', 'isAvailable', 'makeEmpty', 'subdetectorHitNumbers_begin', 
+            'subdetectorHitNumbers_end', 'subdetectorHitNumbers_size', 'trackStates_begin', 'trackStates_end', 'trackStates_size', 'trackerHits_begin', 
+            'trackerHits_end', 'trackerHits_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink']
+            """
+            if tracks.size() == 1: # charged particle
+                track = tracks.at(0)
+                #print(track.getRadiusOfInnermostHit())
+                #print(particle.getCovMatrix()) # all zero
+            elif tracks.size() == 0: # neutral particle -> no track -> set them to zero! DOUBLE CHECK!!!
+                dic["pfcand_dptdpt"].push_back(0)
+                dic["pfcand_detadeta"].push_back(0)
+                dic["pfcand_dphidphi"].push_back(0)
+                dic["pfcand_dxydxy"].push_back(0)
+                dic["pfcand_dzdz"].push_back(0)
+                dic["pfcand_dxydz"].push_back(0)
+                dic["pfcand_dphidxy"].push_back(0)
+                dic["pfcand_dlambdadz"].push_back(0)
+                dic["pfcand_dxyc"].push_back(0)
+                dic["pfcand_dxyctgtheta"].push_back(0)
+                dic["pfcand_phic"].push_back(0)
+                dic["pfcand_phidz"].push_back(0)
+                dic["pfcand_phictgtheta"].push_back(0)
+                dic["pfcand_cdz"].push_back(0)
+                dic["pfcand_cctgtheta"].push_back(0)
+                dic["pfcand_dxy"].push_back(0)
+                dic["pfcand_dz"].push_back(0)
+                dic["pfcand_btagSip2dVal"].push_back(0)
+                dic["pfcand_btagSip2dSig"].push_back(0)
+                dic["pfcand_btagSip3dVal"].push_back(0)
+                dic["pfcand_btagSip3dSig"].push_back(0)
+                dic["pfcand_btagJetDistVal"].push_back(0)
+                dic["pfcand_btagJetDistSig"].push_back(0)
+            else:
+                raise ValueError("Particle has more than one track")
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
         t.Fill()
         # because we want to go from an event based tree to a jet based tree for each jet we add an event
