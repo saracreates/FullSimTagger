@@ -21,7 +21,7 @@ output_file = sys.argv[2]
 CLIC = "False"
 reader = root_io.Reader(input_file)
 out_root = TFile(output_file, "RECREATE")
-t = TTree("events", "pf tree lar")
+t = TTree("tree", "pf tree lar")
 event_number, n_hit, n_part, dic, t = initialize(t)
 
 event_number[0] = 0

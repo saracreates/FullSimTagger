@@ -8,7 +8,6 @@ from podio import root_io
 import edm4hep
 
 
-
 def PDG_ID_to_bool(number: int) -> dict:
     """Maps the PDG ID to the particle type for jets using https://pdg.lbl.gov/2007/reviews/montecarlorpp.pdf """
     particle_map = {
@@ -46,26 +45,9 @@ def initialize(t):
     event_number = array("i", [0])
     n_hit = array("i", [0])
     n_part = array("i", [0])
-
-    hit_chis = ROOT.std.vector("float")()
-    hit_x = ROOT.std.vector("float")()
-    hit_y = ROOT.std.vector("float")()
-    hit_z = ROOT.std.vector("float")()
-    hit_px = ROOT.std.vector("float")()
-    hit_py = ROOT.std.vector("float")()
-    hit_pz = ROOT.std.vector("float")()
-
     t.Branch("event_number", event_number, "event_number/I")
     t.Branch("n_hit", n_hit, "n_hit/I")
     t.Branch("n_part", n_part, "n_part/I")
-
-    t.Branch("hit_chis", hit_chis)
-    t.Branch("hit_x", hit_x)
-    t.Branch("hit_y", hit_y)
-    t.Branch("hit_z", hit_z)
-    t.Branch("hit_px", hit_px)
-    t.Branch("hit_py", hit_py)
-    t.Branch("hit_pz", hit_pz)
     
     # Parameters from fast sim to be reproduced in full sim
     
@@ -190,13 +172,6 @@ def initialize(t):
     
 
     dic = {
-        "hit_chis": hit_chis,
-        "hit_x": hit_x,
-        "hit_y": hit_y,
-        "hit_z": hit_z,
-        "hit_px": hit_px,
-        "hit_py": hit_py,
-        "hit_pz": hit_pz,
         "jet_p": jet_p,
         "jet_E": jet_E,
         "jet_mass": jet_mass,
@@ -244,8 +219,8 @@ def initialize(t):
         "pfcand_phictgtheta": pfcand_phictgtheta,
         "pfcand_cdz": pfcand_cdz,
         "pfcand_cctgtheta": pfcand_cctgtheta,
-        "pfcand_dxy": pfcand_dxy,
-        "pfcand_dz": pfcand_dz,
+        "pfcand_dxy": pfcand_dxy, # transverse impact parameter
+        "pfcand_dz": pfcand_dz, # longitudinal impact parameter
         "pfcand_btagSip2dVal": pfcand_btagSip2dVal,
         "pfcand_btagSip2dSig": pfcand_btagSip2dSig,
         "pfcand_btagSip3dVal": pfcand_btagSip3dVal,
@@ -343,11 +318,7 @@ def store_jet(event, debug, dic, event_number, t):
             particle = particles_jet.at(i)
             #print(dir(particle)) # print all available bindings for particle
             """
-            ['__add__', '__assign__', '__bool__', '__class__', '__delattr__', '__destruct__', '__dict__', '__dir__', '__dispatch__', 
-            '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', 
-            '__invert__', '__le__', '__lt__', '__module__', '__mul__', '__ne__', '__neg__', '__new__', '__pos__', '__python_owns__', 
-            '__radd__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__rsub__', '__rtruediv__', '__setattr__', '__sizeof__', 
-            '__smartptr__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__weakref__', 'clone', 'clusters_begin', 
+            ['clone', 'clusters_begin', 
             'clusters_end', 'clusters_size', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 'getGoodnessOfPID', 
             'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 'getReferencePoint', 
             'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'makeEmpty', 'particleIDs_begin', 
@@ -373,52 +344,105 @@ def store_jet(event, debug, dic, event_number, t):
             tracks = particle.getTracks()
             #print(dir(tracks))
             """
-            ['__add__', '__assign__', '__bool__', '__class__', '__delattr__', '__destruct__', '__dict__', '__dir__', 
-            '__dispatch__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', 
-            '__init_subclass__', '__invert__', '__iter__', '__le__', '__len__', '__lt__', '__module__', '__mul__', '__ne__', '__neg__', '__new__', 
-            '__pos__', '__python_owns__', '__radd__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__rsub__', '__rtruediv__', '__setattr__', 
-            '__sizeof__', '__smartptr__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__weakref__', 'at', 'begin', 'empty', 'end', 'size']
+            ['at', 'begin', 'empty', 'end', 'size']
             """
             #print(dir(tracks.at(0)))
             """
-            ['__add__', '__assign__', '__bool__', '__class__', '__delattr__', '__destruct__', '__dict__', '__dir__', '__dispatch__', '__doc__', '__eq__', 
-            '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__invert__', '__le__', '__lt__', 
-            '__module__', '__mul__', '__ne__', '__neg__', '__new__', '__pos__', '__python_owns__', '__radd__', '__reduce__', '__reduce_ex__', 
-            '__repr__', '__rmul__', '__rsub__', '__rtruediv__', '__setattr__', '__sizeof__', '__smartptr__', '__str__', '__sub__', 
-            '__subclasshook__', '__truediv__', '__weakref__', 'clone', 'dxQuantities_begin', 'dxQuantities_end', 'dxQuantities_size', 
+            ['clone', 'dxQuantities_begin', 'dxQuantities_end', 'dxQuantities_size', 
             'getChi2', 'getDEdx', 'getDEdxError', 'getDxQuantities', 'getNdf', 'getObjectID', 'getRadiusOfInnermostHit', 'getSubdetectorHitNumbers', 
             'getTrackStates', 'getTrackerHits', 'getTracks', 'getType', 'id', 'isAvailable', 'makeEmpty', 'subdetectorHitNumbers_begin', 
             'subdetectorHitNumbers_end', 'subdetectorHitNumbers_size', 'trackStates_begin', 'trackStates_end', 'trackStates_size', 'trackerHits_begin', 
             'trackerHits_end', 'trackerHits_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink']
             """
             if tracks.size() == 1: # charged particle
-                track = tracks.at(0)
-                #print(track.getRadiusOfInnermostHit())
-                #print(particle.getCovMatrix()) # all zero
-            elif tracks.size() == 0: # neutral particle -> no track -> set them to zero! DOUBLE CHECK!!!
-                dic["pfcand_dptdpt"].push_back(0)
-                dic["pfcand_detadeta"].push_back(0)
-                dic["pfcand_dphidphi"].push_back(0)
-                dic["pfcand_dxydxy"].push_back(0)
-                dic["pfcand_dzdz"].push_back(0)
-                dic["pfcand_dxydz"].push_back(0)
-                dic["pfcand_dphidxy"].push_back(0)
-                dic["pfcand_dlambdadz"].push_back(0)
-                dic["pfcand_dxyc"].push_back(0)
-                dic["pfcand_dxyctgtheta"].push_back(0)
-                dic["pfcand_phic"].push_back(0)
-                dic["pfcand_phidz"].push_back(0)
-                dic["pfcand_phictgtheta"].push_back(0)
-                dic["pfcand_cdz"].push_back(0)
-                dic["pfcand_cctgtheta"].push_back(0)
-                dic["pfcand_dxy"].push_back(0)
-                dic["pfcand_dz"].push_back(0)
-                dic["pfcand_btagSip2dVal"].push_back(0)
-                dic["pfcand_btagSip2dSig"].push_back(0)
-                dic["pfcand_btagSip3dVal"].push_back(0)
-                dic["pfcand_btagSip3dSig"].push_back(0)
-                dic["pfcand_btagJetDistVal"].push_back(0)
-                dic["pfcand_btagJetDistSig"].push_back(0)
+                #print(dir(tracks.at(0).getTrackStates().at(0))) # -> 'covMatrix', 'location', 'omega', 'phi', 'referencePoint', 'tanLambda', 'time'
+                #print(track.getTrackStates().size()) 
+                """static const int AtOther = 0 ; // any location other than the ones defined below\n
+                static const int AtIP = 1 ;\n
+                static const int AtFirstHit = 2 ;\n
+                static const int AtLastHit = 3 ;\n
+                static const int AtCalorimeter = 4 ;\n
+                static const int AtVertex = 5 ;\n """
+                print("---- new track")
+                track = tracks.at(0).getTrackStates().at(0) # info at IP
+                dic["pfcand_dxy"].push_back(track.D0) # transverse impact parameter
+                dic["pfcand_dz"].push_back(track.Z0) # longitudinal impact parameter
+                
+                part_p = ROOT.TVector3(particle_momentum.x, particle_momentum.y, particle_momentum.z)
+                jet_p = ROOT.TVector3(jet_momentum.x, jet_momentum.y, jet_momentum.z)
+                
+                # calculate d_3d as in FCCAnalysis, JetConstituentsUtils.cc in get_JetDistVal() https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2
+                n = part_p.Cross(jet_p).Unit() # distance of closest approach always in direction perpendicular to both (particle and jet). Problem: What if they are parallel?
+                pt_ct = ROOT.TVector3(- track.D0 * np.sin(track.phi), track.D0 * np.cos(track.phi), track.Z0) # point on particle track
+                pt_jet = ROOT.TVector3(0,0,0) # point on jet
+                d_3d = n.Dot(pt_ct - pt_jet) # distance of closest approach
+                dic["pfcand_btagJetDistVal"].push_back(d_3d)
+                
+                
+                # calculate signed 2D impact parameter - like in get_Sip2dVal_clusterV() in JetConstituentsUtils.cc (https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L450 )
+                p_jet_2d = ROOT.TVector2(jet_momentum.x, jet_momentum.y)
+                pt_ct_2d = ROOT.TVector2(pt_ct.x(), pt_ct.y())
+                sip2d = np.sign(pt_ct_2d * p_jet_2d) * abs(track.D0) # if angle between track and jet greater 90 deg -> negative sign; if smaller 90 deg -> positive sign
+                dic["pfcand_btagSip2dVal"].push_back(sip2d)
+                
+                # calculate signed 3D impact parameter - like in get_Sip3Val() in JetConstituentsUtils.cc 
+                IP_3d = np.sqrt(track.D0**2 + track.Z0**2)
+                sip3d = np.sign(pt_ct * jet_p) * abs(IP_3d) 
+                dic["pfcand_btagSip3dVal"].push_back(sip3d)
+                
+                # Covariance matrix of helix parameters - use indices like used in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L355 
+                #print(track.covMatrix.shape) # 21 values: 6 dimensional covariance matrix with values stored in lower triangular form
+                # diagonal: d0 = xy, phi, omega = pt, z0, tanLambda = eta
+                dic["pfcand_dxydxy"].push_back(track.covMatrix[0]) # checked
+                dic["pfcand_dphidphi"].push_back(track.covMatrix[2]) # checked
+                dic["pfcand_dptdpt"].push_back(track.covMatrix[5]) # omega - checked
+                dic["pfcand_dzdz"].push_back(track.covMatrix[9]) # checked
+                dic["pfcand_detadeta"].push_back(track.covMatrix[14]) # tanLambda - checked
+                
+                dic["pfcand_dxydz"].push_back(track.covMatrix[6]) #checked
+                dic["pfcand_dphidxy"].push_back(track.covMatrix[1]) # checked 
+                dic["pfcand_dlambdadz"].push_back(track.covMatrix[13]) #checked
+                dic["pfcand_dxyc"].push_back(track.covMatrix[3]) # checked
+                dic["pfcand_dxyctgtheta"].push_back(track.covMatrix[10]) # checked
+                
+                dic["pfcand_phic"].push_back(track.covMatrix[4]) # checked
+                dic["pfcand_phidz"].push_back(track.covMatrix[7]) # checked 
+                dic["pfcand_phictgtheta"].push_back(track.covMatrix[11]) # checked
+                dic["pfcand_cdz"].push_back(track.covMatrix[8]) # checked 
+                dic["pfcand_cctgtheta"].push_back(track.covMatrix[12]) #checked
+                
+                
+                
+                
+                """for i in range(track.getTrackStates().size()): # loop over all 4 avaible possitions of track in detector
+                    print(track.getTrackStates().at(i).phi)
+                    #print(track.getTrackStates().at(i).location) # 1,2,3,4 -> AtIP, AtFirstHit, AtLastHit, AtCalorimeter"""
+                
+                
+            elif tracks.size() == 0: # neutral particle -> no track -> set them to -9!
+                dic["pfcand_dptdpt"].push_back(-9) # like in ReconstructedParticle2Track.cc line 336 ( https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L335 )
+                dic["pfcand_detadeta"].push_back(-9)
+                dic["pfcand_dphidphi"].push_back(-9)
+                dic["pfcand_dxydxy"].push_back(-9)
+                dic["pfcand_dzdz"].push_back(-9)
+                dic["pfcand_dxydz"].push_back(-9)
+                dic["pfcand_dphidxy"].push_back(-9)
+                dic["pfcand_dlambdadz"].push_back(-9)
+                dic["pfcand_dxyc"].push_back(-9)
+                dic["pfcand_dxyctgtheta"].push_back(-9)
+                dic["pfcand_phic"].push_back(-9)
+                dic["pfcand_phidz"].push_back(-9)
+                dic["pfcand_phictgtheta"].push_back(-9)
+                dic["pfcand_cdz"].push_back(-9)
+                dic["pfcand_cctgtheta"].push_back(-9)
+                dic["pfcand_dxy"].push_back(-9)
+                dic["pfcand_dz"].push_back(-9)
+                dic["pfcand_btagSip2dVal"].push_back(-9)
+                dic["pfcand_btagSip2dSig"].push_back(-9)
+                dic["pfcand_btagSip3dVal"].push_back(-9)
+                dic["pfcand_btagSip3dSig"].push_back(-9)
+                dic["pfcand_btagJetDistVal"].push_back(-9) # line 641 in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
+                dic["pfcand_btagJetDistSig"].push_back(-9)
             else:
                 raise ValueError("Particle has more than one track")
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
