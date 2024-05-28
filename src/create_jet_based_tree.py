@@ -28,7 +28,7 @@ event_number[0] = 0
 for i, event in enumerate(reader.get("events")):
 
     if debug:
-        if i > 2:
+        if i > 50:
             break
     # clear all the vectors
     dic = clear_dic(dic)

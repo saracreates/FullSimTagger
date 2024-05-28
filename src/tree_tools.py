@@ -54,12 +54,14 @@ def initialize(t):
     # Jet parameters
     jet_p = array("f", [0])
     t.Branch("jet_p", jet_p, "jet_p/F")
-    jet_E = array("f", [0])
-    t.Branch("jet_E", jet_E, "jet_E/F")
+    jet_e = array("f", [0])
+    t.Branch("jet_e", jet_e, "jet_e/F")
     jet_mass = array("f", [0])
     t.Branch("jet_mass", jet_mass, "jet_mass/F")
     jet_nconst = array("i", [0])
     t.Branch("jet_nconst", jet_nconst, "jet_nconst/I")
+    jet_npfcand = array("i", [0])
+    t.Branch("jet_npfcand", jet_npfcand, "jet_npfcand/I")
     jet_theta = array("f", [0])
     t.Branch("jet_theta", jet_theta, "jet_theta/F")
     jet_phi = array("f", [0])
@@ -167,15 +169,20 @@ def initialize(t):
     t.Branch("pfcand_btagJetDistVal", pfcand_btagJetDistVal)
     pfcand_btagJetDistSig = ROOT.std.vector("float")()
     t.Branch("pfcand_btagJetDistSig", pfcand_btagJetDistSig)
+    pfcand_mtof = ROOT.std.vector("float")()
+    t.Branch("pfcand_mtof", pfcand_mtof)
+    pfcand_dndx = ROOT.std.vector("float")()
+    t.Branch("pfcand_dndx", pfcand_dndx)
    
     
     
 
     dic = {
         "jet_p": jet_p,
-        "jet_E": jet_E,
+        "jet_e": jet_e,
         "jet_mass": jet_mass,
         "jet_nconst": jet_nconst,
+        "jet_npfcand": jet_npfcand,
         "jet_theta": jet_theta,
         "jet_phi": jet_phi,
         "recojet_isG": recojet_isG,
@@ -226,13 +233,15 @@ def initialize(t):
         "pfcand_btagSip3dVal": pfcand_btagSip3dVal,
         "pfcand_btagSip3dSig": pfcand_btagSip3dSig,
         "pfcand_btagJetDistVal": pfcand_btagJetDistVal,
-        "pfcand_btagJetDistSig": pfcand_btagJetDistSig
+        "pfcand_btagJetDistSig": pfcand_btagJetDistSig,
+        "pfcand_mtof": pfcand_mtof,
+        "pfcand_dndx": pfcand_dndx
         
     }
     return (event_number, n_hit, n_part, dic, t)
 
 def clear_dic(dic):
-    scalars = ["jet_p", "jet_E", "jet_mass", "jet_nconst", "jet_theta", "jet_phi", \
+    scalars = ["jet_p", "jet_e", "jet_mass", "jet_nconst", "jet_npfcand", "jet_theta", "jet_phi", \
         "recojet_isG", "recojet_isU", "recojet_isD", "recojet_isS", "recojet_isC", "recojet_isB", "recojet_isTAU", \
         "jet_nmu", "jet_nel", "jet_ngamma", "jet_nnhad", "jet_nchad"]
     for key in dic:
@@ -277,10 +286,6 @@ def store_jet(event, debug, dic, event_number, t):
     for j, jet in enumerate(event.get(RefinedVertexJets)): # loop over the two jets
         clear_dic(dic) # clear the dictionary for new jet
 
-        # Use dir(jet) to print all available bindings
-        # print(dir(jet))
-
-        # break
         # Extract the jet momentum
         jet_momentum = jet.getMomentum()
         #print(jet_momentum.x, jet_momentum.y)
@@ -294,19 +299,16 @@ def store_jet(event, debug, dic, event_number, t):
         '__weakref__', 'at', 'begin', 'empty', 'end', 'size']
         """
         
-        
-        #print(jet.getCovMatrix()) # Covariance matrix but only filled with zeros 
-        
-        
         # calculate angles
         jet_theta = np.arcsin(np.sqrt(jet_momentum.x**2 + jet_momentum.y**2)/np.sqrt(jet_momentum.x**2 + jet_momentum.y**2 + jet_momentum.z**2))
         jet_phi = np.arccos(jet_momentum.x/np.sqrt(jet_momentum.x**2 + jet_momentum.y**2))
         
         # Fill branches of the tree
         dic["jet_p"][0] = np.sqrt(jet_momentum.x**2 + jet_momentum.y**2 + jet_momentum.z**2)
-        dic["jet_E"][0] = jet.getEnergy()
+        dic["jet_e"][0] = jet.getEnergy()
         dic["jet_mass"][0] = jet.getMass()
         dic["jet_nconst"][0] = particles_jet.size()
+        dic["jet_npfcand"][0] = particles_jet.size()
         dic["jet_theta"][0] = jet_theta
         dic["jet_phi"][0] = jet_phi
         # MC truth jet particle IDs
@@ -336,7 +338,7 @@ def store_jet(event, debug, dic, event_number, t):
             for key in MC_particle_type:
                 dic[key].push_back(MC_particle_type[key])
             # calculate relative values
-            dic["pfcand_erel_log"].push_back(np.log(dic["pfcand_e"][-1]/dic["jet_E"][0]))
+            dic["pfcand_erel_log"].push_back(np.log(dic["pfcand_e"][-1]/dic["jet_e"][0]))
             dic["pfcand_phirel"].push_back(dic["pfcand_phi"][-1] - dic["jet_phi"][0]) # same as in  rv::RVec<FCCAnalysesJetConstituentsData> get_phirel_cluster in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
             dic["pfcand_thetarel"].push_back(dic["pfcand_theta"][-1] - dic["jet_theta"][0]) 
             
@@ -363,8 +365,12 @@ def store_jet(event, debug, dic, event_number, t):
                 static const int AtLastHit = 3 ;\n
                 static const int AtCalorimeter = 4 ;\n
                 static const int AtVertex = 5 ;\n """
-                print("---- new track")
+                #print("---- new charged track")
+    
                 track = tracks.at(0).getTrackStates().at(0) # info at IP
+                """dir(track)
+                'covMatrix', 'location', 'omega', 'phi', 'referencePoint', 'tanLambda', 'time'
+                but look at https://github.com/key4hep/EDM4hep/blob/997ab32b886899253c9bc61adea9a21b57bc5a21/edm4hep.yaml#L192 for details of the TrackState object"""
                 dic["pfcand_dxy"].push_back(track.D0) # transverse impact parameter
                 dic["pfcand_dz"].push_back(track.Z0) # longitudinal impact parameter
                 
@@ -377,6 +383,8 @@ def store_jet(event, debug, dic, event_number, t):
                 pt_jet = ROOT.TVector3(0,0,0) # point on jet
                 d_3d = n.Dot(pt_ct - pt_jet) # distance of closest approach
                 dic["pfcand_btagJetDistVal"].push_back(d_3d)
+                err3d = np.sqrt(track.covMatrix[0] + track.covMatrix[9]) # error of distance of closest approach
+                dic["pfcand_btagJetDistSig"].push_back(d_3d/err3d) # significance of distance of closest approach
                 
                 
                 # calculate signed 2D impact parameter - like in get_Sip2dVal_clusterV() in JetConstituentsUtils.cc (https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L450 )
@@ -384,11 +392,13 @@ def store_jet(event, debug, dic, event_number, t):
                 pt_ct_2d = ROOT.TVector2(pt_ct.x(), pt_ct.y())
                 sip2d = np.sign(pt_ct_2d * p_jet_2d) * abs(track.D0) # if angle between track and jet greater 90 deg -> negative sign; if smaller 90 deg -> positive sign
                 dic["pfcand_btagSip2dVal"].push_back(sip2d)
+                dic["pfcand_btagSip2dSig"].push_back(sip2d/np.sqrt(track.covMatrix[0]))
                 
                 # calculate signed 3D impact parameter - like in get_Sip3Val() in JetConstituentsUtils.cc 
                 IP_3d = np.sqrt(track.D0**2 + track.Z0**2)
                 sip3d = np.sign(pt_ct * jet_p) * abs(IP_3d) 
                 dic["pfcand_btagSip3dVal"].push_back(sip3d)
+                dic["pfcand_btagSip3dSig"].push_back(sip3d/np.sqrt(track.covMatrix[0] + track.covMatrix[9]) )
                 
                 # Covariance matrix of helix parameters - use indices like used in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L355 
                 #print(track.covMatrix.shape) # 21 values: 6 dimensional covariance matrix with values stored in lower triangular form
@@ -410,13 +420,6 @@ def store_jet(event, debug, dic, event_number, t):
                 dic["pfcand_phictgtheta"].push_back(track.covMatrix[11]) # checked
                 dic["pfcand_cdz"].push_back(track.covMatrix[8]) # checked 
                 dic["pfcand_cctgtheta"].push_back(track.covMatrix[12]) #checked
-                
-                
-                
-                
-                """for i in range(track.getTrackStates().size()): # loop over all 4 avaible possitions of track in detector
-                    print(track.getTrackStates().at(i).phi)
-                    #print(track.getTrackStates().at(i).location) # 1,2,3,4 -> AtIP, AtFirstHit, AtLastHit, AtCalorimeter"""
                 
                 
             elif tracks.size() == 0: # neutral particle -> no track -> set them to -9!
@@ -445,6 +448,12 @@ def store_jet(event, debug, dic, event_number, t):
                 dic["pfcand_btagJetDistSig"].push_back(-9)
             else:
                 raise ValueError("Particle has more than one track")
+            
+            # ignore these because CLD as no drift chamber
+            dic["pfcand_mtof"].push_back(0)
+            dic["pfcand_dndx"].push_back(0)   
+            
+            
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
         t.Fill()
         # because we want to go from an event based tree to a jet based tree for each jet we add an event
