@@ -2,7 +2,7 @@ import sys
 import math
 import ROOT
 from array import array
-from ROOT import TFile, TTree
+from ROOT import TFile, TTree, TLorentzVector
 import numpy as np
 from podio import root_io
 import edm4hep
@@ -300,8 +300,10 @@ def store_jet(event, debug, dic, event_number, t):
         """
         
         # calculate angles
-        jet_theta = np.arcsin(np.sqrt(jet_momentum.x**2 + jet_momentum.y**2)/np.sqrt(jet_momentum.x**2 + jet_momentum.y**2 + jet_momentum.z**2))
-        jet_phi = np.arccos(jet_momentum.x/np.sqrt(jet_momentum.x**2 + jet_momentum.y**2))
+        tlv = TLorentzVector()
+        tlv.SetXYZM(jet_momentum.x, jet_momentum.y, jet_momentum.z, jet.getMass())
+        jet_phi = tlv.Phi() # done like in ReconstructedParticle.cc in get_phi ( https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/ReconstructedParticle.cc#L3 )
+        jet_theta = tlv.Theta()
         
         # Fill branches of the tree
         dic["jet_p"][0] = np.sqrt(jet_momentum.x**2 + jet_momentum.y**2 + jet_momentum.z**2)
@@ -329,9 +331,11 @@ def store_jet(event, debug, dic, event_number, t):
             """
             particle_momentum = particle.getMomentum()
             dic["pfcand_e"].push_back(particle.getEnergy())
+            tlv_p = TLorentzVector()
+            tlv_p.SetXYZM(particle_momentum.x, particle_momentum.y, particle_momentum.z, particle.getMass())
             dic["pfcand_p"].push_back(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2))
-            dic["pfcand_theta"].push_back(np.arcsin(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2)/np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2)))
-            dic["pfcand_phi"].push_back(np.arccos(particle_momentum.x/np.sqrt(particle_momentum.x**2 + particle_momentum.y**2)))
+            dic["pfcand_theta"].push_back(tlv_p.Theta())
+            dic["pfcand_phi"].push_back(tlv_p.Phi())
             dic["pfcand_type"].push_back(particle.getType())
             dic["pfcand_charge"].push_back(particle.getCharge()) 
             MC_particle_type = PDG_ID_to_bool_particles(particle.getType(), particle.getTracks().size()) # dictionary with the particle type (bool)
@@ -451,7 +455,19 @@ def store_jet(event, debug, dic, event_number, t):
             
             # ignore these because CLD as no drift chamber
             dic["pfcand_mtof"].push_back(0)
-            dic["pfcand_dndx"].push_back(0)   
+            dic["pfcand_dndx"].push_back(0)
+            
+            # count number of particles in jet
+            if MC_particle_type["pfcand_isMu"]:
+                dic["jet_nmu"][0] += 1
+            elif MC_particle_type["pfcand_isEl"]:
+                dic["jet_nel"][0] += 1
+            elif MC_particle_type["pfcand_isGamma"]:
+                dic["jet_ngamma"][0] += 1
+            elif MC_particle_type["pfcand_isNeutralHad"]:
+                dic["jet_nnhad"][0] += 1
+            elif MC_particle_type["pfcand_isChargedHad"]:
+                dic["jet_nchad"][0] += 1   
             
             
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
