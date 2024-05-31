@@ -342,9 +342,9 @@ def store_jet(event, debug, dic, event_number, t):
             for key in MC_particle_type:
                 dic[key].push_back(MC_particle_type[key])
             # calculate relative values
-            dic["pfcand_erel_log"].push_back(np.log(dic["pfcand_e"][-1]/dic["jet_e"][0]))
+            dic["pfcand_erel_log"].push_back(np.log10(dic["pfcand_e"][-1]/dic["jet_e"][0])) # like in JetConstituentsUtils.cc in get_erel_log_cluster ( https://github.com/HEP-FCC/FCCAnalyses/blob/d0abc8d76e37630ea157f9d5c48e7867a86be2e2/analyzers/dataframe/src/JetConstituentsUtils.cc#L4 line 877)
             dic["pfcand_phirel"].push_back(dic["pfcand_phi"][-1] - dic["jet_phi"][0]) # same as in  rv::RVec<FCCAnalysesJetConstituentsData> get_phirel_cluster in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
-            dic["pfcand_thetarel"].push_back(dic["pfcand_theta"][-1] - dic["jet_theta"][0]) 
+            dic["pfcand_thetarel"].push_back(abs(dic["pfcand_theta"][-1] - dic["jet_theta"][0])) # rel theta should be positive!  
             
             # get tracks of each particle (should be only one track)
             tracks = particle.getTracks()
