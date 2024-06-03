@@ -21,6 +21,20 @@ def PDG_ID_to_bool(number: int) -> dict:
     }
     return particle_map.get(number, {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False})
 
+def which_H_process(filename: str) -> dict:
+    """Uses the file name to determine which Higgs process is being simulated."""
+    particle_map = {
+        "Huu": {"recojet_isU": True, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
+        "Hdd": {"recojet_isU": False, "recojet_isD": True, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
+        "Hss": {"recojet_isU": False, "recojet_isD": False, "recojet_isS": True, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
+        "Hcc": {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": True, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
+        "Hbb": {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": True, "recojet_isTAU": False, "recojet_isG": False},
+        "Htautau": {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": True, "recojet_isG": False},
+        "Hgg": {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": True},
+    }
+    return particle_map.get(filename, {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False})
+
+
 def PDG_ID_to_bool_particles(number: int, ntracks: int) -> dict:
     """Maps the PDG ID to the particle type for particles in jet"""
     particle_map = {
@@ -29,7 +43,11 @@ def PDG_ID_to_bool_particles(number: int, ntracks: int) -> dict:
         13: {"pfcand_isEl": False, "pfcand_isMu": True, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False},
         -13: {"pfcand_isEl": False, "pfcand_isMu": True, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False},
         22: {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": True, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False},
+        #2112: {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": True, "pfcand_isChargedHad": False},
+        #211: {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": True},
+        #-211: {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": True}
     } 
+    # {211: 883, -211: 896, 22: 1921, 2112: 543, 11: 66, -11: 73, 13: 24, -13: 22}
     # Mappings for charged and neutral hadrons
     if number not in [-11, 11, -13, 13, 22]:
         if ntracks == 0:
@@ -252,7 +270,7 @@ def clear_dic(dic):
     return dic
 
 
-def store_jet(event, debug, dic, event_number, t):
+def store_jet(event, debug, dic, event_number, t, H_to_xx):
     """The jets have the following args that can be accessed with dir(jets)
     ['__add__', '__assign__', '__bool__', '__class__', '__delattr__', '__destruct__',
     '__dict__', '__dir__', '__dispatch__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__',
@@ -314,7 +332,8 @@ def store_jet(event, debug, dic, event_number, t):
         dic["jet_theta"][0] = jet_theta
         dic["jet_phi"][0] = jet_phi
         # MC truth jet particle IDs
-        MC_type = PDG_ID_to_bool(jet.getType()) # returns a dictionary with the particle type
+        #MC_type = PDG_ID_to_bool(jet.getType()) # returns a dictionary with the particle type
+        MC_type = which_H_process(H_to_xx) # use file name to determine which Higgs process is being simulated
         for key in MC_type:
             dic[key][0] = MC_type[key]
             
@@ -343,8 +362,11 @@ def store_jet(event, debug, dic, event_number, t):
                 dic[key].push_back(MC_particle_type[key])
             # calculate relative values
             dic["pfcand_erel_log"].push_back(np.log10(dic["pfcand_e"][-1]/dic["jet_e"][0])) # like in JetConstituentsUtils.cc in get_erel_log_cluster ( https://github.com/HEP-FCC/FCCAnalyses/blob/d0abc8d76e37630ea157f9d5c48e7867a86be2e2/analyzers/dataframe/src/JetConstituentsUtils.cc#L4 line 877)
-            dic["pfcand_phirel"].push_back(dic["pfcand_phi"][-1] - dic["jet_phi"][0]) # same as in  rv::RVec<FCCAnalysesJetConstituentsData> get_phirel_cluster in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
-            dic["pfcand_thetarel"].push_back(abs(dic["pfcand_theta"][-1] - dic["jet_theta"][0])) # rel theta should be positive!  
+            # to calculate the angle correctly in 3D, roate the angle by the jet angle first
+            tlv_p.RotateZ(-jet_phi) # rotate the particle by the jet angle in the xy-plane
+            tlv_p.RotateY(-jet_theta) # rotate the particle by the jet angle in the xz-plane
+            dic["pfcand_phirel"].push_back(tlv_p.Phi()) # same as in  rv::RVec<FCCAnalysesJetConstituentsData> get_phirel_cluster in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
+            dic["pfcand_thetarel"].push_back(tlv_p.Theta()) # rel theta should be positive!  
             
             # get tracks of each particle (should be only one track)
             tracks = particle.getTracks()
@@ -445,11 +467,11 @@ def store_jet(event, debug, dic, event_number, t):
                 dic["pfcand_dxy"].push_back(-9)
                 dic["pfcand_dz"].push_back(-9)
                 dic["pfcand_btagSip2dVal"].push_back(-9)
-                dic["pfcand_btagSip2dSig"].push_back(-9)
+                dic["pfcand_btagSip2dSig"].push_back(-200) # set significance to -200 so it's outside of the distribution (FCCAnalyses: -9)
                 dic["pfcand_btagSip3dVal"].push_back(-9)
-                dic["pfcand_btagSip3dSig"].push_back(-9)
+                dic["pfcand_btagSip3dSig"].push_back(-200)
                 dic["pfcand_btagJetDistVal"].push_back(-9) # line 641 in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
-                dic["pfcand_btagJetDistSig"].push_back(-9)
+                dic["pfcand_btagJetDistSig"].push_back(-200)
             else:
                 raise ValueError("Particle has more than one track")
             

@@ -8,15 +8,26 @@ from ROOT import TFile, TTree
 import numpy as np
 from podio import root_io
 import edm4hep
+import re
 
 from tree_tools import initialize, clear_dic, store_jet
 
 ## debug is used to work with only 2 events and add some prints
 debug = True
 
+def extract_hxx(filename):
+    # Use regular expression to find "H" followed by two lowercase letters
+    match = re.search(r'H[a-z]{2}', filename)
+    if match:
+        return match.group(0)
+    return None
+
+
 ## Input args are the file to read from and the file to write on
 input_file = sys.argv[1]
 output_file = sys.argv[2]
+
+H_to_xx = extract_hxx(input_file)
 
 CLIC = "False"
 reader = root_io.Reader(input_file)
@@ -25,10 +36,11 @@ t = TTree("tree", "pf tree lar")
 event_number, n_hit, n_part, dic, t = initialize(t)
 
 event_number[0] = 0
+print(len(reader.get("events")))
 for i, event in enumerate(reader.get("events")):
 
     if debug:
-        if i > 50:
+        if i > 500:
             break
     # clear all the vectors
     dic = clear_dic(dic)
@@ -42,7 +54,8 @@ for i, event in enumerate(reader.get("events")):
         debug,
         dic,
         event_number, 
-        t
+        t, 
+        H_to_xx
     )
 
 
