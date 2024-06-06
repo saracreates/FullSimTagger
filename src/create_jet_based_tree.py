@@ -40,7 +40,7 @@ print(len(reader.get("events")))
 for i, event in enumerate(reader.get("events")):
 
     if debug:
-        if i > 500:
+        if i > 10:
             break
     # clear all the vectors
     dic = clear_dic(dic)

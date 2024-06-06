@@ -191,6 +191,8 @@ def initialize(t):
     t.Branch("pfcand_mtof", pfcand_mtof)
     pfcand_dndx = ROOT.std.vector("float")()
     t.Branch("pfcand_dndx", pfcand_dndx)
+    pfcand_MCPID = ROOT.std.vector("int")()
+    t.Branch("pfcand_MCPID", pfcand_MCPID)
    
     
     
@@ -253,7 +255,8 @@ def initialize(t):
         "pfcand_btagJetDistVal": pfcand_btagJetDistVal,
         "pfcand_btagJetDistSig": pfcand_btagJetDistSig,
         "pfcand_mtof": pfcand_mtof,
-        "pfcand_dndx": pfcand_dndx
+        "pfcand_dndx": pfcand_dndx,
+        "pfcand_MCPID": pfcand_MCPID
         
     }
     return (event_number, n_hit, n_part, dic, t)
@@ -331,11 +334,11 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         dic["jet_npfcand"][0] = particles_jet.size()
         dic["jet_theta"][0] = jet_theta
         dic["jet_phi"][0] = jet_phi
-        # MC truth jet particle IDs
-        #MC_type = PDG_ID_to_bool(jet.getType()) # returns a dictionary with the particle type
-        MC_type = which_H_process(H_to_xx) # use file name to determine which Higgs process is being simulated
-        for key in MC_type:
-            dic[key][0] = MC_type[key]
+        # reco jet particle IDs
+        #jet_type = PDG_ID_to_bool(jet.getType()) # returns a dictionary with the particle type
+        jet_type = which_H_process(H_to_xx) # use file name to determine which Higgs process is being simulated
+        for key in jet_type:
+            dic[key][0] = jet_type[key]
             
         for i, part in enumerate(particles_jet):
             particle = particles_jet.at(i)
@@ -348,11 +351,24 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             'particleIDs_end', 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'tracks_begin', 'tracks_end', 
             'tracks_size', 'unlink']
             """
+
+            p_reco = np.sqrt(particle.getMomentum().x**2 + particle.getMomentum().y**2 + particle.getMomentum().z**2)
+            debug = False
+            if p_reco>10:
+                debug = True
+                print("-------- new reco particle ------------")
+
             particle_momentum = particle.getMomentum()
             dic["pfcand_e"].push_back(particle.getEnergy())
             tlv_p = TLorentzVector()
             tlv_p.SetXYZM(particle_momentum.x, particle_momentum.y, particle_momentum.z, particle.getMass())
             dic["pfcand_p"].push_back(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2))
+            if debug:
+                print("reco momentum: ", p_reco)
+                print("reco theta: ", tlv_p.Theta())
+                print("reco phi: ", tlv_p.Phi())
+                print("reco mass: ", particle.getMass())
+                print("reco PID: ", particle.getType())
             dic["pfcand_theta"].push_back(tlv_p.Theta())
             dic["pfcand_phi"].push_back(tlv_p.Phi())
             dic["pfcand_type"].push_back(particle.getType())
@@ -367,6 +383,55 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             tlv_p.RotateY(-jet_theta) # rotate the particle by the jet angle in the xz-plane
             dic["pfcand_phirel"].push_back(tlv_p.Phi()) # same as in  rv::RVec<FCCAnalysesJetConstituentsData> get_phirel_cluster in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
             dic["pfcand_thetarel"].push_back(tlv_p.Theta()) # rel theta should be positive!  
+
+
+            reco_obj = particle.getObjectID()
+            reco_collection_id = reco_obj.collectionID
+            reco_index =  reco_obj.index
+
+
+            # get MC particle ID - loop over all MC-Reco-Pairs
+            found_MCparticle = False
+            count = 0
+            for l, link in enumerate(event.get("MCTruthRecoLink")): # or "RecoMCTruthLink"???
+                #print(dir(link))# 'clone', 'getObjectID', 'getRec', 'getSim', 'getWeight', 'id', 'isAvailable', 'operator MCRecoParticleAssociation', 'setRec', 'setSim', 'setWeight', 'unlink'
+                reco_part = link.getRec()
+                reco_collection_id_link = reco_part.getObjectID().collectionID
+                reco_index_link = reco_part.getObjectID().index
+
+                if (reco_collection_id_link == reco_collection_id) and (reco_index_link == reco_index): # if right collection & index
+                    MC_part = link.getSim() # Sim refers to MC
+                    #print(dir(MC_part)) # print all available bindings for MC_part
+                    """
+                    clone', 'daughters_begin', 'daughters_end', 'daughters_size', 'getCharge', 'getColorFlow', 'getDaughters', 
+                    'getEndpoint', 'getEnergy', 'getGeneratorStatus', 'getMass', 'getMomentum', 'getMomentumAtEndpoint', 'getObjectID', 
+                    'getPDG', 'getParents', 'getSimulatorStatus', 'getSpin', 'getTime', 'getVertex', 'hasLeftDetector', 'id', 'isAvailable', 
+                    'isBackscatter', 'isCreatedInSimulation', 'isDecayedInCalorimeter', 'isDecayedInTracker', 'isOverlay', 'isStopped', 
+                    'makeEmpty', 'parents_begin', 'parents_end', 'parents_size', 'unlink', 'vertexIsNotEndpointOfParent']
+                    """
+                    if debug:
+                        print("--- new MC part ---")
+                        print("MC momentum: ", np.sqrt(MC_part.getMomentum().x**2 + MC_part.getMomentum().y**2 + MC_part.getMomentum().z**2))
+                        tlv_MC = TLorentzVector()
+                        tlv_MC.SetXYZM(MC_part.getMomentum().x, MC_part.getMomentum().y, MC_part.getMomentum().z, MC_part.getMass())
+                        print("MC theta: ", tlv_MC.Theta())
+                        print("MC phi: ", tlv_MC.Phi())
+                        print("MC mass: ", MC_part.getMass())
+                        print("MC PID: ", MC_part.getPDG())
+                        print("MC Generator Status: ", MC_part.getGeneratorStatus())
+                        print("MC Simulator Status: ", MC_part.getSimulatorStatus())
+                    dic["pfcand_MCPID"].push_back(MC_part.getPDG()) # save MC particle ID
+                    found_MCparticle = True
+                    count += 1
+            if debug:
+                print("--------")
+                print("count MC particles: ", count)
+            if not found_MCparticle:
+                dic["pfcand_MCPID"].push_back(-999)
+
+
+
+
             
             # get tracks of each particle (should be only one track)
             tracks = particle.getTracks()

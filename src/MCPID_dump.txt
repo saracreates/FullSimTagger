@@ -1,0 +1,981 @@
+100
+
+ ----- new event: 0 ----------
+
+
+-------- new reco particle ------------
+reco momentum:  12.835975169152453
+reco theta:  2.470454083612677
+reco phi:  -2.7257437650326124
+reco mass:  0.1395701766014099
+reco PID:  211
+--- new MC part ---
+MC momentum:  12.751853781298538
+MC theta:  2.47176475850153
+MC phi:  -2.7287655707052125
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  8.95649328555545
+MC theta:  2.493851982310315
+MC phi:  -2.7757168990242542
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  3.539360796867928
+MC theta:  2.4951364502826885
+MC phi:  -2.807204807363744
+MC mass:  -5.960464477539063e-08
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  3.254396481444514
+MC theta:  2.4617225996241676
+MC phi:  -2.720069818547551
+MC mass:  0.00051099891
+MC PID:  -11
+MC Generator Status:  0
+MC Simulator Status:  1157627904
+--- new MC part ---
+MC momentum:  0.017368391715368806
+MC theta:  2.4646906809570823
+MC phi:  -2.902551738007838
+MC mass:  0.0
+MC PID:  22
+MC Generator Status:  0
+MC Simulator Status:  1426063360
+--- new MC part ---
+MC momentum:  0.6961840066239243
+MC theta:  2.464410453183412
+MC phi:  -2.9649685018591168
+MC mass:  0.0
+MC PID:  22
+MC Generator Status:  0
+MC Simulator Status:  1426063360
+--------
+count MC particles:  6
+-------- new reco particle ------------
+reco momentum:  12.443750284298222
+reco theta:  0.606165196307647
+reco phi:  -1.149927427977499
+reco mass:  0.9395653009414673
+reco PID:  2112
+--- new MC part ---
+MC momentum:  12.211793316734274
+MC theta:  0.5982272351582745
+MC phi:  -1.1464114833468015
+MC mass:  0.4976699948310852
+MC PID:  130
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  1
+
+ ----- new event: 2 ----------
+
+
+-------- new reco particle ------------
+reco momentum:  18.106193155552045
+reco theta:  1.043904009846362
+reco phi:  0.34638336724461377
+reco mass:  0.1395701766014099
+reco PID:  211
+--- new MC part ---
+MC momentum:  10.182931083500852
+MC theta:  1.0479579047128524
+MC phi:  0.34056642092813755
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  18.08598792685536
+MC theta:  1.0439990063302502
+MC phi:  0.3464050138488292
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  0.6580049198219604
+MC theta:  1.1514270607723323
+MC phi:  0.29622947939825217
+MC mass:  0.93956536
+MC PID:  2112
+MC Generator Status:  0
+MC Simulator Status:  1157627904
+--------
+count MC particles:  3
+
+ ----- new event: 4 ----------
+
+
+-------- new reco particle ------------
+reco momentum:  10.358737375502692
+reco theta:  1.9849918714785344
+reco phi:  0.42070039809300364
+reco mass:  0.9395653009414673
+reco PID:  2112
+--- new MC part ---
+MC momentum:  0.8039985411102436
+MC theta:  2.4411555816699573
+MC phi:  0.9688364422588193
+MC mass:  0.93956536
+MC PID:  2112
+MC Generator Status:  0
+MC Simulator Status:  1157627904
+--- new MC part ---
+MC momentum:  10.429040424241272
+MC theta:  1.9553795862387426
+MC phi:  0.43812380514993465
+MC mass:  0.4976699948310852
+MC PID:  130
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  7.068263748044658
+MC theta:  2.022135824352983
+MC phi:  0.39152775033826587
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  9.242976482837177
+MC theta:  1.98911613930482
+MC phi:  0.4513568250705783
+MC mass:  0.4936000108718872
+MC PID:  -321
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  4
+-------- new reco particle ------------
+reco momentum:  11.03627039264599
+reco theta:  1.988993810575852
+reco phi:  0.5259626241020322
+reco mass:  0.9395653009414673
+reco PID:  2112
+--- new MC part ---
+MC momentum:  0.40068586442730003
+MC theta:  2.014963694517318
+MC phi:  0.7292829261652855
+MC mass:  0.493677
+MC PID:  -321
+MC Generator Status:  0
+MC Simulator Status:  1157627904
+--- new MC part ---
+MC momentum:  0.8039985411102436
+MC theta:  2.4411555816699573
+MC phi:  0.9688364422588193
+MC mass:  0.93956536
+MC PID:  2112
+MC Generator Status:  0
+MC Simulator Status:  1157627904
+--- new MC part ---
+MC momentum:  1.5179528763341157
+MC theta:  1.8173330771542053
+MC phi:  0.8401605239842738
+MC mass:  0.1395701
+MC PID:  -211
+MC Generator Status:  0
+MC Simulator Status:  1157627904
+--- new MC part ---
+MC momentum:  0.45279238012075784
+MC theta:  2.491640584171812
+MC phi:  0.20496468235516152
+MC mass:  0.1395701
+MC PID:  211
+MC Generator Status:  0
+MC Simulator Status:  1157627904
+--- new MC part ---
+MC momentum:  0.16157877611200358
+MC theta:  2.1387614093840464
+MC phi:  1.0074700758601682
+MC mass:  0.0
+MC PID:  22
+MC Generator Status:  0
+MC Simulator Status:  1157627904
+--- new MC part ---
+MC momentum:  2.7255516144953886
+MC theta:  1.905972570432833
+MC phi:  0.4561460217130345
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  10.429040424241272
+MC theta:  1.9553795862387426
+MC phi:  0.43812380514993465
+MC mass:  0.4976699948310852
+MC PID:  130
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  7.068263748044658
+MC theta:  2.022135824352983
+MC phi:  0.39152775033826587
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  9.242976482837177
+MC theta:  1.98911613930482
+MC phi:  0.4513568250705783
+MC mass:  0.4936000108718872
+MC PID:  -321
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  9
+
+ ----- new event: 6 ----------
+
+
+-------- new reco particle ------------
+reco momentum:  11.92847162084694
+reco theta:  2.356123339039167
+reco phi:  2.4117165491788928
+reco mass:  0.9395653009414673
+reco PID:  2112
+--- new MC part ---
+MC momentum:  2.1000397544517577
+MC theta:  2.4106715115669672
+MC phi:  2.1998057953494747
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  9.181203115856315
+MC theta:  2.353523295072335
+MC phi:  2.3080737550514843
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  7.63349942208986
+MC theta:  2.3530951082278713
+MC phi:  2.42635679254846
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  8.101314159256981
+MC theta:  2.3765975322010604
+MC phi:  2.347774803857899
+MC mass:  0.4976699948310852
+MC PID:  130
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  4.700811613057237
+MC theta:  2.3809317308367075
+MC phi:  2.4426582316449696
+MC mass:  1.3328003944934608e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  7.135921492646807
+MC theta:  2.367933438721658
+MC phi:  2.4147865684633048
+MC mass:  1.4600097131278744e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  3.0193387101030966
+MC theta:  2.3558755450524296
+MC phi:  2.4121367512163747
+MC mass:  4.214684778958144e-08
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  1.3022187865258115
+MC theta:  2.3360409300469382
+MC phi:  2.3768975694112737
+MC mass:  0.0
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  8
+-------- new reco particle ------------
+reco momentum:  10.783669669080522
+reco theta:  2.369725200519244
+reco phi:  2.2117849857418994
+reco mass:  0.9395653009414673
+reco PID:  2112
+--- new MC part ---
+MC momentum:  8.738815640476497
+MC theta:  2.3692330158178034
+MC phi:  2.3220115731706565
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  1
+
+ ----- new event: 8 ----------
+
+
+-------- new reco particle ------------
+reco momentum:  28.835172795504395
+reco theta:  2.6542198453705548
+reco phi:  -1.4199066126109332
+reco mass:  0.1395701766014099
+reco PID:  211
+--- new MC part ---
+MC momentum:  29.2004064848691
+MC theta:  2.654307722980122
+MC phi:  -1.4207817710083008
+MC mass:  0.4936000108718872
+MC PID:  321
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  7.496311470433499
+MC theta:  2.6824716312479793
+MC phi:  -1.2212159657781032
+MC mass:  0.4976699948310852
+MC PID:  130
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  3.40161467854139
+MC theta:  2.5094453864038693
+MC phi:  -1.646515796378031
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  7.760575043553296
+MC theta:  2.7027388867236164
+MC phi:  -1.4075487641932247
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  4
+-------- new reco particle ------------
+reco momentum:  14.526286801232917
+reco theta:  2.397908619705397
+reco phi:  -0.7114583026052158
+reco mass:  0.0
+reco PID:  22
+--- new MC part ---
+MC momentum:  13.74784975191474
+MC theta:  2.397999871975626
+MC phi:  -0.7117376314375926
+MC mass:  1.6858739115832577e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  1
+
+ ----- new event: 10 ----------
+
+
+-------- new reco particle ------------
+reco momentum:  12.55031091232234
+reco theta:  1.7400925417552413
+reco phi:  -1.512275696279663
+reco mass:  0.1395701766014099
+reco PID:  -211
+--- new MC part ---
+MC momentum:  10.150502045793115
+MC theta:  1.8687526216852333
+MC phi:  -1.5324503665831035
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  12.60697179509578
+MC theta:  1.785048445803324
+MC phi:  -1.488673384749304
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  12.541424336510332
+MC theta:  1.7401398718141923
+MC phi:  -1.5122809923857705
+MC mass:  0.9382699728012085
+MC PID:  -2212
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  3
+-------- new reco particle ------------
+reco momentum:  12.588106988846587
+reco theta:  1.7851973931455547
+reco phi:  -1.4892067916776708
+reco mass:  0.1395701766014099
+reco PID:  -211
+--- new MC part ---
+MC momentum:  10.150502045793115
+MC theta:  1.8687526216852333
+MC phi:  -1.5324503665831035
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  12.60697179509578
+MC theta:  1.785048445803324
+MC phi:  -1.488673384749304
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  4.387874333609385
+MC theta:  1.780855942542545
+MC phi:  -1.453743016735538
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  2.3247163325455333
+MC theta:  1.9063368465950887
+MC phi:  -1.4422573782546508
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  12.541424336510332
+MC theta:  1.7401398718141923
+MC phi:  -1.5122809923857705
+MC mass:  0.9382699728012085
+MC PID:  -2212
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  5
+-------- new reco particle ------------
+reco momentum:  10.20527043176668
+reco theta:  1.8688045587172346
+reco phi:  -1.5318005122909844
+reco mass:  0.1395701766014099
+reco PID:  211
+--- new MC part ---
+MC momentum:  10.150502045793115
+MC theta:  1.8687526216852333
+MC phi:  -1.5324503665831035
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  4.387874333609385
+MC theta:  1.780855942542545
+MC phi:  -1.453743016735538
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  4.294737327478637
+MC theta:  1.832352713215973
+MC phi:  -1.6255127601713832
+MC mass:  -1.1920928955078125e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  6.615017932914076
+MC theta:  1.800038041573491
+MC phi:  -1.5698341404748004
+MC mass:  0.9382699728012085
+MC PID:  2212
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  4
+
+ ----- new event: 12 ----------
+
+
+-------- new reco particle ------------
+reco momentum:  17.139537189970717
+reco theta:  1.9385808700491438
+reco phi:  1.2086464205855438
+reco mass:  0.10565835982561111
+reco PID:  -13
+--- new MC part ---
+MC momentum:  17.00985592148889
+MC theta:  1.9384903078378908
+MC phi:  1.2085975563706453
+MC mass:  0.10565999895334244
+MC PID:  -13
+MC Generator Status:  1
+MC Simulator Status:  33554432
+--------
+count MC particles:  1
+
+ ----- new event: 14 ----------
+
+
+-------- new reco particle ------------
+reco momentum:  14.73802339449258
+reco theta:  2.7443970268345814
+reco phi:  -0.050138971565466796
+reco mass:  0.1395701766014099
+reco PID:  -211
+--- new MC part ---
+MC momentum:  14.668476605009529
+MC theta:  2.7445365205839605
+MC phi:  -0.04945488288611613
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  2.569004074094367
+MC theta:  2.802073015119243
+MC phi:  0.08047929887913956
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  6.872719090329592
+MC theta:  2.681988199812846
+MC phi:  -0.18839448995091412
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  2.8163073349745282
+MC theta:  2.7674212149652453
+MC phi:  -0.08560480918772763
+MC mass:  5.960464477539063e-08
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  2.0261015455833484
+MC theta:  2.7284353421558736
+MC phi:  -0.10101907894994461
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  5
+-------- new reco particle ------------
+reco momentum:  10.557369782532735
+reco theta:  2.72723930003986
+reco phi:  -0.3378605344639181
+reco mass:  0.0
+reco PID:  22
+--- new MC part ---
+MC momentum:  11.213836161710018
+MC theta:  2.727308986719511
+MC phi:  -0.3381783763402452
+MC mass:  -1.6858739115832577e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  8.093659939854534
+MC theta:  2.7209210886776507
+MC phi:  -0.3069848882722822
+MC mass:  1.1920928955078125e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  6.339753996418606
+MC theta:  2.779943357834026
+MC phi:  -0.16734804275588072
+MC mass:  1.4600097131278744e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  3
+-------- new reco particle ------------
+reco momentum:  18.853769963464643
+reco theta:  0.31281013410023684
+reco phi:  0.3337985894448108
+reco mass:  0.1395701766014099
+reco PID:  211
+--- new MC part ---
+MC momentum:  6.750891089664357
+MC theta:  0.35339665138946885
+MC phi:  0.23540936999446918
+MC mass:  0.4936000108718872
+MC PID:  321
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  18.760821251307974
+MC theta:  0.31288906354099927
+MC phi:  0.3336293801815917
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  3.6837578575532923
+MC theta:  0.3217125254484094
+MC phi:  0.059484146936808334
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  2.6604471351997048
+MC theta:  0.30317337410918477
+MC phi:  0.5575349712467996
+MC mass:  -5.960464477539063e-08
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  3.9200617066657766
+MC theta:  0.3201644517583664
+MC phi:  0.4328734443204951
+MC mass:  -1.1920928955078125e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  5
+
+ ----- new event: 16 ----------
+
+
+-------- new reco particle ------------
+reco momentum:  36.607984101060396
+reco theta:  1.3565615586331463
+reco phi:  -2.7775077905491092
+reco mass:  0.1395701766014099
+reco PID:  -211
+--- new MC part ---
+MC momentum:  60.080753581662876
+MC theta:  1.3419898444213707
+MC phi:  -2.767462991785876
+MC mass:  1.8693000078201294
+MC PID:  411
+MC Generator Status:  2
+MC Simulator Status:  134217728
+--- new MC part ---
+MC momentum:  6.907923808721142
+MC theta:  1.3888397721859753
+MC phi:  -2.7671083679662054
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  6.451068355818651
+MC theta:  1.3808648495890634
+MC phi:  -2.724061312284182
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  3.26945943767534
+MC theta:  1.3360278502719227
+MC phi:  -2.669325310344112
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  2.4361435124292914
+MC theta:  1.4843991082625034
+MC phi:  -2.73509618698237
+MC mass:  0.0
+MC PID:  22
+MC Generator Status:  0
+MC Simulator Status:  1157627904
+--- new MC part ---
+MC momentum:  3.9503487330732643
+MC theta:  1.3523247461708503
+MC phi:  -2.7745014542723743
+MC mass:  5.960464477539063e-08
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  36.442518692732975
+MC theta:  1.3582642886378447
+MC phi:  -2.777830896579224
+MC mass:  0.4936000108718872
+MC PID:  -321
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  5.0738251794795834
+MC theta:  1.3414487797892367
+MC phi:  -2.7132536530508538
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  8
+
+ ----- new event: 18 ----------
+
+
+-------- new reco particle ------------
+reco momentum:  20.413848531409407
+reco theta:  2.618005630413663
+reco phi:  1.2515888300987918
+reco mass:  0.9395653009414673
+reco PID:  2112
+--- new MC part ---
+MC momentum:  3.3850272039386162
+MC theta:  2.629965701606026
+MC phi:  1.1780886810722102
+MC mass:  0.00051099891
+MC PID:  11
+MC Generator Status:  0
+MC Simulator Status:  1157627904
+--- new MC part ---
+MC momentum:  15.920812444106177
+MC theta:  2.6048487424703506
+MC phi:  1.3012808762371406
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  4.9722161813902375
+MC theta:  2.5920130339326186
+MC phi:  1.1742423285698886
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  6.049169346814009
+MC theta:  2.62149841749375
+MC phi:  1.1552544497324682
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  13.75241687581817
+MC theta:  2.6065687922762
+MC phi:  1.2692582050719012
+MC mass:  0.4976699948310852
+MC PID:  130
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  3.995602720731071
+MC theta:  2.630871269283272
+MC phi:  1.18020151215423
+MC mass:  0.4936000108718872
+MC PID:  321
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  7.85525010557608
+MC theta:  2.5829578104327564
+MC phi:  1.1528539627140901
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  7
+-------- new reco particle ------------
+reco momentum:  16.023591019541264
+reco theta:  2.604941728031917
+reco phi:  1.3017680646412182
+reco mass:  0.1395701766014099
+reco PID:  211
+--- new MC part ---
+MC momentum:  1.977914763318668
+MC theta:  2.6241077188660427
+MC phi:  1.2192730564262655
+MC mass:  -4.71216097253091e-08
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  15.920812444106177
+MC theta:  2.6048487424703506
+MC phi:  1.3012808762371406
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  4.9722161813902375
+MC theta:  2.5920130339326186
+MC phi:  1.1742423285698886
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  6.049169346814009
+MC theta:  2.62149841749375
+MC phi:  1.1552544497324682
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  13.75241687581817
+MC theta:  2.6065687922762
+MC phi:  1.2692582050719012
+MC mass:  0.4976699948310852
+MC PID:  130
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  9.480202673060514
+MC theta:  2.629357256061378
+MC phi:  1.1477114588855744
+MC mass:  -2.384185791015625e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  3.995602720731071
+MC theta:  2.630871269283272
+MC phi:  1.18020151215423
+MC mass:  0.4936000108718872
+MC PID:  321
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  7.85525010557608
+MC theta:  2.5829578104327564
+MC phi:  1.1528539627140901
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  8
+
+ ----- new event: 20 ----------
+
+
+-------- new reco particle ------------
+reco momentum:  16.287073488146433
+reco theta:  2.111780908118634
+reco phi:  0.5458957157509732
+reco mass:  0.1395701766014099
+reco PID:  211
+--- new MC part ---
+MC momentum:  16.307894481336664
+MC theta:  2.1123162401853035
+MC phi:  0.5442202577905809
+MC mass:  0.4936000108718872
+MC PID:  321
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  3.960608308575358
+MC theta:  2.1187941291310666
+MC phi:  0.5293224551785268
+MC mass:  0.13956999778747559
+MC PID:  -211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  4.565892998434571
+MC theta:  2.1565141004396136
+MC phi:  0.5105023728914321
+MC mass:  1.1920928955078125e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  9.41407170761779
+MC theta:  2.1047051423067855
+MC phi:  0.5370519523432559
+MC mass:  2.384185791015625e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  1.0537906331470155
+MC theta:  2.1469512450059938
+MC phi:  0.5455471813667797
+MC mass:  4.470348358154297e-08
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  0.7648157600097107
+MC theta:  2.1283934923464334
+MC phi:  0.5073661684417335
+MC mass:  1.4901161193847656e-08
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  7.392096480601266
+MC theta:  2.124934542832767
+MC phi:  0.6325634417301175
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  7
+-------- new reco particle ------------
+reco momentum:  10.465642344792155
+reco theta:  2.104950250926261
+reco phi:  0.5393975447761333
+reco mass:  0.0
+reco PID:  22
+--- new MC part ---
+MC momentum:  16.307894481336664
+MC theta:  2.1123162401853035
+MC phi:  0.5442202577905809
+MC mass:  0.4936000108718872
+MC PID:  321
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  9.41407170761779
+MC theta:  2.1047051423067855
+MC phi:  0.5370519523432559
+MC mass:  2.384185791015625e-07
+MC PID:  22
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--- new MC part ---
+MC momentum:  7.392096480601266
+MC theta:  2.124934542832767
+MC phi:  0.6325634417301175
+MC mass:  0.13956999778747559
+MC PID:  211
+MC Generator Status:  1
+MC Simulator Status:  83886080
+--------
+count MC particles:  3
