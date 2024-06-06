@@ -1,4 +1,4 @@
-lines.linewidth : 5.0
+lines.linewidth : 2.0
 
 patch.linewidth: 0.5
 patch.facecolor: blue
