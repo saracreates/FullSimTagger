@@ -342,6 +342,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             
         for i, part in enumerate(particles_jet):
             particle = particles_jet.at(i)
+            #print("-------- new reco particle ------------")
             #print(dir(particle)) # print all available bindings for particle
             """
             ['clone', 'clusters_begin', 
@@ -351,24 +352,16 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             'particleIDs_end', 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'tracks_begin', 'tracks_end', 
             'tracks_size', 'unlink']
             """
+            #print("ref point particle: ", particle.getReferencePoint().x, particle.getReferencePoint().y, particle.getReferencePoint().z)
 
-            p_reco = np.sqrt(particle.getMomentum().x**2 + particle.getMomentum().y**2 + particle.getMomentum().z**2)
-            debug = False
-            if p_reco>10:
-                debug = True
-                print("-------- new reco particle ------------")
+
 
             particle_momentum = particle.getMomentum()
             dic["pfcand_e"].push_back(particle.getEnergy())
             tlv_p = TLorentzVector()
             tlv_p.SetXYZM(particle_momentum.x, particle_momentum.y, particle_momentum.z, particle.getMass())
             dic["pfcand_p"].push_back(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2))
-            if debug:
-                print("reco momentum: ", p_reco)
-                print("reco theta: ", tlv_p.Theta())
-                print("reco phi: ", tlv_p.Phi())
-                print("reco mass: ", particle.getMass())
-                print("reco PID: ", particle.getType())
+            #print("reco PID: ", particle.getType())
             dic["pfcand_theta"].push_back(tlv_p.Theta())
             dic["pfcand_phi"].push_back(tlv_p.Phi())
             dic["pfcand_type"].push_back(particle.getType())
@@ -386,48 +379,60 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
 
 
             reco_obj = particle.getObjectID()
-            reco_collection_id = reco_obj.collectionID
+            reco_collection_id = reco_obj.collectionID # 4196981182
             reco_index =  reco_obj.index
 
 
             # get MC particle ID - loop over all MC-Reco-Pairs
-            found_MCparticle = False
             count = 0
-            for l, link in enumerate(event.get("MCTruthRecoLink")): # or "RecoMCTruthLink"???
-                #print(dir(link))# 'clone', 'getObjectID', 'getRec', 'getSim', 'getWeight', 'id', 'isAvailable', 'operator MCRecoParticleAssociation', 'setRec', 'setSim', 'setWeight', 'unlink'
+            track_weights = []
+            cluster_weights = []
+            link_index = []
+            for l, link in enumerate(event.get("RecoMCTruthLink")):
+                #print(dir(link)) #'clone', 'getObjectID', 'getRec', 'getSim', 'getWeight', 'id', 'isAvailable', 'operator MCRecoParticleAssociation', 'setRec', 'setSim', 'setWeight', 'unlink'
                 reco_part = link.getRec()
                 reco_collection_id_link = reco_part.getObjectID().collectionID
                 reco_index_link = reco_part.getObjectID().index
-
                 if (reco_collection_id_link == reco_collection_id) and (reco_index_link == reco_index): # if right collection & index
                     MC_part = link.getSim() # Sim refers to MC
                     #print(dir(MC_part)) # print all available bindings for MC_part
                     """
-                    clone', 'daughters_begin', 'daughters_end', 'daughters_size', 'getCharge', 'getColorFlow', 'getDaughters', 
+                    'clone', 'daughters_begin', 'daughters_end', 'daughters_size', 'getCharge', 'getColorFlow', 'getDaughters', 
                     'getEndpoint', 'getEnergy', 'getGeneratorStatus', 'getMass', 'getMomentum', 'getMomentumAtEndpoint', 'getObjectID', 
                     'getPDG', 'getParents', 'getSimulatorStatus', 'getSpin', 'getTime', 'getVertex', 'hasLeftDetector', 'id', 'isAvailable', 
                     'isBackscatter', 'isCreatedInSimulation', 'isDecayedInCalorimeter', 'isDecayedInTracker', 'isOverlay', 'isStopped', 
-                    'makeEmpty', 'parents_begin', 'parents_end', 'parents_size', 'unlink', 'vertexIsNotEndpointOfParent']
+                    'makeEmpty', 'parents_begin', 'parents_end', 'parents_size', 'unlink', 'vertexIsNotEndpointOfParent'
                     """
-                    if debug:
-                        print("--- new MC part ---")
-                        print("MC momentum: ", np.sqrt(MC_part.getMomentum().x**2 + MC_part.getMomentum().y**2 + MC_part.getMomentum().z**2))
-                        tlv_MC = TLorentzVector()
-                        tlv_MC.SetXYZM(MC_part.getMomentum().x, MC_part.getMomentum().y, MC_part.getMomentum().z, MC_part.getMass())
-                        print("MC theta: ", tlv_MC.Theta())
-                        print("MC phi: ", tlv_MC.Phi())
-                        print("MC mass: ", MC_part.getMass())
-                        print("MC PID: ", MC_part.getPDG())
-                        print("MC Generator Status: ", MC_part.getGeneratorStatus())
-                        print("MC Simulator Status: ", MC_part.getSimulatorStatus())
-                    dic["pfcand_MCPID"].push_back(MC_part.getPDG()) # save MC particle ID
-                    found_MCparticle = True
+                    wgt = link.getWeight()
+                    trackwgt = (int(wgt)%10000)/1000
+                    clusterwgt = (int(wgt)/10000)/1000
+                    track_weights.append(trackwgt)
+                    cluster_weights.append(clusterwgt)
+                    link_index.append(l)
+
                     count += 1
-            if debug:
-                print("--------")
-                print("count MC particles: ", count)
-            if not found_MCparticle:
+
+            #print("count MC particles: ", count)
+            track_weights = np.array(track_weights)
+            cluster_weights = np.array(cluster_weights)
+            link_index = np.array(link_index)
+            # find best matching particle
+            if np.any(track_weights>0.8):
+                best_match = np.argmax(track_weights)
+                best_link_index = link_index[best_match]
+                best_link = event.get("RecoMCTruthLink").at(int(best_link_index))
+                MC_part = best_link.getSim()
+                dic["pfcand_MCPID"].push_back(MC_part.getPDG()) # save MC particle ID
+            elif np.any(cluster_weights>0.8):
+                best_match = np.argmax(cluster_weights)
+                best_link_index = link_index[best_match]
+                best_link = event.get("RecoMCTruthLink").at(int(best_link_index))
+                MC_part = best_link.getSim()
+                dic["pfcand_MCPID"].push_back(MC_part.getPDG())
+            else:
                 dic["pfcand_MCPID"].push_back(-999)
+
+
 
 
 
@@ -462,6 +467,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                 """dir(track)
                 'covMatrix', 'location', 'omega', 'phi', 'referencePoint', 'tanLambda', 'time'
                 but look at https://github.com/key4hep/EDM4hep/blob/997ab32b886899253c9bc61adea9a21b57bc5a21/edm4hep.yaml#L192 for details of the TrackState object"""
+                #print("track ref point: ", track.referencePoint.x, track.referencePoint.y, track.referencePoint.z) # (0,0,0) for IP
                 dic["pfcand_dxy"].push_back(track.D0) # transverse impact parameter
                 dic["pfcand_dz"].push_back(track.Z0) # longitudinal impact parameter
                 
