@@ -300,6 +300,14 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         _type_: _description_
     """
 
+    # calculate PV
+    for v, vertex in enumerate(event.get("PrimaryVertices")):
+        if v>0:
+            raise ValueError("More than one primary vertex")
+        primaryVertex = vertex.getPosition()
+
+    #print(primaryVertex.x, primaryVertex.y, primaryVertex.z)
+
     RefinedVertexJets = "RefinedVertexJets"
 
     if debug:
@@ -561,6 +569,17 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                 dic["jet_nnhad"][0] += 1
             elif MC_particle_type["pfcand_isChargedHad"]:
                 dic["jet_nchad"][0] += 1   
+
+            
+            """ROOT.gInterpreter.Declare('#include <marlinutil/HelixClassT.h>')
+            ROOT.gInterpreter.Declare('template class HelixClassT<float>;')
+            HelixClassT = ROOT.gROOT.GetClass("HelixClassT<float>")
+            h = HelixClassT.New()
+            h = ROOT.HelixClassT("float")
+            print(type(h))
+            h.Initialize_Canonical(track.phi, track.D0, track.Z0, track.omega, track.tanLambda, 2.0) # 2 is B field strength in T
+            distance = h.getDistanceToPoint(primaryVertex)
+            print("distance: ", distance)"""
             
             
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
