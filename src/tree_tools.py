@@ -622,7 +622,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                 dic["jet_nchad"][0] += 1   
 
             
-            ROOT.gInterpreter.Declare('#include <marlinutil/HelixClassT.h>')
+            """ROOT.gInterpreter.Declare('#include <marlinutil/HelixClassT.h>')
             h = ROOT.HelixClassT["float"]()
             h.Initialize_Canonical(track.phi, track.D0, track.Z0, track.omega, track.tanLambda, 2.0) # 2 is B field strength in T
             distance_before = ROOT.std.vector("float")(3)
@@ -643,7 +643,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             distance = h.getDistanceToPoint(primaryVertex_array, distance_before_array)
             #distance = h.getDistanceToPoint(primaryVertex, distance_before)
             #print("distance: ", distance) #float...
-            
+            """
             
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
         t.Fill()
