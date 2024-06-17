@@ -20,7 +20,7 @@ def run_create_jet_based_tree(file_pattern, output_folder, output_root_filename)
         # Process each root file
         output_files = []
         print(f"Processing {len(root_files)} root files...")
-        for root_file in root_files:
+        for i, root_file in enumerate(root_files):
             output_file_path = os.path.join(output_folder, f"tagger_input_data_fullsim_{os.path.basename(root_file)}")
             # Run the create_jet_based_tree.py script
             subprocess.run(
@@ -29,6 +29,8 @@ def run_create_jet_based_tree(file_pattern, output_folder, output_root_filename)
                 stderr=log_file
             )
             output_files.append(output_file_path)
+            if (i + 1) % 20 == 0:
+                print(f"Done with {i + 1} events")
     
     # Combine all output root files into one big root file
     combined_output_path = os.path.join(output_folder, output_root_filename)
