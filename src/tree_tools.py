@@ -10,6 +10,13 @@ import ctypes
 
 cSpeed = 2.99792458e8 * 1.0e-9
 
+def arccot(x, epsilon=1e-10):
+    if abs(x) < epsilon:
+        return np.pi / 2
+    elif x > 0:
+        return np.arctan(1 / x)
+    else:  # x < 0
+        return np.arctan(1 / x) + np.pi
 
 def PDG_ID_to_bool(number: int) -> dict:
     """Maps the PDG ID to the particle type for jets using https://pdg.lbl.gov/2007/reviews/montecarlorpp.pdf """
@@ -155,7 +162,10 @@ def calculate_params_wrt_PV(track, primaryVertex, particle, Bz=2):
     return d0, z0, phi, c, ct
 
 def calculate_covariance_matrix(dic, track):
-    # Covariance matrix of helix parameters - use indices like used in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L355 
+    """
+    Covariance matrix of helix parameters - use indices like used in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L355 
+    NOTE: the calculation is in principle not fully correct because the cov matrix is calculated in the point of closest approach to the origin (0,0,0) and not to the primary vertex.
+    """
     #print(track.covMatrix.shape) # 21 values: 6 dimensional covariance matrix with values stored in lower triangular form
     # diagonal: d0 = xy, phi, omega = pt, z0, tanLambda = eta
     dic["pfcand_dxydxy"].push_back(track.covMatrix[0]) 
@@ -548,6 +558,10 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                 # correct for phi
                 dic["pfcand_phi"].pop_back() # remove the phi calculated with respect to (0,0,0)
                 dic["pfcand_phi"].push_back(phi) # update phi with respect to PV
+                # correct for theta
+                dic["pfcand_theta"].pop_back() # remove the theta calculated with respect to (0,0,0)
+                dic["pfcand_theta"].push_back(arccot(ct)) # update theta with respect to PV
+
                 
                 part_p = ROOT.TVector3(particle_momentum.x, particle_momentum.y, particle_momentum.z)
                 jet_p = ROOT.TVector3(jet_momentum.x, jet_momentum.y, jet_momentum.z)
@@ -558,6 +572,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                 pt_jet = ROOT.TVector3(0,0,0) # point on jet
                 d_3d = n.Dot(pt_ct - pt_jet) # distance of closest approach
                 dic["pfcand_btagJetDistVal"].push_back(d_3d)
+                # NOTE: error of distance of closest approach is calculated in the point of closest approach to the origin (0,0,0) and not to the primary vertex - this is in principle wrong!!!
                 err3d = np.sqrt(track.covMatrix[0] + track.covMatrix[9]) # error of distance of closest approach
                 dic["pfcand_btagJetDistSig"].push_back(d_3d/err3d) # significance of distance of closest approach
                 

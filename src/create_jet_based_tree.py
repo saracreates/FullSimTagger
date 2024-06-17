@@ -36,7 +36,7 @@ t = TTree("tree", "pf tree lar")
 event_number, n_hit, n_part, dic, t = initialize(t)
 
 event_number[0] = 0
-print(len(reader.get("events")))
+print("Processing ", len(reader.get("events")), " events...")
 for i, event in enumerate(reader.get("events")):
 
     if debug:
@@ -45,9 +45,9 @@ for i, event in enumerate(reader.get("events")):
     # clear all the vectors
     dic = clear_dic(dic)
 
-    print("")
-    print(" ----- new event: {} ----------".format(event_number[0]))
-    print("")
+    #print("")
+    #print(" ----- new event: {} ----------".format(event_number[0]))
+    #print("")
 
     dic, event_number, t = store_jet(
         event,
