@@ -437,8 +437,6 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
 
     RefinedVertexJets = "RefinedVertexJets"
 
-    if debug:
-        print("")
     for j, jet in enumerate(event.get(RefinedVertexJets)): # loop over the two jets
         clear_dic(dic) # clear the dictionary for new jet
 

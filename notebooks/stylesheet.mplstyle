@@ -10,13 +10,12 @@ text.hinting_factor : 8
 mathtext.fontset : dejavuserif
 
 axes.facecolor: eeeeee
-axes.edgecolor: bcbcbc
+
 axes.grid : True
 axes.titlesize: x-large
 axes.labelsize: x-large
 axes.prop_cycle: cycler('color', ['73b06f', 'e6701b', '007090', 'c7463d', 'ffad08', '6f73b0', '56b4e9', '4c6e3d', 'c47ca2', 'f5f575'])
 
-grid.color: b2b2b2
 grid.linestyle: --
 grid.linewidth: 0.5
 
