@@ -187,6 +187,38 @@ def calculate_covariance_matrix(dic, track):
     dic["pfcand_cctgtheta"].push_back(track.covMatrix[12]) 
     return dic
 
+def secondary_vertex_info(event, dic):
+    """Find out how much info is saved about secondary vertices in full sim"""
+    for v, vertex in enumerate(event.get("BuildUpVertices")):
+        """
+        print(dir(vertex))
+        'addToParameters', 'clone', 'covMatrix', 'getAlgorithmType', 'getAssociatedParticle', 'getChi2', 'getCovMatrix', 
+        'getObjectID', 'getParameters', 'getPosition', 'getPrimary', 'getProbability', 'id', 'isAvailable', 'operator Vertex', 
+        'parameters_begin', 'parameters_end', 'parameters_size', 'position', 'setAlgorithmType', 'setAssociatedParticle', 
+        'setChi2', 'setCovMatrix', 'setPosition', 'setPrimary', 'setProbability', 'unlink'
+        """
+        #pv = vertex.getPrimary() # empty 0
+        # print(vertex.getParameters()) # empty {}
+        sv_position = ROOT.TVector3(vertex.getPosition().x, vertex.getPosition().y, vertex.getPosition().y)
+
+        ass_part = vertex.getAssociatedParticle()
+        """
+        print(dir(ass_part))
+        'clone', 'clusters_begin', 'clusters_end', 'clusters_size', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 
+        'getGoodnessOfPID', 'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 
+        'getReferencePoint', 'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'makeEmpty', 
+        'particleIDs_begin', 'particleIDs_end', 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink'
+        """
+        part = ass_part.getParticles()
+        #print(dir(part)) # size, at
+        #print(part.size()) 2-4
+
+        collectionID = ass_part.getObjectID().collectionID # 822742788
+        index = ass_part.getObjectID().index
+        print(collectionID)
+
+
+    return dic
         
 def initialize(t):
     event_number = array("i", [0])
@@ -428,12 +460,17 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
     Returns:
         _type_: _description_
     """
+    
 
     # calculate PV
     for v, vertex in enumerate(event.get("PrimaryVertices")):
         if v>0:
             raise ValueError("More than one primary vertex")
         primaryVertex = vertex.getPosition()
+        print("Primary vertex: ", primaryVertex.x, primaryVertex.y, primaryVertex.z)
+
+
+    #dic = secondary_vertex_info(event, dic)
 
     RefinedVertexJets = "RefinedVertexJets"
 
@@ -657,7 +694,8 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             #distance = h.getDistanceToPoint(primaryVertex, distance_before)
             #print("distance: ", distance) #float...
             """
-            
+
+
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
         t.Fill()
         # because we want to go from an event based tree to a jet based tree for each jet we add an event
