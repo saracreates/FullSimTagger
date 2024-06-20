@@ -44,7 +44,6 @@ def run_create_jet_based_tree(file_pattern, output_folder, output_root_filename)
 if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Usage: python script.py <file_pattern> <output_folder> <output_root_filename>")
-        # python create_fullsim_tagger_data.py "/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/H*/CLD_o2_v05/rec/*/*/H*_rec_*.root" /afs/cern.ch/work/s/saaumill/public/fullsim_smalldataset/ /afs/cern.ch/work/s/saaumill/public/fullsim_smalldata.root
         # python create_fullsim_tagger_data.py "/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/H*/CLD_o2_v05/rec/*/*/H*_rec_*.root" /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-smalldata_new /afs/cern.ch/work/s/saaumill/public/final-fullsim-inputNN/Hxx-inputNN-smalldata_new.root
         sys.exit(1)
     
