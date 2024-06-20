@@ -273,7 +273,7 @@ def initialize(t):
     t.Branch("pfcand_type", pfcand_type)
     pfcand_charge = ROOT.std.vector("float")()
     t.Branch("pfcand_charge", pfcand_charge)
-    pfcand_isEl = ROOT.std.vector("bool")()
+    pfcand_isEl = ROOT.std.vector("bool")() #problem store it as int
     t.Branch("pfcand_isEl", pfcand_isEl)
     pfcand_isMu = ROOT.std.vector("bool")()
     t.Branch("pfcand_isMu", pfcand_isMu)
