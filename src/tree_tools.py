@@ -21,28 +21,28 @@ def arccot(x, epsilon=1e-10):
 def PDG_ID_to_bool(number: int) -> dict:
     """Maps the PDG ID to the particle type for jets using https://pdg.lbl.gov/2007/reviews/montecarlorpp.pdf """
     particle_map = {
-        1: {"recojet_isU": True, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
-        2: {"recojet_isU": False, "recojet_isD": True, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
-        3: {"recojet_isU": False, "recojet_isD": False, "recojet_isS": True, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
-        4: {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": True, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
-        5: {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": True, "recojet_isTAU": False, "recojet_isG": False},
-        15: {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": True, "recojet_isG": False},
-        21: {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": True},
+        1: {"recojet_isU": 1, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 0},
+        2: {"recojet_isU": 0, "recojet_isD": 1, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 0},
+        3: {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 1, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 0},
+        4: {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 1, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 0},
+        5: {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 1, "recojet_isTAU": 0, "recojet_isG": 0},
+        15: {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 1, "recojet_isG": 0},
+        21: {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 1},
     }
-    return particle_map.get(number, {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False})
+    return particle_map.get(number, {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 0})
 
 def which_H_process(filename: str) -> dict:
     """Uses the file name to determine which Higgs process is being simulated."""
     particle_map = {
-        "Huu": {"recojet_isU": True, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
-        "Hdd": {"recojet_isU": False, "recojet_isD": True, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
-        "Hss": {"recojet_isU": False, "recojet_isD": False, "recojet_isS": True, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
-        "Hcc": {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": True, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False},
-        "Hbb": {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": True, "recojet_isTAU": False, "recojet_isG": False},
-        "Htautau": {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": True, "recojet_isG": False},
-        "Hgg": {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": True},
+        "Huu": {"recojet_isU": 1, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 0},
+        "Hdd": {"recojet_isU": 0, "recojet_isD": 1, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 0},
+        "Hss": {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 1, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 0},
+        "Hcc": {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 1, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 0},
+        "Hbb": {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 1, "recojet_isTAU": 0, "recojet_isG": 0},
+        "Htautau": {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 1, "recojet_isG": 0},
+        "Hgg": {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 1},
     }
-    return particle_map.get(filename, {"recojet_isU": False, "recojet_isD": False, "recojet_isS": False, "recojet_isC": False, "recojet_isB": False, "recojet_isTAU": False, "recojet_isG": False})
+    return particle_map.get(filename, {"recojet_isU": 0, "recojet_isD": 0, "recojet_isS": 0, "recojet_isC": 0, "recojet_isB": 0, "recojet_isTAU": 0, "recojet_isG": 0})
 
 def PDG_ID_to_bool_particles(number: int, ntracks: int) -> dict:
     """Maps the PDG ID to the particle type for particles in jet"""
@@ -273,15 +273,15 @@ def initialize(t):
     t.Branch("pfcand_type", pfcand_type)
     pfcand_charge = ROOT.std.vector("float")()
     t.Branch("pfcand_charge", pfcand_charge)
-    pfcand_isEl = ROOT.std.vector("bool")() #problem store it as int
+    pfcand_isEl = ROOT.std.vector("int")() #problem with NN: store as int not as bool
     t.Branch("pfcand_isEl", pfcand_isEl)
-    pfcand_isMu = ROOT.std.vector("bool")()
+    pfcand_isMu = ROOT.std.vector("int")()
     t.Branch("pfcand_isMu", pfcand_isMu)
-    pfcand_isGamma = ROOT.std.vector("bool")()
+    pfcand_isGamma = ROOT.std.vector("int")()
     t.Branch("pfcand_isGamma", pfcand_isGamma)
-    pfcand_isNeutralHad = ROOT.std.vector("bool")()
+    pfcand_isNeutralHad = ROOT.std.vector("int")()
     t.Branch("pfcand_isNeutralHad", pfcand_isNeutralHad)
-    pfcand_isChargedHad = ROOT.std.vector("bool")()
+    pfcand_isChargedHad = ROOT.std.vector("int")()
     t.Branch("pfcand_isChargedHad", pfcand_isChargedHad)
     #count number of particles in jet
     jet_nmu = array("i", [0])
@@ -460,6 +460,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
     Returns:
         _type_: _description_
     """
+    debug_phi = False
     
 
     # calculate PV
@@ -528,7 +529,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
 
             particle_momentum = particle.getMomentum()
             dic["pfcand_e"].push_back(particle.getEnergy())
-            tlv_p = TLorentzVector()
+            tlv_p = TLorentzVector() # initialize new TLorentzVector for particle
             tlv_p.SetXYZM(particle_momentum.x, particle_momentum.y, particle_momentum.z, particle.getMass())
             dic["pfcand_p"].push_back(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2))
             #print("reco PID: ", particle.getType())
@@ -541,9 +542,34 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                 dic[key].push_back(MC_particle_type[key])
             # calculate relative values
             dic["pfcand_erel_log"].push_back(np.log10(dic["pfcand_e"][-1]/dic["jet_e"][0])) # like in JetConstituentsUtils.cc in get_erel_log_cluster ( https://github.com/HEP-FCC/FCCAnalyses/blob/d0abc8d76e37630ea157f9d5c48e7867a86be2e2/analyzers/dataframe/src/JetConstituentsUtils.cc#L4 line 877)
+            
             # to calculate the angle correctly in 3D, roate the angle by the jet angle first
+
+            if debug_phi:
+                # TEST
+                pi = math.pi
+
+                print("-------- new particle -------")
+                print("jet phi: ", jet_phi, "(", jet_phi / pi, "pi)")
+                print("particle charge: ", particle.getCharge())
+                tlv.RotateZ(-jet_phi)
+                phi_after_rotation_z = tlv.Phi()
+                print("jet phi after rotation (only phi): ", phi_after_rotation_z, "(", phi_after_rotation_z / pi, "pi)")
+                tlv.RotateY(-jet_theta)
+                phi_after_rotation_y = tlv.Phi()
+                theta_after_rotation_y = tlv.Theta()
+                print("jet phi after rotation: ", phi_after_rotation_y, "(", phi_after_rotation_y / pi, "pi)")
+                print("jet theta after rotation: ", theta_after_rotation_y, "(", theta_after_rotation_y / pi, "pi)")
+                print("jet 3v: ", tlv.X(), tlv.Y(), tlv.Z())
+                tlv.RotateY(jet_theta)
+                tlv.RotateZ(jet_phi)
+
+
+                print("particle phi before rotation: ", tlv_p.Phi(), "(", tlv_p.Phi() / pi, "pi)")
             tlv_p.RotateZ(-jet_phi) # rotate the particle by the jet angle in the xy-plane
             tlv_p.RotateY(-jet_theta) # rotate the particle by the jet angle in the xz-plane
+            if debug_phi:
+                print("particle phi after rotation: ", tlv_p.Phi(), "(", tlv_p.Phi() / pi, "pi)")
             dic["pfcand_phirel"].push_back(tlv_p.Phi()) # same as in  rv::RVec<FCCAnalysesJetConstituentsData> get_phirel_cluster in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
             dic["pfcand_thetarel"].push_back(tlv_p.Theta()) # rel theta should be positive!  
 
