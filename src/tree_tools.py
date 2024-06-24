@@ -236,8 +236,10 @@ def V0_info(event, dic, p_index):
     for v, vertex in enumerate(event.get("BuildUpVertices_V0")):
         ass_part = vertex.getAssociatedParticle()
         part = ass_part.getParticles()
+        E_tot = 0
         for i in range(part.size()):
             p = part.at(i)
+            E_tot += p.getEnergy()
             #print("I'm a ", p.getType())
             #print(p.getObjectID().collectionID) # 4196981182 -> PandoraPFOs -> this is my reco particle!
             index = p.getObjectID().index
@@ -246,12 +248,15 @@ def V0_info(event, dic, p_index):
                 dic["pfcand_V0_x"].push_back(vertex.getPosition().x)
                 dic["pfcand_V0_y"].push_back(vertex.getPosition().y)
                 dic["pfcand_V0_z"].push_back(vertex.getPosition().z)
-    if ismatch == 0: # if no V0, fill with -9
-        dic["pfcand_V0_x"].push_back(-9)
-        dic["pfcand_V0_y"].push_back(-9)
-        dic["pfcand_V0_z"].push_back(-9)
+        if ismatch == 1:
+            dic["pfcand_V0_Etot"].push_back(E_tot) # sum of energies of all particles at this vertex
+    if ismatch == 0: # if no V0, fill with -200/-9
+        dic["pfcand_V0_x"].push_back(-200)
+        dic["pfcand_V0_y"].push_back(-200)
+        dic["pfcand_V0_z"].push_back(-200)
+        dic["pfcand_V0_Etot"].push_back(-9)
     elif ismatch>1:
-        raise ValueError(f"Found {ismatch} (more than 1) V0s assosiated with one particle in jet")
+        raise ValueError(f"Found {ismatch} (more than 1) V0s assosiated with one particle/PFO in jet")
     return dic
         
         
@@ -387,8 +392,18 @@ def initialize(t):
     t.Branch("pfcand_mtof", pfcand_mtof)
     pfcand_dndx = ROOT.std.vector("float")()
     t.Branch("pfcand_dndx", pfcand_dndx)
+    # MC info
     pfcand_MCPID = ROOT.std.vector("int")()
     t.Branch("pfcand_MCPID", pfcand_MCPID)
+    # secondary vertex info
+    pfcand_V0_x = ROOT.std.vector("float")()
+    t.Branch("pfcand_V0_x", pfcand_V0_x)
+    pfcand_V0_y = ROOT.std.vector("float")()
+    t.Branch("pfcand_V0_y", pfcand_V0_y)
+    pfcand_V0_z = ROOT.std.vector("float")()
+    t.Branch("pfcand_V0_z", pfcand_V0_z)
+    pfcand_V0_Etot = ROOT.std.vector("float")()
+    t.Branch("pfcand_V0_Etot", pfcand_V0_Etot)
    
     
     
@@ -452,7 +467,11 @@ def initialize(t):
         "pfcand_btagJetDistSig": pfcand_btagJetDistSig,
         "pfcand_mtof": pfcand_mtof,
         "pfcand_dndx": pfcand_dndx,
-        "pfcand_MCPID": pfcand_MCPID
+        "pfcand_MCPID": pfcand_MCPID,
+        "pfcand_V0_x": pfcand_V0_x,
+        "pfcand_V0_y": pfcand_V0_y,
+        "pfcand_V0_z": pfcand_V0_z,
+        "pfcand_V0_Etot": pfcand_V0_Etot
         
     }
     return (event_number, n_hit, n_part, dic, t)
