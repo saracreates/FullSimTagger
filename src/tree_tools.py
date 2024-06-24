@@ -200,6 +200,7 @@ def secondary_vertex_info(event, dic):
         #pv = vertex.getPrimary() # empty 0
         # print(vertex.getParameters()) # empty {}
         sv_position = ROOT.TVector3(vertex.getPosition().x, vertex.getPosition().y, vertex.getPosition().y)
+        print("Secondary vertex position: ", sv_position.x(), sv_position.y(), sv_position.z())
 
         ass_part = vertex.getAssociatedParticle()
         """
@@ -211,14 +212,48 @@ def secondary_vertex_info(event, dic):
         """
         part = ass_part.getParticles()
         #print(dir(part)) # size, at
-        #print(part.size()) 2-4
+        print("# particles:", part.size()) #2-4
+        for i in range(part.size()):
+            p = part.at(i)
+            print("I'm a ", p.getType())
+        """
+        print(dir(part.at(0)))
+        'clone', 'clusters_begin', 'clusters_end', 'clusters_size', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 'getGoodnessOfPID', 
+        'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 'getReferencePoint', 'getStartVertex', 
+        'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'makeEmpty', 'particleIDs_begin', 'particleIDs_end', 'particleIDs_size', 
+        'particles_begin', 'particles_end', 'particles_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink'
+        """
+        #print(part.at(0).getObjectID().collectionID) # 4196981182 -> this is my reco particle!! Yeayy! 
+        #tracks = ass_part.getTracks()
+        #print("track size ", tracks.size()) # 0
 
-        collectionID = ass_part.getObjectID().collectionID # 822742788
-        index = ass_part.getObjectID().index
-        print(collectionID)
-
+        #collectionID = ass_part.getObjectID().collectionID # 822742788
 
     return dic
+
+def V0_info(event, dic, p_index):
+    ismatch = 0
+    for v, vertex in enumerate(event.get("BuildUpVertices_V0")):
+        ass_part = vertex.getAssociatedParticle()
+        part = ass_part.getParticles()
+        for i in range(part.size()):
+            p = part.at(i)
+            #print("I'm a ", p.getType())
+            #print(p.getObjectID().collectionID) # 4196981182 -> PandoraPFOs -> this is my reco particle!
+            index = p.getObjectID().index
+            if index == p_index:
+                ismatch += 1
+                dic["pfcand_V0_x"].push_back(vertex.getPosition().x)
+                dic["pfcand_V0_y"].push_back(vertex.getPosition().y)
+                dic["pfcand_V0_z"].push_back(vertex.getPosition().z)
+    if ismatch == 0: # if no V0, fill with -9
+        dic["pfcand_V0_x"].push_back(-9)
+        dic["pfcand_V0_y"].push_back(-9)
+        dic["pfcand_V0_z"].push_back(-9)
+    elif ismatch>1:
+        raise ValueError(f"Found {ismatch} (more than 1) V0s assosiated with one particle in jet")
+    return dic
+        
         
 def initialize(t):
     event_number = array("i", [0])
@@ -578,6 +613,12 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             reco_collection_id = reco_obj.collectionID # 4196981182
             reco_index =  reco_obj.index
             dic = get_MCparticle_ID(event, dic, reco_collection_id, reco_index)
+
+
+            # V0 info
+            dic = V0_info(event, dic, reco_index)
+
+
 
             
             # get tracks of each particle (should be only one track)
