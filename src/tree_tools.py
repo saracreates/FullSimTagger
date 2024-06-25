@@ -8,6 +8,7 @@ from podio import root_io
 import edm4hep
 import ctypes
 
+
 cSpeed = 2.99792458e8 * 1.0e-9
 
 def arccot(x, epsilon=1e-10):
@@ -199,7 +200,7 @@ def secondary_vertex_info(event, dic):
         """
         #pv = vertex.getPrimary() # empty 0
         # print(vertex.getParameters()) # empty {}
-        sv_position = ROOT.TVector3(vertex.getPosition().x, vertex.getPosition().y, vertex.getPosition().y)
+        sv_position = ROOT.TVector3(vertex.getPosition().x, vertex.getPosition().y, vertex.getPosition().z)
         print("Secondary vertex position: ", sv_position.x(), sv_position.y(), sv_position.z())
 
         ass_part = vertex.getAssociatedParticle()
@@ -231,30 +232,68 @@ def secondary_vertex_info(event, dic):
 
     return dic
 
-def V0_info(event, dic, p_index):
-    ismatch = 0
+
+def V0_info_dic(event, ev_num):
+    """Calculating invariant mass: https://opendata-education.github.io/en_Physics/Exercises-with-open-data/Warming-up/Calculate-invariant-mass.html """
+    dic = {
+        "V0_id": [],
+        "V0_M": [],
+        "V0_x": [],
+        "V0_y": [],
+        "V0_z": []
+        }
     for v, vertex in enumerate(event.get("BuildUpVertices_V0")):
         ass_part = vertex.getAssociatedParticle()
         part = ass_part.getParticles()
-        E_tot = 0
+        energies = np.array([p.getEnergy() for p in part])
+        momenta = np.array([[p.getMomentum().x, p.getMomentum().y, p.getMomentum().z] for p in part])
+
+        # Sum the energies and momenta
+        E = np.sum(energies)
+        p_x, p_y, p_z = np.sum(momenta, axis=0)
+        M = E**2 - (p_x**2 + p_y**2 + p_z**2)
+        dic["V0_M"].append(M)
+        dic["V0_id"].append(ev_num*100 + v+1) # set id for this vertex
+        dic["V0_x"].append(vertex.getPosition().x)
+        dic["V0_y"].append(vertex.getPosition().y)
+        dic["V0_z"].append(vertex.getPosition().z)
+    return dic
+
+        
+
+
+def V0_info(event, dic, p_index, j, V0_dic, ev_num):
+    ismatch = 0
+    for v, vertex in enumerate(event.get("BuildUpVertices_V0")):
+        
+        ass_part = vertex.getAssociatedParticle()
+        part = ass_part.getParticles()
+
         for i in range(part.size()):
             p = part.at(i)
-            E_tot += p.getEnergy()
             #print("I'm a ", p.getType())
             #print(p.getObjectID().collectionID) # 4196981182 -> PandoraPFOs -> this is my reco particle!
             index = p.getObjectID().index
-            if index == p_index:
+            if index == p_index: # found particle as part of V0 vertex
                 ismatch += 1
-                dic["pfcand_V0_x"].push_back(vertex.getPosition().x)
-                dic["pfcand_V0_y"].push_back(vertex.getPosition().y)
-                dic["pfcand_V0_z"].push_back(vertex.getPosition().z)
-        if ismatch == 1:
-            dic["pfcand_V0_Etot"].push_back(E_tot) # sum of energies of all particles at this vertex
-    if ismatch == 0: # if no V0, fill with -200/-9
+    if ismatch == 1: 
+        # find out v0 index
+        if j==0:
+            v0_ind = ev_num*100 + v + 1
+        else:
+            v0_ind = (ev_num-1)*100 + v + 1
+        ind = np.where(np.array(V0_dic["V0_id"]) == v0_ind)
+        dic["pfcand_V0_x"].push_back(V0_dic["V0_x"][ind])
+        dic["pfcand_V0_y"].push_back(V0_dic["V0_x"][ind])
+        dic["pfcand_V0_z"].push_back(V0_dic["V0_x"][ind]) 
+        dic["pfcand_V0_M"].push_back(V0_dic["V0_x"][ind]) 
+        dic["pfcand_V0_id"].push_back(v0_ind)
+    elif ismatch == 0: # if no V0, fill with -200/-9
         dic["pfcand_V0_x"].push_back(-200)
         dic["pfcand_V0_y"].push_back(-200)
         dic["pfcand_V0_z"].push_back(-200)
-        dic["pfcand_V0_Etot"].push_back(-9)
+        dic["pfcand_V0_M"].push_back(-200)
+        dic["pfcand_V0_id"].push_back(0)
     elif ismatch>1:
         raise ValueError(f"Found {ismatch} (more than 1) V0s assosiated with one particle/PFO in jet")
     return dic
@@ -402,8 +441,11 @@ def initialize(t):
     t.Branch("pfcand_V0_y", pfcand_V0_y)
     pfcand_V0_z = ROOT.std.vector("float")()
     t.Branch("pfcand_V0_z", pfcand_V0_z)
-    pfcand_V0_Etot = ROOT.std.vector("float")()
-    t.Branch("pfcand_V0_Etot", pfcand_V0_Etot)
+    pfcand_V0_M = ROOT.std.vector("float")()
+    t.Branch("pfcand_V0_M", pfcand_V0_M)
+    pfcand_V0_id = ROOT.std.vector("float")()
+    t.Branch("pfcand_V0_id", pfcand_V0_id)
+
    
     
     
@@ -489,7 +531,7 @@ def clear_dic(dic):
 
 
 def store_jet(event, debug, dic, event_number, t, H_to_xx):
-    """The jets have the following args that can be accessed with dir(jets)
+    """The yets have the following args that can be accessed with dir(jets)
     ['__add__', '__assign__', '__bool__', '__class__', '__delattr__', '__destruct__',
     '__dict__', '__dir__', '__dispatch__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__',
     '__gt__', '__hash__', '__init__', '__init_subclass__', '__invert__', '__le__', '__lt__', '__module__',
@@ -524,8 +566,9 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         primaryVertex = vertex.getPosition()
         print("Primary vertex: ", primaryVertex.x, primaryVertex.y, primaryVertex.z)
 
-
-    #dic = secondary_vertex_info(event, dic)
+    print("event number: ", event_number[0])
+    V0_dic = V0_info_dic(event, event_number) # only calculate once
+    dic = secondary_vertex_info(event, dic)
 
     RefinedVertexJets = "RefinedVertexJets"
 
@@ -635,7 +678,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
 
 
             # V0 info
-            dic = V0_info(event, dic, reco_index)
+            dic = V0_info(event, dic, reco_index, j, V0_dic, event_number[0])
 
 
 
