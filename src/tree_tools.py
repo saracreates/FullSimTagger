@@ -188,61 +188,16 @@ def calculate_covariance_matrix(dic, track):
     dic["pfcand_cctgtheta"].push_back(track.covMatrix[12]) 
     return dic
 
-def secondary_vertex_info(event, dic):
-    """Find out how much info is saved about secondary vertices in full sim"""
-    for v, vertex in enumerate(event.get("BuildUpVertices")):
-        """
-        print(dir(vertex))
-        'addToParameters', 'clone', 'covMatrix', 'getAlgorithmType', 'getAssociatedParticle', 'getChi2', 'getCovMatrix', 
-        'getObjectID', 'getParameters', 'getPosition', 'getPrimary', 'getProbability', 'id', 'isAvailable', 'operator Vertex', 
-        'parameters_begin', 'parameters_end', 'parameters_size', 'position', 'setAlgorithmType', 'setAssociatedParticle', 
-        'setChi2', 'setCovMatrix', 'setPosition', 'setPrimary', 'setProbability', 'unlink'
-        """
-        #pv = vertex.getPrimary() # empty 0
-        # print(vertex.getParameters()) # empty {}
-        sv_position = ROOT.TVector3(vertex.getPosition().x, vertex.getPosition().y, vertex.getPosition().z)
-        print("Secondary vertex position: ", sv_position.x(), sv_position.y(), sv_position.z())
-
-        ass_part = vertex.getAssociatedParticle()
-        """
-        print(dir(ass_part))
-        'clone', 'clusters_begin', 'clusters_end', 'clusters_size', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 
-        'getGoodnessOfPID', 'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 
-        'getReferencePoint', 'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'makeEmpty', 
-        'particleIDs_begin', 'particleIDs_end', 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink'
-        """
-        part = ass_part.getParticles()
-        #print(dir(part)) # size, at
-        print("# particles:", part.size()) #2-4
-        for i in range(part.size()):
-            p = part.at(i)
-            print("I'm a ", p.getType())
-        """
-        print(dir(part.at(0)))
-        'clone', 'clusters_begin', 'clusters_end', 'clusters_size', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 'getGoodnessOfPID', 
-        'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 'getReferencePoint', 'getStartVertex', 
-        'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'makeEmpty', 'particleIDs_begin', 'particleIDs_end', 'particleIDs_size', 
-        'particles_begin', 'particles_end', 'particles_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink'
-        """
-        #print(part.at(0).getObjectID().collectionID) # 4196981182 -> this is my reco particle!! Yeayy! 
-        #tracks = ass_part.getTracks()
-        #print("track size ", tracks.size()) # 0
-
-        #collectionID = ass_part.getObjectID().collectionID # 822742788
-
-    return dic
-
-
-def V0_info_dic(event, ev_num):
+def V_info_dic(event, ev_num, collection):
     """Calculating invariant mass: https://opendata-education.github.io/en_Physics/Exercises-with-open-data/Warming-up/Calculate-invariant-mass.html """
     dic = {
-        "V0_id": [],
-        "V0_M": [],
-        "V0_x": [],
-        "V0_y": [],
-        "V0_z": []
+        "V_id": [],
+        "V_M": [],
+        "V_x": [],
+        "V_y": [],
+        "V_z": []
         }
-    for v, vertex in enumerate(event.get("BuildUpVertices_V0")):
+    for v, vertex in enumerate(event.get(collection)):
         ass_part = vertex.getAssociatedParticle()
         part = ass_part.getParticles()
         energies = np.array([p.getEnergy() for p in part])
@@ -251,20 +206,23 @@ def V0_info_dic(event, ev_num):
         # Sum the energies and momenta
         E = np.sum(energies)
         p_x, p_y, p_z = np.sum(momenta, axis=0)
-        M = E**2 - (p_x**2 + p_y**2 + p_z**2)
-        dic["V0_M"].append(M)
-        dic["V0_id"].append(ev_num*100 + v+1) # set id for this vertex
-        dic["V0_x"].append(vertex.getPosition().x)
-        dic["V0_y"].append(vertex.getPosition().y)
-        dic["V0_z"].append(vertex.getPosition().z)
+        M2 = E**2 - (p_x**2 + p_y**2 + p_z**2)
+        dic["V_M"].append(np.sqrt(M2))
+        dic["V_id"].append(ev_num*100 + v+1) # set id for this vertex
+        dic["V_x"].append(vertex.getPosition().x)
+        dic["V_y"].append(vertex.getPosition().y)
+        dic["V_z"].append(vertex.getPosition().z)
     return dic
 
-        
-
-
-def V0_info(event, dic, p_index, j, V0_dic, ev_num):
+def V_info(event, dic, p_index, j, V_dic, ev_num, collection):
+    if collection == "BuildUpVertices":
+        t = "SV"
+    elif collection == "BuildUpVertices_V0":
+        t = "V0"
+    else:
+        raise ValueError(f"{collection} not a supported collection. Choose 'BuildUpVertices' or 'BuildUpVertices_V0'.")
     ismatch = 0
-    for v, vertex in enumerate(event.get("BuildUpVertices_V0")):
+    for v, vertex in enumerate(event.get(collection)):
         
         ass_part = vertex.getAssociatedParticle()
         part = ass_part.getParticles()
@@ -282,20 +240,23 @@ def V0_info(event, dic, p_index, j, V0_dic, ev_num):
             v0_ind = ev_num*100 + v + 1
         else:
             v0_ind = (ev_num-1)*100 + v + 1
-        ind = np.where(np.array(V0_dic["V0_id"]) == v0_ind)
-        dic["pfcand_V0_x"].push_back(V0_dic["V0_x"][ind])
-        dic["pfcand_V0_y"].push_back(V0_dic["V0_x"][ind])
-        dic["pfcand_V0_z"].push_back(V0_dic["V0_x"][ind]) 
-        dic["pfcand_V0_M"].push_back(V0_dic["V0_x"][ind]) 
-        dic["pfcand_V0_id"].push_back(v0_ind)
-    elif ismatch == 0: # if no V0, fill with -200/-9
-        dic["pfcand_V0_x"].push_back(-200)
-        dic["pfcand_V0_y"].push_back(-200)
-        dic["pfcand_V0_z"].push_back(-200)
-        dic["pfcand_V0_M"].push_back(-200)
-        dic["pfcand_V0_id"].push_back(0)
+        ind = np.where(np.array(V_dic["V_id"]) == v0_ind)
+        if ind[0].size>1 or ind[0].size==0:
+            raise ValueError(f"Found {ind[0].size} indices instead of one.")
+        dic[f"pfcand_{t}_x"].push_back(V_dic["V_x"][ind[0][0]])
+        dic[f"pfcand_{t}_y"].push_back(V_dic["V_y"][ind[0][0]])
+        dic[f"pfcand_{t}_z"].push_back(V_dic["V_z"][ind[0][0]]) 
+        dic[f"pfcand_{t}_M"].push_back(V_dic["V_M"][ind[0][0]]) 
+        dic[f"pfcand_{t}_id"].push_back(v0_ind)
+        #print(f"FOUND {t} at: ", V_dic["V_x"][ind[0][0]], V_dic["V_y"][ind[0][0]], V_dic["V_z"][ind[0][0]])
+    elif ismatch == 0: # if no V0, fill with -200/0
+        dic[f"pfcand_{t}_x"].push_back(-200)
+        dic[f"pfcand_{t}_y"].push_back(-200)
+        dic[f"pfcand_{t}_z"].push_back(-200)
+        dic[f"pfcand_{t}_M"].push_back(-200)
+        dic[f"pfcand_{t}_id"].push_back(0)
     elif ismatch>1:
-        raise ValueError(f"Found {ismatch} (more than 1) V0s assosiated with one particle/PFO in jet")
+        raise ValueError(f"Found {ismatch} (more than 1) V0/secondary vertex (collection: {collection}) assosiated with one particle/PFO in jet")
     return dic
         
         
@@ -445,6 +406,16 @@ def initialize(t):
     t.Branch("pfcand_V0_M", pfcand_V0_M)
     pfcand_V0_id = ROOT.std.vector("float")()
     t.Branch("pfcand_V0_id", pfcand_V0_id)
+    pfcand_SV_x = ROOT.std.vector("float")()
+    t.Branch("pfcand_SV_x", pfcand_SV_x)
+    pfcand_SV_y = ROOT.std.vector("float")()
+    t.Branch("pfcand_SV_y", pfcand_SV_y)
+    pfcand_SV_z = ROOT.std.vector("float")()
+    t.Branch("pfcand_SV_z", pfcand_SV_z)
+    pfcand_SV_M = ROOT.std.vector("float")()
+    t.Branch("pfcand_SV_M", pfcand_SV_M)
+    pfcand_SV_id = ROOT.std.vector("float")()
+    t.Branch("pfcand_SV_id", pfcand_SV_id)
 
    
     
@@ -513,7 +484,13 @@ def initialize(t):
         "pfcand_V0_x": pfcand_V0_x,
         "pfcand_V0_y": pfcand_V0_y,
         "pfcand_V0_z": pfcand_V0_z,
-        "pfcand_V0_Etot": pfcand_V0_Etot
+        "pfcand_V0_M": pfcand_V0_M,
+        "pfcand_V0_id": pfcand_V0_id,
+        "pfcand_SV_x": pfcand_SV_x,
+        "pfcand_SV_y": pfcand_SV_y,
+        "pfcand_SV_z": pfcand_SV_z,
+        "pfcand_SV_M": pfcand_SV_M,
+        "pfcand_SV_id": pfcand_SV_id
         
     }
     return (event_number, n_hit, n_part, dic, t)
@@ -564,11 +541,10 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         if v>0:
             raise ValueError("More than one primary vertex")
         primaryVertex = vertex.getPosition()
-        print("Primary vertex: ", primaryVertex.x, primaryVertex.y, primaryVertex.z)
+        #print("Primary vertex: ", primaryVertex.x, primaryVertex.y, primaryVertex.z)
 
-    print("event number: ", event_number[0])
-    V0_dic = V0_info_dic(event, event_number) # only calculate once
-    dic = secondary_vertex_info(event, dic)
+    V0_dic = V_info_dic(event, event_number[0], "BuildUpVertices_V0") # only calculate once
+    SV_dic = V_info_dic(event, event_number[0], "BuildUpVertices")
 
     RefinedVertexJets = "RefinedVertexJets"
 
@@ -677,10 +653,9 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             dic = get_MCparticle_ID(event, dic, reco_collection_id, reco_index)
 
 
-            # V0 info
-            dic = V0_info(event, dic, reco_index, j, V0_dic, event_number[0])
-
-
+            # Vertex info
+            dic = V_info(event, dic, reco_index, j, V0_dic, event_number[0], "BuildUpVertices_V0")
+            dic = V_info(event, dic, reco_index, j, SV_dic, event_number[0], "BuildUpVertices")
 
             
             # get tracks of each particle (should be only one track)
