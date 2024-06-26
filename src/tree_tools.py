@@ -215,6 +215,9 @@ def V_info_dic(event, ev_num, collection):
     return dic
 
 def V_info(event, dic, p_index, j, V_dic, ev_num, collection):
+    """find collection in CLD steering file: https://github.com/key4hep/CLDConfig/blob/main/CLDConfig/CLDReconstruction.xml#L1364 
+    - BuildUpVerticies:https://github.com/lcfiplus/LCFIPlus/blob/39cf1736f3f05345dc67553bca0fcc0cf64be43e/src/process.cc#L150C6-L150C19 
+    """
     if collection == "BuildUpVertices":
         t = "SV"
     elif collection == "BuildUpVertices_V0":
