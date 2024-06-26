@@ -536,7 +536,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
     Returns:
         _type_: _description_
     """
-    debug_phi = False
+    debug_phi = True
     
 
     # calculate PV
@@ -586,7 +586,9 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         jet_type = which_H_process(H_to_xx) # use file name to determine which Higgs process is being simulated
         for key in jet_type:
             dic[key][0] = jet_type[key]
-            
+
+        print("-------------------- new jet -------------------")
+        print("loop over ", particles_jet.size(), " particles in jet")
         for i, part in enumerate(particles_jet):
             particle = particles_jet.at(i)
             #print("-------- new reco particle ------------")
@@ -627,6 +629,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
 
                 print("-------- new particle -------")
                 print("jet phi: ", jet_phi, "(", jet_phi / pi, "pi)")
+                print("jet theta: ", jet_theta, "(", jet_theta / pi, "pi)")
                 print("particle charge: ", particle.getCharge())
                 tlv.RotateZ(-jet_phi)
                 phi_after_rotation_z = tlv.Phi()
@@ -642,10 +645,12 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
 
 
                 print("particle phi before rotation: ", tlv_p.Phi(), "(", tlv_p.Phi() / pi, "pi)")
+                print("particle theta before rotation: ", tlv_p.Theta(), "(", tlv_p.Theta() / pi, "pi)")
             tlv_p.RotateZ(-jet_phi) # rotate the particle by the jet angle in the xy-plane
             tlv_p.RotateY(-jet_theta) # rotate the particle by the jet angle in the xz-plane
             if debug_phi:
                 print("particle phi after rotation: ", tlv_p.Phi(), "(", tlv_p.Phi() / pi, "pi)")
+                print("particle theta after rotation: ", tlv_p.Theta(), "(", tlv_p.Theta() / pi, "pi)")
             dic["pfcand_phirel"].push_back(tlv_p.Phi()) # same as in  rv::RVec<FCCAnalysesJetConstituentsData> get_phirel_cluster in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
             dic["pfcand_thetarel"].push_back(tlv_p.Theta()) # rel theta should be positive!  
 
@@ -776,31 +781,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             elif MC_particle_type["pfcand_isNeutralHad"]:
                 dic["jet_nnhad"][0] += 1
             elif MC_particle_type["pfcand_isChargedHad"]:
-                dic["jet_nchad"][0] += 1   
-
-            
-            """ROOT.gInterpreter.Declare('#include <marlinutil/HelixClassT.h>')
-            h = ROOT.HelixClassT["float"]()
-            h.Initialize_Canonical(track.phi, track.D0, track.Z0, track.omega, track.tanLambda, 2.0) # 2 is B field strength in T
-            distance_before = ROOT.std.vector("float")(3)
-            d0 = dic["pfcand_dxy"][-1]
-            z0 = dic["pfcand_dz"][-1]
-            d3d = dic["pfcand_btagJetDistVal"][-1]
-            distance_before[0] = d0 # d0
-            distance_before[1] = z0 # z0
-            distance_before[2] = d3d # 3D distance of closest approach
-            #primaryVertex = [primaryVertex.x, primaryVertex.y, primaryVertex.z] 
-            # Convert primaryVertex to the required format (array of floats)
-            primaryVertex_array = (ctypes.c_float * 3)(*[primaryVertex.x, primaryVertex.y, primaryVertex.z] )
-
-            # Convert distance_before to an array of floats
-            distance_before_array = (ctypes.c_float * 3)(*distance_before)
-
-            # Call getDistanceToPoint with the proper arguments
-            distance = h.getDistanceToPoint(primaryVertex_array, distance_before_array)
-            #distance = h.getDistanceToPoint(primaryVertex, distance_before)
-            #print("distance: ", distance) #float...
-            """
+                dic["jet_nchad"][0] += 1  
 
 
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
