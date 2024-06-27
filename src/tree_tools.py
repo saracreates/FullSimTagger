@@ -67,7 +67,7 @@ def PDG_ID_to_bool_particles(number: int, ntracks: int) -> dict:
     # mapping for leptons and photon
     return particle_map.get(number, {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False})
 
-def get_MCparticle_ID(event, dic, reco_collection_id, reco_index):
+def get_MCparticle_ID(event, reco_collection_id, reco_index):
      # get MC particle ID - loop over all MC-Reco-Pairs
     count = 0
     track_weights = []
@@ -107,16 +107,15 @@ def get_MCparticle_ID(event, dic, reco_collection_id, reco_index):
         best_link_index = link_index[best_match]
         best_link = event.get("RecoMCTruthLink").at(int(best_link_index))
         MC_part = best_link.getSim()
-        dic["pfcand_MCPID"].push_back(MC_part.getPDG()) # save MC particle ID
+        return MC_part
     elif np.any(cluster_weights>0.8):
         best_match = np.argmax(cluster_weights)
         best_link_index = link_index[best_match]
         best_link = event.get("RecoMCTruthLink").at(int(best_link_index))
         MC_part = best_link.getSim()
-        dic["pfcand_MCPID"].push_back(MC_part.getPDG())
+        return MC_part
     else:
-        dic["pfcand_MCPID"].push_back(-999)
-    return dic
+        return None
 
 def calculate_params_wrt_PV(track, primaryVertex, particle, Bz=2):
     """
@@ -615,9 +614,9 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             dic["pfcand_phi"].push_back(tlv_p.Phi())
             dic["pfcand_type"].push_back(particle.getType())
             dic["pfcand_charge"].push_back(particle.getCharge()) 
-            MC_particle_type = PDG_ID_to_bool_particles(particle.getType(), particle.getTracks().size()) # dictionary with the particle type (bool)
-            for key in MC_particle_type:
-                dic[key].push_back(MC_particle_type[key])
+            reco_particle_type = PDG_ID_to_bool_particles(particle.getType(), particle.getTracks().size()) # dictionary with the particle type (bool)
+            for key in reco_particle_type:
+                dic[key].push_back(reco_particle_type[key])
             # calculate relative values
             dic["pfcand_erel_log"].push_back(np.log10(dic["pfcand_e"][-1]/dic["jet_e"][0])) # like in JetConstituentsUtils.cc in get_erel_log_cluster ( https://github.com/HEP-FCC/FCCAnalyses/blob/d0abc8d76e37630ea157f9d5c48e7867a86be2e2/analyzers/dataframe/src/JetConstituentsUtils.cc#L4 line 877)
             
@@ -658,7 +657,27 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             reco_obj = particle.getObjectID()
             reco_collection_id = reco_obj.collectionID # 4196981182
             reco_index =  reco_obj.index
-            dic = get_MCparticle_ID(event, dic, reco_collection_id, reco_index)
+            MC_part = get_MCparticle_ID(event, reco_collection_id, reco_index)
+            """
+            print(dir(MC_part))
+            'clone', 'daughters_begin', 'daughters_end', 'daughters_size', 'getCharge', 'getColorFlow', 'getDaughters', 'getEndpoint', 
+            'getEnergy', 'getGeneratorStatus', 'getMass', 'getMomentum', 'getMomentumAtEndpoint', 'getObjectID', 'getPDG', 'getParents', 
+            'getSimulatorStatus', 'getSpin', 'getTime', 'getVertex', 'hasLeftDetector', 'id', 'isAvailable', 'isBackscatter', 
+            'isCreatedInSimulation', 'isDecayedInCalorimeter', 'isDecayedInTracker', 'isOverlay', 'isStopped', 
+            'makeEmpty', 'parents_begin', 'parents_end', 'parents_size', 'unlink', 'vertexIsNotEndpointOfParent']
+            """
+            if MC_part!=None: # if MC particle is found
+                print("MC PID particle: ", MC_part.getPDG())
+                dic["pfcand_MCPID"].push_back(MC_part.getPDG()) # MC PID of particle
+                parents = MC_part.getParents()
+                if parents.size() > 1:
+                    raise ValueError("Particle has more than one parent")
+                parent = parents.at(0)
+                #print(dir(parent)) # same as particle above
+                parent_ID = parent.getPDG() # MC PID of parent
+                print("MC PID parent: ", parent_ID)
+            else: 
+                dic["pfcand_MCPID"].push_back(-999)
 
 
             # Vertex info
@@ -772,15 +791,15 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             dic["pfcand_dndx"].push_back(0)
             
             # count number of particles in jet
-            if MC_particle_type["pfcand_isMu"]:
+            if reco_particle_type["pfcand_isMu"]:
                 dic["jet_nmu"][0] += 1
-            elif MC_particle_type["pfcand_isEl"]:
+            elif reco_particle_type["pfcand_isEl"]:
                 dic["jet_nel"][0] += 1
-            elif MC_particle_type["pfcand_isGamma"]:
+            elif reco_particle_type["pfcand_isGamma"]:
                 dic["jet_ngamma"][0] += 1
-            elif MC_particle_type["pfcand_isNeutralHad"]:
+            elif reco_particle_type["pfcand_isNeutralHad"]:
                 dic["jet_nnhad"][0] += 1
-            elif MC_particle_type["pfcand_isChargedHad"]:
+            elif reco_particle_type["pfcand_isChargedHad"]:
                 dic["jet_nchad"][0] += 1  
 
 
