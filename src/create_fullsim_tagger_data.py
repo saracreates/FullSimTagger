@@ -2,6 +2,7 @@ import os
 import subprocess
 import sys
 import glob
+import time
 
 def run_create_jet_based_tree(file_pattern, output_folder, output_root_filename):
     # Ensure output folder exists
@@ -51,4 +52,7 @@ if __name__ == "__main__":
     output_folder = sys.argv[2]
     output_root_filename = sys.argv[3]
     
+    a = time.time()
     run_create_jet_based_tree(file_pattern, output_folder, output_root_filename)
+    b = time.time()
+    print(f"Time taken: {(b - a)/60:.2f} minutes")

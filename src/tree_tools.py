@@ -418,6 +418,15 @@ def initialize(t):
     t.Branch("pfcand_SV_M", pfcand_SV_M)
     pfcand_SV_id = ROOT.std.vector("float")()
     t.Branch("pfcand_SV_id", pfcand_SV_id)
+    # debug
+    pfcand_MC_phi = ROOT.std.vector("float")()
+    t.Branch("pfcand_MC_phi", pfcand_MC_phi)
+    pfcand_MC_phirel = ROOT.std.vector("float")()
+    t.Branch("pfcand_MC_phirel", pfcand_MC_phirel)
+    pfcand_parent_ID = ROOT.std.vector("int")()
+    t.Branch("pfcand_parent_ID", pfcand_parent_ID)
+    pfcand_parent_index = ROOT.std.vector("int")()
+    t.Branch("pfcand_parent_index", pfcand_parent_index)
 
    
     
@@ -492,7 +501,12 @@ def initialize(t):
         "pfcand_SV_y": pfcand_SV_y,
         "pfcand_SV_z": pfcand_SV_z,
         "pfcand_SV_M": pfcand_SV_M,
-        "pfcand_SV_id": pfcand_SV_id
+        "pfcand_SV_id": pfcand_SV_id,
+        #debug
+        "pfcand_MC_phi": pfcand_MC_phi,
+        "pfcand_MC_phirel": pfcand_MC_phirel,
+        "pfcand_parent_ID": pfcand_parent_ID,
+        "pfcand_parent_index": pfcand_parent_index
         
     }
     return (event_number, n_hit, n_part, dic, t)
@@ -629,16 +643,17 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                 print("-------- new particle -------")
                 print("jet phi: ", jet_phi, "(", jet_phi / pi, "pi)")
                 print("jet theta: ", jet_theta, "(", jet_theta / pi, "pi)")
+                print("jet 3v: ", tlv.X(), tlv.Y(), tlv.Z())
                 print("particle charge: ", particle.getCharge())
                 tlv.RotateZ(-jet_phi)
                 phi_after_rotation_z = tlv.Phi()
-                print("jet phi after rotation (only phi): ", phi_after_rotation_z, "(", phi_after_rotation_z / pi, "pi)")
+                #print("jet phi after rotation (only phi): ", phi_after_rotation_z, "(", phi_after_rotation_z / pi, "pi)")
                 tlv.RotateY(-jet_theta)
                 phi_after_rotation_y = tlv.Phi()
                 theta_after_rotation_y = tlv.Theta()
-                print("jet phi after rotation: ", phi_after_rotation_y, "(", phi_after_rotation_y / pi, "pi)")
-                print("jet theta after rotation: ", theta_after_rotation_y, "(", theta_after_rotation_y / pi, "pi)")
-                print("jet 3v: ", tlv.X(), tlv.Y(), tlv.Z())
+                #print("jet phi after rotation: ", phi_after_rotation_y, "(", phi_after_rotation_y / pi, "pi)")
+                #print("jet theta after rotation: ", theta_after_rotation_y, "(", theta_after_rotation_y / pi, "pi)")
+                #print("jet 3v: ", tlv.X(), tlv.Y(), tlv.Z())
                 tlv.RotateY(jet_theta)
                 tlv.RotateZ(jet_phi)
 
@@ -666,18 +681,39 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             'isCreatedInSimulation', 'isDecayedInCalorimeter', 'isDecayedInTracker', 'isOverlay', 'isStopped', 
             'makeEmpty', 'parents_begin', 'parents_end', 'parents_size', 'unlink', 'vertexIsNotEndpointOfParent']
             """
+            print("reco PID particle: ", particle.getType())
             if MC_part!=None: # if MC particle is found
                 print("MC PID particle: ", MC_part.getPDG())
                 dic["pfcand_MCPID"].push_back(MC_part.getPDG()) # MC PID of particle
+
+                # debug info
+                tlv_MC = TLorentzVector()
+                tlv_MC.SetXYZM(MC_part.getMomentum().x, MC_part.getMomentum().y, MC_part.getMomentum().z, particle.getMass())
+                dic["pfcand_MC_phi"].push_back(tlv_MC.Phi())
+
+
+                # parents
                 parents = MC_part.getParents()
                 if parents.size() > 1:
                     raise ValueError("Particle has more than one parent")
-                parent = parents.at(0)
-                #print(dir(parent)) # same as particle above
-                parent_ID = parent.getPDG() # MC PID of parent
-                print("MC PID parent: ", parent_ID)
+                elif parents.size() == 0:
+                    #raise ValueError("Particle has no parent. Particle ID: ", MC_part.getPDG()) # 22
+                    dic["pfcand_parent_ID"].push_back(-999)
+                    dic["pfcand_parent_index"].push_back(-999)
+                else:
+                    parent = parents.at(0)
+                    #print(dir(parent)) # same as particle above
+                    parent_ID = parent.getPDG() # MC PID of parent
+                    dic["pfcand_parent_index"].push_back(parent.getObjectID().index)
+                    dic["pfcand_parent_ID"].push_back(parent_ID)
+                    print("MC PID parent: ", parent_ID)
+                    print("parent index: ", parent.getObjectID().index)
+                    print("parent momentum: ", parent.getMomentum().x, parent.getMomentum().y, parent.getMomentum().z)
             else: 
                 dic["pfcand_MCPID"].push_back(-999)
+                dic["pfcand_parent_ID"].push_back(-999)
+                dic["pfcand_parent_index"].push_back(-999)
+                dic["pfcand_MC_phi"].push_back(-9)
 
 
             # Vertex info
