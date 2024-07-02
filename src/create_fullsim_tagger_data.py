@@ -30,16 +30,18 @@ def run_create_jet_based_tree(file_pattern, output_folder, output_root_filename)
                 stderr=log_file
             )
             output_files.append(output_file_path)
-            if (i + 1) % 20 == 0:
+            if (i + 1) % 1000 == 0:
                 print(f"Done with {i + 1} events")
     
     # Combine all output root files into one big root file
     combined_output_path = os.path.join(output_folder, output_root_filename)
-    hadd_command = ['hadd', combined_output_path] + output_files
-    subprocess.run(hadd_command)
-    
-    print(f"Combined root file created at: {combined_output_path}")
-    print(f"Log file created at: {log_file_path}")
+    try:
+        hadd_command = ['hadd', combined_output_path] + output_files
+        subprocess.run(hadd_command)
+        print(f"Combined root file created at: {combined_output_path}")
+        print(f"Log file created at: {log_file_path}")
+    except OSError as e:
+        print(f"Error combining root files: {e}")
 
 
 if __name__ == "__main__":

@@ -549,7 +549,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
     Returns:
         _type_: _description_
     """
-    debug_phi = True
+    debug_phi = False
     
 
     # calculate PV
@@ -599,9 +599,9 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         jet_type = which_H_process(H_to_xx) # use file name to determine which Higgs process is being simulated
         for key in jet_type:
             dic[key][0] = jet_type[key]
-
-        print("-------------------- new jet -------------------")
-        print("loop over ", particles_jet.size(), " particles in jet")
+        if debug_phi:
+            print("-------------------- new jet -------------------")
+            print("loop over ", particles_jet.size(), " particles in jet")
         for i, part in enumerate(particles_jet):
             particle = particles_jet.at(i)
             #print("-------- new reco particle ------------")
@@ -681,9 +681,11 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             'isCreatedInSimulation', 'isDecayedInCalorimeter', 'isDecayedInTracker', 'isOverlay', 'isStopped', 
             'makeEmpty', 'parents_begin', 'parents_end', 'parents_size', 'unlink', 'vertexIsNotEndpointOfParent']
             """
-            print("reco PID particle: ", particle.getType())
+            if debug_phi:
+                print("reco PID particle: ", particle.getType())
             if MC_part!=None: # if MC particle is found
-                print("MC PID particle: ", MC_part.getPDG())
+                if debug_phi:
+                    print("MC PID particle: ", MC_part.getPDG())
                 dic["pfcand_MCPID"].push_back(MC_part.getPDG()) # MC PID of particle
 
                 # debug info
@@ -706,9 +708,10 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                     parent_ID = parent.getPDG() # MC PID of parent
                     dic["pfcand_parent_index"].push_back(parent.getObjectID().index)
                     dic["pfcand_parent_ID"].push_back(parent_ID)
-                    print("MC PID parent: ", parent_ID)
-                    print("parent index: ", parent.getObjectID().index)
-                    print("parent momentum: ", parent.getMomentum().x, parent.getMomentum().y, parent.getMomentum().z)
+                    if debug_phi:
+                        print("MC PID parent: ", parent_ID)
+                        print("parent index: ", parent.getObjectID().index)
+                        print("parent momentum: ", parent.getMomentum().x, parent.getMomentum().y, parent.getMomentum().z)
             else: 
                 dic["pfcand_MCPID"].push_back(-999)
                 dic["pfcand_parent_ID"].push_back(-999)
