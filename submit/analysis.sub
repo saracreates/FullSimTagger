@@ -1,0 +1,28 @@
+# run commands for analysis,  
+
+# here goes your shell script
+executable    = submitAnalysisJob.sh
+#requirements = (OpSysAndVer =?= "CentOS7")
+# here you specify where to put .log, .out and .err files
+output                = std/condor.$(ClusterId).$(ProcId).out
+error                 = std/condor.$(ClusterId).$(ProcId).err
+log                   = std/condor.$(ClusterId).log
+
++AccountingGroup = "group_u_FCC.local_gen"
++JobFlavour    = "workday"
+arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_002305720.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_0.root 100000"
+queue
+arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_030697089.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_1.root 100000"
+queue
+arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_034090110.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_2.root 100000"
+queue
+arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_036581856.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_3.root 100000"
+queue
+arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_040770007.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_4.root 100000"
+queue
+arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_041382953.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_5.root 100000"
+queue
+arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_041623160.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_6.root 100000"
+queue
+arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_057484114.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_7.root 100000"
+queue
