@@ -1,4 +1,4 @@
-# run commands for analysis,  
+# run commands for analysis,
 
 # here goes your shell script
 executable    = submitAnalysisJob.sh
@@ -10,19 +10,143 @@ log                   = std/condor.$(ClusterId).log
 
 +AccountingGroup = "group_u_FCC.local_gen"
 +JobFlavour    = "workday"
-arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_002305720.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_0.root 100000"
+arguments="0 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_0.root"
 queue
-arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_030697089.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_1.root 100000"
+arguments="1000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_1.root"
 queue
-arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_034090110.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_2.root 100000"
+arguments="2000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_2.root"
 queue
-arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_036581856.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_3.root 100000"
+arguments="3000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_3.root"
 queue
-arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_040770007.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_4.root 100000"
+arguments="4000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_4.root"
 queue
-arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_041382953.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_5.root 100000"
+arguments="5000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_5.root"
 queue
-arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_041623160.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_6.root 100000"
+arguments="6000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_6.root"
 queue
-arguments="/afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023 /afs/cern.ch/work/s/selvaggi/private/FCCSW-ee/FCCAnalyses_winter2023/examples/FCCee/weaver/analysis_inference_zh_vvjj_v1.py /eos/experiment/fcc/ee/generation/DelphesEvents/winter2023/IDEA/p8_ee_tt_ecm365/events_057484114.root /eos/experiment/fcc/ee/analyses/case-studies/higgs/flat_trees/zh_vvjj_365/p8_ee_tt_ecm365/events_7.root 100000"
+arguments="7000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_7.root"
+queue
+arguments="8000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_8.root"
+queue
+arguments="9000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_9.root"
+queue
+arguments="0 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Huu_10.root"
+queue
+arguments="1000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Huu_11.root"
+queue
+arguments="2000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Huu_12.root"
+queue
+arguments="3000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Huu_13.root"
+queue
+arguments="4000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Huu_14.root"
+queue
+arguments="5000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Huu_15.root"
+queue
+arguments="6000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Huu_16.root"
+queue
+arguments="7000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Huu_17.root"
+queue
+arguments="8000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Huu_18.root"
+queue
+arguments="9000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Huu_19.root"
+queue
+arguments="0 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hdd/CLD_o2_v05/rec/*/*/Hdd_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hdd_20.root"
+queue
+arguments="1000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hdd/CLD_o2_v05/rec/*/*/Hdd_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hdd_21.root"
+queue
+arguments="2000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hdd/CLD_o2_v05/rec/*/*/Hdd_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hdd_22.root"
+queue
+arguments="3000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hdd/CLD_o2_v05/rec/*/*/Hdd_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hdd_23.root"
+queue
+arguments="4000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hdd/CLD_o2_v05/rec/*/*/Hdd_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hdd_24.root"
+queue
+arguments="5000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hdd/CLD_o2_v05/rec/*/*/Hdd_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hdd_25.root"
+queue
+arguments="6000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hdd/CLD_o2_v05/rec/*/*/Hdd_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hdd_26.root"
+queue
+arguments="7000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hdd/CLD_o2_v05/rec/*/*/Hdd_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hdd_27.root"
+queue
+arguments="8000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hdd/CLD_o2_v05/rec/*/*/Hdd_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hdd_28.root"
+queue
+arguments="9000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hdd/CLD_o2_v05/rec/*/*/Hdd_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hdd_29.root"
+queue
+arguments="0 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hcc/CLD_o2_v05/rec/*/*/Hcc_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hcc_30.root"
+queue
+arguments="1000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hcc/CLD_o2_v05/rec/*/*/Hcc_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hcc_31.root"
+queue
+arguments="2000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hcc/CLD_o2_v05/rec/*/*/Hcc_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hcc_32.root"
+queue
+arguments="3000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hcc/CLD_o2_v05/rec/*/*/Hcc_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hcc_33.root"
+queue
+arguments="4000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hcc/CLD_o2_v05/rec/*/*/Hcc_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hcc_34.root"
+queue
+arguments="5000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hcc/CLD_o2_v05/rec/*/*/Hcc_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hcc_35.root"
+queue
+arguments="6000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hcc/CLD_o2_v05/rec/*/*/Hcc_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hcc_36.root"
+queue
+arguments="7000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hcc/CLD_o2_v05/rec/*/*/Hcc_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hcc_37.root"
+queue
+arguments="8000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hcc/CLD_o2_v05/rec/*/*/Hcc_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hcc_38.root"
+queue
+arguments="9000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hcc/CLD_o2_v05/rec/*/*/Hcc_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hcc_39.root"
+queue
+arguments="0 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hss/CLD_o2_v05/rec/*/*/Hss_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hss_40.root"
+queue
+arguments="1000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hss/CLD_o2_v05/rec/*/*/Hss_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hss_41.root"
+queue
+arguments="2000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hss/CLD_o2_v05/rec/*/*/Hss_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hss_42.root"
+queue
+arguments="3000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hss/CLD_o2_v05/rec/*/*/Hss_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hss_43.root"
+queue
+arguments="4000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hss/CLD_o2_v05/rec/*/*/Hss_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hss_44.root"
+queue
+arguments="5000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hss/CLD_o2_v05/rec/*/*/Hss_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hss_45.root"
+queue
+arguments="6000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hss/CLD_o2_v05/rec/*/*/Hss_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hss_46.root"
+queue
+arguments="7000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hss/CLD_o2_v05/rec/*/*/Hss_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hss_47.root"
+queue
+arguments="8000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hss/CLD_o2_v05/rec/*/*/Hss_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hss_48.root"
+queue
+arguments="9000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hss/CLD_o2_v05/rec/*/*/Hss_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hss_49.root"
+queue
+arguments="0 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hgg_50.root"
+queue
+arguments="1000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hgg_51.root"
+queue
+arguments="2000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hgg_52.root"
+queue
+arguments="3000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hgg_53.root"
+queue
+arguments="4000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hgg_54.root"
+queue
+arguments="5000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hgg_55.root"
+queue
+arguments="6000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hgg_56.root"
+queue
+arguments="7000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hgg_57.root"
+queue
+arguments="8000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hgg_58.root"
+queue
+arguments="9000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hgg_59.root"
+queue
+arguments="0 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Htautau_60.root"
+queue
+arguments="1000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Htautau_61.root"
+queue
+arguments="2000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Htautau_62.root"
+queue
+arguments="3000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Htautau_63.root"
+queue
+arguments="4000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Htautau_64.root"
+queue
+arguments="5000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Htautau_65.root"
+queue
+arguments="6000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Htautau_66.root"
+queue
+arguments="7000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Htautau_67.root"
+queue
+arguments="8000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Htautau_68.root"
+queue
+arguments="9000 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Htautau_69.root"
 queue
