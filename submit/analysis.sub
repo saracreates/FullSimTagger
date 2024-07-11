@@ -4,9 +4,9 @@
 executable    = submitAnalysisJob.sh
 #requirements = (OpSysAndVer =?= "CentOS7")
 # here you specify where to put .log, .out and .err files
-output                = std/condor.$(ClusterId).$(ProcId).out
-error                 = std/condor.$(ClusterId).$(ProcId).err
-log                   = std/condor.$(ClusterId).log
+output                = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ProcId).out
+error                 = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ProcId).err
+log                   = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ClusterId).log
 
 +AccountingGroup = "group_u_FCC.local_gen"
 +JobFlavour    = "workday"
