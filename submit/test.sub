@@ -10,3 +10,4 @@ log                   = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(Clu
 +AccountingGroup = "group_u_FCC.local_gen"
 +JobFlavour    = "espresso"
 arguments="I <3 physics! :-)"
+queue
