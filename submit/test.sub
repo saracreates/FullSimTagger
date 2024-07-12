@@ -8,6 +8,6 @@ error                 = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(Clu
 log                   = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ClusterId).log
 
 #+AccountingGroup = "group_u_FCC.local_gen"
-#+JobFlavour    = "espresso"
-arguments="I <3 physics! :-)"
++JobFlavour    = "espresso"
+arguments="I love physics"
 queue
