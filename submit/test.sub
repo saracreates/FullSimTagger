@@ -7,7 +7,7 @@ output                = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(Clu
 error                 = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ProcId).err
 log                   = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ClusterId).log
 
-#+AccountingGroup = "group_u_FCC.local_gen"
++AccountingGroup = "group_u_FCC.local_gen"
 +JobFlavour    = "espresso"
-arguments="I love physics"
+arguments="I-love-physics"
 queue
