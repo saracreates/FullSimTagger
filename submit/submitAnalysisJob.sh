@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # shell script to submit analysis job to the batch system
-
+echo "Running analysis job ..."
 start_time=$(date +%s)
 
 # source key4ehp
@@ -11,15 +11,12 @@ source /cvmfs/sw.hsf.org/key4hep/setup.sh -r 2024-04-12
 FROM_I=${1} # Wwhich index to start with regarding the input root files
 NUM_FILES=${2} # number of files to process
 FILE_PATTERN=${3}
-echo "file pattern ${FILE_PATTERN}"
 OUTPUT_DIR=${4} # output directory
-echo "output dir ${OUTPUT_DIR}"
 OUTPUT_FILE=${5} # output file
-echo "output file ${OUTPUT_FILE}"
-echo "output dir ${OUTPUT_DIR}"
 
 # get input files
 root_files=($(ls ${FILE_PATTERN} 2>/dev/null | sort | tail -n +$((FROM_I + 1)) | head -n ${NUM_FILES})) # works fine even if NUM_FILES is larger than the number of files available 
+echo "loading root files ..."
 
 # Check if there are any matching files
 if [ ${#root_files[@]} -eq 0 ]; then
