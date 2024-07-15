@@ -4,7 +4,8 @@ def generate_analysis_sub():
     num_files = 50
     start_indices = range(0, 10000, num_files)
     base_command = "/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/{pattern}/CLD_o2_v05/rec/*/*/{pattern}_rec_*.root"
-    output_base = "/afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/"
+    #output_base = "/afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/"
+    output_base = "/eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/"
     
     # Prepare the header of the file
     header = """# run commands for analysis,
