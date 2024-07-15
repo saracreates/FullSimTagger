@@ -9,7 +9,7 @@ error                 = std/condor.$(ClusterId).$(ProcId).err
 log                   = std/condor.$(ClusterId).log
 
 +AccountingGroup = "group_u_FCC.local_gen"
-+JobFlavour    = "workday"
++JobFlavour    = "espresso"
 arguments="0 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/Hbb_0.root"
 queue
 arguments="50 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/Hbb_1.root"
