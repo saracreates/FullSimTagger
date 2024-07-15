@@ -9,7 +9,7 @@ error                 = /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_inpu
 log                   = /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/std-condor/job.$(ClusterId).$(ClusterId).log
 
 +AccountingGroup = "group_u_FCC.local_gen"
-+JobFlavour    = "espresso"
++JobFlavour    = "microcentury"
 arguments="0 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/Hbb_0.root"
 queue
 arguments="50 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/Hbb_1.root"
