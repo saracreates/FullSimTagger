@@ -4,9 +4,9 @@
 executable    = submitAnalysisJob.sh
 #requirements = (OpSysAndVer =?= "CentOS7")
 # here you specify where to put .log, .out and .err files
-output                = /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/std-condor/job.$(ClusterId).$(ProcId).out
-error                 = /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/std-condor/job.$(ClusterId).$(ProcId).err
-log                   = /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/std-condor/job.$(ClusterId).$(ClusterId).log
+output                = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ProcId).out
+error                 = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ProcId).err
+log                   = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ClusterId).log
 
 +AccountingGroup = "group_u_FCC.local_gen"
 +JobFlavour    = "microcentury"
