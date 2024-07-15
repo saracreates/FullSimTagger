@@ -1,8 +1,8 @@
 def generate_analysis_sub():
     # Define file patterns and other fixed values
     file_patterns = ["Hbb", "Huu", "Hdd", "Hcc", "Hss", "Hgg", "Htautau"]
-    start_indices = range(0, 10000, 1000)
-    num_files = 1000
+    num_files = 50
+    start_indices = range(0, 10000, num_files)
     base_command = "/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/{pattern}/CLD_o2_v05/rec/*/*/{pattern}_rec_*.root"
     output_base = "/afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/"
     
