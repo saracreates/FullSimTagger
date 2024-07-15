@@ -24,19 +24,24 @@ if [ ${#root_files[@]} -eq 0 ]; then
     exit 1
 fi
 
+# make directory
+mkdir job
 
 # Copy each file using the Python script
 for file in "${root_files[@]}"; do
-    python3 /afs/cern.ch/work/f/fccsw/public/FCCutils/eoscopy.py "${file}" "./$(basename ${file})"
+    # Get the basename of the file
+    base_name=$(basename "${file}")
+    # Copy the file using the Python script
+    python3 /afs/cern.ch/work/f/fccsw/public/FCCutils/eoscopy.py "${file}" "./job/${base_name}"
 done
 
 # merge 1000 root files to one input file
-hadd merged_input.root ./*.root
+hadd ./job/merged_input.root ./job/*.root
 preproc_time=$(date +%s)
 middle_time=$((preproc_time - start_time))
 echo "time before running script: $middle_time seconds" # 13 sec -> x100 = 21 min
-python /afs/cern.ch/work/s/saaumill/public/FullSimTagger/src/create_jet_based_tree.py merged_input.root out.root
-echo "job done ... "
+python /afs/cern.ch/work/s/saaumill/public/FullSimTagger/src/create_jet_based_tree.py ./job/merged_input.root ./job/out.root
+echo "job done ... "ss
 job_endtime=$(date +%s)
 job_time=$((job_endtime - preproc_time)) # 54 sec for 1000 files -> index 0 to 10. So for 0 to 1000 it should be 1.5h 
 echo "time to run job: $job_time seconds" # 
@@ -46,7 +51,7 @@ if [ ! -d ${OUTPUT_DIR} ]; then
 fi
 
 # copy file to output dir
-python /afs/cern.ch/work/f/fccsw/public/FCCutils/eoscopy.py out.root ${OUTPUT_FILE}
+python /afs/cern.ch/work/f/fccsw/public/FCCutils/eoscopy.py ./job/out.root ${OUTPUT_FILE}
 echo "Ran script successfully!"
 end_time=$(date +%s)
 execution_time=$((end_time - start_time)) # rouhgly 2h for index 0 to 1000

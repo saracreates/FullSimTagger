@@ -10,5 +10,5 @@ log                   = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(Clu
 
 +AccountingGroup = "group_u_FCC.local_gen"
 +JobFlavour    = "longlunch"
-arguments="0 1000 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_0.root"
+arguments="0 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/ /afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/Hbb_0.root"
 queue
