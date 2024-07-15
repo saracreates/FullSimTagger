@@ -549,9 +549,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
     Returns:
         _type_: _description_
     """
-    debug_phi = False
     
-
     # calculate PV
     for v, vertex in enumerate(event.get("PrimaryVertices")):
         if v>0:
@@ -599,9 +597,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         jet_type = which_H_process(H_to_xx) # use file name to determine which Higgs process is being simulated
         for key in jet_type:
             dic[key][0] = jet_type[key]
-        if debug_phi:
-            print("-------------------- new jet -------------------")
-            print("loop over ", particles_jet.size(), " particles in jet")
+
         for i, part in enumerate(particles_jet):
             particle = particles_jet.at(i)
             #print("-------- new reco particle ------------")
@@ -636,35 +632,9 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             
             # to calculate the angle correctly in 3D, roate the angle by the jet angle first
 
-            if debug_phi:
-                # TEST
-                pi = math.pi
-
-                print("-------- new particle -------")
-                print("jet phi: ", jet_phi, "(", jet_phi / pi, "pi)")
-                print("jet theta: ", jet_theta, "(", jet_theta / pi, "pi)")
-                print("jet 3v: ", tlv.X(), tlv.Y(), tlv.Z())
-                print("particle charge: ", particle.getCharge())
-                tlv.RotateZ(-jet_phi)
-                phi_after_rotation_z = tlv.Phi()
-                #print("jet phi after rotation (only phi): ", phi_after_rotation_z, "(", phi_after_rotation_z / pi, "pi)")
-                tlv.RotateY(-jet_theta)
-                phi_after_rotation_y = tlv.Phi()
-                theta_after_rotation_y = tlv.Theta()
-                #print("jet phi after rotation: ", phi_after_rotation_y, "(", phi_after_rotation_y / pi, "pi)")
-                #print("jet theta after rotation: ", theta_after_rotation_y, "(", theta_after_rotation_y / pi, "pi)")
-                #print("jet 3v: ", tlv.X(), tlv.Y(), tlv.Z())
-                tlv.RotateY(jet_theta)
-                tlv.RotateZ(jet_phi)
-
-
-                print("particle phi before rotation: ", tlv_p.Phi(), "(", tlv_p.Phi() / pi, "pi)")
-                print("particle theta before rotation: ", tlv_p.Theta(), "(", tlv_p.Theta() / pi, "pi)")
             tlv_p.RotateZ(-jet_phi) # rotate the particle by the jet angle in the xy-plane
             tlv_p.RotateY(-jet_theta) # rotate the particle by the jet angle in the xz-plane
-            if debug_phi:
-                print("particle phi after rotation: ", tlv_p.Phi(), "(", tlv_p.Phi() / pi, "pi)")
-                print("particle theta after rotation: ", tlv_p.Theta(), "(", tlv_p.Theta() / pi, "pi)")
+
             dic["pfcand_phirel"].push_back(tlv_p.Phi()) # same as in  rv::RVec<FCCAnalysesJetConstituentsData> get_phirel_cluster in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
             dic["pfcand_thetarel"].push_back(tlv_p.Theta()) # rel theta should be positive!  
 
@@ -681,11 +651,8 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             'isCreatedInSimulation', 'isDecayedInCalorimeter', 'isDecayedInTracker', 'isOverlay', 'isStopped', 
             'makeEmpty', 'parents_begin', 'parents_end', 'parents_size', 'unlink', 'vertexIsNotEndpointOfParent']
             """
-            if debug_phi:
-                print("reco PID particle: ", particle.getType())
+
             if MC_part!=None: # if MC particle is found
-                if debug_phi:
-                    print("MC PID particle: ", MC_part.getPDG())
                 dic["pfcand_MCPID"].push_back(MC_part.getPDG()) # MC PID of particle
 
                 # debug info
@@ -708,10 +675,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                     parent_ID = parent.getPDG() # MC PID of parent
                     dic["pfcand_parent_index"].push_back(parent.getObjectID().index)
                     dic["pfcand_parent_ID"].push_back(parent_ID)
-                    if debug_phi:
-                        print("MC PID parent: ", parent_ID)
-                        print("parent index: ", parent.getObjectID().index)
-                        print("parent momentum: ", parent.getMomentum().x, parent.getMomentum().y, parent.getMomentum().z)
+
             else: 
                 dic["pfcand_MCPID"].push_back(-999)
                 dic["pfcand_parent_ID"].push_back(-999)
