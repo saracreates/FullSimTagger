@@ -675,7 +675,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                     #    print("ID: ", parents.at(p).getPDG())
                     #    print("index: ", parents.at(p).getObjectID().index)
                     if parents.size()==2 and MC_part.getPDG()==22:
-                        print("Photon with two parents from inital state...")
+                        print("Photon with two parents from inital state...") # initial state radiation? 
                         dic["pfcand_parent_ID"].push_back(-444)
                         dic["pfcand_parent_index"].push_back(-444)
                     else: 
