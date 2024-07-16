@@ -206,7 +206,10 @@ def V_info_dic(event, ev_num, collection):
         E = np.sum(energies)
         p_x, p_y, p_z = np.sum(momenta, axis=0)
         M2 = E**2 - (p_x**2 + p_y**2 + p_z**2)
-        dic["V_M"].append(np.sqrt(M2))
+        if M2<0:
+            dic["V_M"].append(-9)
+        else:
+            dic["V_M"].append(np.sqrt(M2))
         dic["V_id"].append(ev_num*100 + v+1) # set id for this vertex
         dic["V_x"].append(vertex.getPosition().x)
         dic["V_y"].append(vertex.getPosition().y)
@@ -550,6 +553,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         _type_: _description_
     """
     
+
     # calculate PV
     for v, vertex in enumerate(event.get("PrimaryVertices")):
         if v>0:
@@ -664,7 +668,18 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                 # parents
                 parents = MC_part.getParents()
                 if parents.size() > 1:
-                    raise ValueError("Particle has more than one parent")
+                    #print("# const in jet: ", particles_jet.size())
+                    #print("MC PID: ", MC_part.getPDG())
+                    #print(f"Particle has {parents.size()} parents.")
+                    #for p in range(parents.size()):
+                    #    print("ID: ", parents.at(p).getPDG())
+                    #    print("index: ", parents.at(p).getObjectID().index)
+                    if parents.size()==2 and MC_part.getPDG()==22:
+                        print("Photon with two parents from inital state...")
+                        dic["pfcand_parent_ID"].push_back(-444)
+                        dic["pfcand_parent_index"].push_back(-444)
+                    else: 
+                        raise ValueError("Particle has more than one parent")
                 elif parents.size() == 0:
                     #raise ValueError("Particle has no parent. Particle ID: ", MC_part.getPDG()) # 22
                     dic["pfcand_parent_ID"].push_back(-999)
