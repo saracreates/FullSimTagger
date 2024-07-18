@@ -35,13 +35,18 @@ for file in "${root_files[@]}"; do
     python3 /afs/cern.ch/work/f/fccsw/public/FCCutils/eoscopy.py "${file}" "./job/${base_name}"
 done
 
+# Extract the pattern (e.g., Hbb, Huu, etc.)
+pattern=$(echo "${FILE_PATTERN}" | grep -oE '/H[[:alnum:]]+/')
+pattern=${pattern:1:-1} # Remove the leading and trailing slashes
+#echo "file pattern: $pattern"
+
 # merge 1000 root files to one input file
-hadd ./job/merged_input.root ./job/*.root
+hadd "./job/merged_input_${pattern}.root" ./job/*.root
 preproc_time=$(date +%s)
 middle_time=$((preproc_time - start_time))
 echo "time before running script: $middle_time seconds" # 13 sec -> x100 = 21 min
-python /afs/cern.ch/work/s/saaumill/public/FullSimTagger/src/create_jet_based_tree.py ./job/merged_input.root ./job/out.root
-echo "job done ... "ss
+python /afs/cern.ch/work/s/saaumill/public/FullSimTagger/src/create_jet_based_tree.py "./job/merged_input_${pattern}.root" ./job/out.root
+echo "job done ... "
 job_endtime=$(date +%s)
 job_time=$((job_endtime - preproc_time)) # 54 sec for 1000 files -> index 0 to 10. So for 0 to 1000 it should be 1.5h 
 echo "time to run job: $job_time seconds" # 
