@@ -19,7 +19,7 @@ def extract_hxx(filename):
     # Use regular expression to find "H" followed by either "tautau" or exactly two lowercase letters (Huu, Hdd, etc.)
     match = re.search(r'H(?:tautau|[a-z]{2})', filename)
     if match:
-        return match.group(0)
+        return match.group(0) 
     return None
 
 ## Input args are the file to read from and the file to write on

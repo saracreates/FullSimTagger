@@ -1,0 +1,1212 @@
+# run commands for analysis,
+
+# here goes your shell script
+executable    = submitAnalysisJob.sh
+#requirements = (OpSysAndVer =?= "CentOS7")
+# here you specify where to put .log, .out and .err files
+output                = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ProcId).out
+error                 = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ProcId).err
+log                   = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ClusterId).log
+
++AccountingGroup = "group_u_FCC.local_gen"
++JobFlavour    = "microcentury"
+arguments="0 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_0.root"
+queue
+arguments="50 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_1.root"
+queue
+arguments="100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_2.root"
+queue
+arguments="150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_3.root"
+queue
+arguments="200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_4.root"
+queue
+arguments="250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_5.root"
+queue
+arguments="300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_6.root"
+queue
+arguments="350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_7.root"
+queue
+arguments="400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_8.root"
+queue
+arguments="450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_9.root"
+queue
+arguments="500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_10.root"
+queue
+arguments="550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_11.root"
+queue
+arguments="600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_12.root"
+queue
+arguments="650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_13.root"
+queue
+arguments="700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_14.root"
+queue
+arguments="750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_15.root"
+queue
+arguments="800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_16.root"
+queue
+arguments="850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_17.root"
+queue
+arguments="900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_18.root"
+queue
+arguments="950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_19.root"
+queue
+arguments="1000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_20.root"
+queue
+arguments="1050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_21.root"
+queue
+arguments="1100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_22.root"
+queue
+arguments="1150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_23.root"
+queue
+arguments="1200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_24.root"
+queue
+arguments="1250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_25.root"
+queue
+arguments="1300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_26.root"
+queue
+arguments="1350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_27.root"
+queue
+arguments="1400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_28.root"
+queue
+arguments="1450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_29.root"
+queue
+arguments="1500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_30.root"
+queue
+arguments="1550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_31.root"
+queue
+arguments="1600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_32.root"
+queue
+arguments="1650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_33.root"
+queue
+arguments="1700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_34.root"
+queue
+arguments="1750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_35.root"
+queue
+arguments="1800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_36.root"
+queue
+arguments="1850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_37.root"
+queue
+arguments="1900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_38.root"
+queue
+arguments="1950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_39.root"
+queue
+arguments="2000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_40.root"
+queue
+arguments="2050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_41.root"
+queue
+arguments="2100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_42.root"
+queue
+arguments="2150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_43.root"
+queue
+arguments="2200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_44.root"
+queue
+arguments="2250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_45.root"
+queue
+arguments="2300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_46.root"
+queue
+arguments="2350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_47.root"
+queue
+arguments="2400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_48.root"
+queue
+arguments="2450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_49.root"
+queue
+arguments="2500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_50.root"
+queue
+arguments="2550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_51.root"
+queue
+arguments="2600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_52.root"
+queue
+arguments="2650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_53.root"
+queue
+arguments="2700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_54.root"
+queue
+arguments="2750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_55.root"
+queue
+arguments="2800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_56.root"
+queue
+arguments="2850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_57.root"
+queue
+arguments="2900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_58.root"
+queue
+arguments="2950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_59.root"
+queue
+arguments="3000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_60.root"
+queue
+arguments="3050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_61.root"
+queue
+arguments="3100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_62.root"
+queue
+arguments="3150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_63.root"
+queue
+arguments="3200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_64.root"
+queue
+arguments="3250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_65.root"
+queue
+arguments="3300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_66.root"
+queue
+arguments="3350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_67.root"
+queue
+arguments="3400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_68.root"
+queue
+arguments="3450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_69.root"
+queue
+arguments="3500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_70.root"
+queue
+arguments="3550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_71.root"
+queue
+arguments="3600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_72.root"
+queue
+arguments="3650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_73.root"
+queue
+arguments="3700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_74.root"
+queue
+arguments="3750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_75.root"
+queue
+arguments="3800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_76.root"
+queue
+arguments="3850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_77.root"
+queue
+arguments="3900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_78.root"
+queue
+arguments="3950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_79.root"
+queue
+arguments="4000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_80.root"
+queue
+arguments="4050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_81.root"
+queue
+arguments="4100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_82.root"
+queue
+arguments="4150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_83.root"
+queue
+arguments="4200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_84.root"
+queue
+arguments="4250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_85.root"
+queue
+arguments="4300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_86.root"
+queue
+arguments="4350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_87.root"
+queue
+arguments="4400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_88.root"
+queue
+arguments="4450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_89.root"
+queue
+arguments="4500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_90.root"
+queue
+arguments="4550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_91.root"
+queue
+arguments="4600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_92.root"
+queue
+arguments="4650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_93.root"
+queue
+arguments="4700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_94.root"
+queue
+arguments="4750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_95.root"
+queue
+arguments="4800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_96.root"
+queue
+arguments="4850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_97.root"
+queue
+arguments="4900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_98.root"
+queue
+arguments="4950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_99.root"
+queue
+arguments="5000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_100.root"
+queue
+arguments="5050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_101.root"
+queue
+arguments="5100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_102.root"
+queue
+arguments="5150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_103.root"
+queue
+arguments="5200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_104.root"
+queue
+arguments="5250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_105.root"
+queue
+arguments="5300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_106.root"
+queue
+arguments="5350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_107.root"
+queue
+arguments="5400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_108.root"
+queue
+arguments="5450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_109.root"
+queue
+arguments="5500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_110.root"
+queue
+arguments="5550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_111.root"
+queue
+arguments="5600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_112.root"
+queue
+arguments="5650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_113.root"
+queue
+arguments="5700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_114.root"
+queue
+arguments="5750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_115.root"
+queue
+arguments="5800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_116.root"
+queue
+arguments="5850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_117.root"
+queue
+arguments="5900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_118.root"
+queue
+arguments="5950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_119.root"
+queue
+arguments="6000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_120.root"
+queue
+arguments="6050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_121.root"
+queue
+arguments="6100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_122.root"
+queue
+arguments="6150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_123.root"
+queue
+arguments="6200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_124.root"
+queue
+arguments="6250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_125.root"
+queue
+arguments="6300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_126.root"
+queue
+arguments="6350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_127.root"
+queue
+arguments="6400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_128.root"
+queue
+arguments="6450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_129.root"
+queue
+arguments="6500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_130.root"
+queue
+arguments="6550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_131.root"
+queue
+arguments="6600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_132.root"
+queue
+arguments="6650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_133.root"
+queue
+arguments="6700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_134.root"
+queue
+arguments="6750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_135.root"
+queue
+arguments="6800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_136.root"
+queue
+arguments="6850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_137.root"
+queue
+arguments="6900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_138.root"
+queue
+arguments="6950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_139.root"
+queue
+arguments="7000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_140.root"
+queue
+arguments="7050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_141.root"
+queue
+arguments="7100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_142.root"
+queue
+arguments="7150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_143.root"
+queue
+arguments="7200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_144.root"
+queue
+arguments="7250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_145.root"
+queue
+arguments="7300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_146.root"
+queue
+arguments="7350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_147.root"
+queue
+arguments="7400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_148.root"
+queue
+arguments="7450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_149.root"
+queue
+arguments="7500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_150.root"
+queue
+arguments="7550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_151.root"
+queue
+arguments="7600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_152.root"
+queue
+arguments="7650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_153.root"
+queue
+arguments="7700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_154.root"
+queue
+arguments="7750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_155.root"
+queue
+arguments="7800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_156.root"
+queue
+arguments="7850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_157.root"
+queue
+arguments="7900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_158.root"
+queue
+arguments="7950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_159.root"
+queue
+arguments="8000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_160.root"
+queue
+arguments="8050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_161.root"
+queue
+arguments="8100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_162.root"
+queue
+arguments="8150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_163.root"
+queue
+arguments="8200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_164.root"
+queue
+arguments="8250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_165.root"
+queue
+arguments="8300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_166.root"
+queue
+arguments="8350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_167.root"
+queue
+arguments="8400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_168.root"
+queue
+arguments="8450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_169.root"
+queue
+arguments="8500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_170.root"
+queue
+arguments="8550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_171.root"
+queue
+arguments="8600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_172.root"
+queue
+arguments="8650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_173.root"
+queue
+arguments="8700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_174.root"
+queue
+arguments="8750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_175.root"
+queue
+arguments="8800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_176.root"
+queue
+arguments="8850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_177.root"
+queue
+arguments="8900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_178.root"
+queue
+arguments="8950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_179.root"
+queue
+arguments="9000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_180.root"
+queue
+arguments="9050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_181.root"
+queue
+arguments="9100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_182.root"
+queue
+arguments="9150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_183.root"
+queue
+arguments="9200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_184.root"
+queue
+arguments="9250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_185.root"
+queue
+arguments="9300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_186.root"
+queue
+arguments="9350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_187.root"
+queue
+arguments="9400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_188.root"
+queue
+arguments="9450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_189.root"
+queue
+arguments="9500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_190.root"
+queue
+arguments="9550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_191.root"
+queue
+arguments="9600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_192.root"
+queue
+arguments="9650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_193.root"
+queue
+arguments="9700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_194.root"
+queue
+arguments="9750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_195.root"
+queue
+arguments="9800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_196.root"
+queue
+arguments="9850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_197.root"
+queue
+arguments="9900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_198.root"
+queue
+arguments="9950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHbb_199.root"
+queue
+arguments="0 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_200.root"
+queue
+arguments="50 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_201.root"
+queue
+arguments="100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_202.root"
+queue
+arguments="150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_203.root"
+queue
+arguments="200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_204.root"
+queue
+arguments="250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_205.root"
+queue
+arguments="300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_206.root"
+queue
+arguments="350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_207.root"
+queue
+arguments="400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_208.root"
+queue
+arguments="450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_209.root"
+queue
+arguments="500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_210.root"
+queue
+arguments="550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_211.root"
+queue
+arguments="600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_212.root"
+queue
+arguments="650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_213.root"
+queue
+arguments="700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_214.root"
+queue
+arguments="750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_215.root"
+queue
+arguments="800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_216.root"
+queue
+arguments="850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_217.root"
+queue
+arguments="900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_218.root"
+queue
+arguments="950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_219.root"
+queue
+arguments="1000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_220.root"
+queue
+arguments="1050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_221.root"
+queue
+arguments="1100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_222.root"
+queue
+arguments="1150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_223.root"
+queue
+arguments="1200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_224.root"
+queue
+arguments="1250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_225.root"
+queue
+arguments="1300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_226.root"
+queue
+arguments="1350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_227.root"
+queue
+arguments="1400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_228.root"
+queue
+arguments="1450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_229.root"
+queue
+arguments="1500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_230.root"
+queue
+arguments="1550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_231.root"
+queue
+arguments="1600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_232.root"
+queue
+arguments="1650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_233.root"
+queue
+arguments="1700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_234.root"
+queue
+arguments="1750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_235.root"
+queue
+arguments="1800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_236.root"
+queue
+arguments="1850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_237.root"
+queue
+arguments="1900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_238.root"
+queue
+arguments="1950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_239.root"
+queue
+arguments="2000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_240.root"
+queue
+arguments="2050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_241.root"
+queue
+arguments="2100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_242.root"
+queue
+arguments="2150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_243.root"
+queue
+arguments="2200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_244.root"
+queue
+arguments="2250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_245.root"
+queue
+arguments="2300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_246.root"
+queue
+arguments="2350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_247.root"
+queue
+arguments="2400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_248.root"
+queue
+arguments="2450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_249.root"
+queue
+arguments="2500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_250.root"
+queue
+arguments="2550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_251.root"
+queue
+arguments="2600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_252.root"
+queue
+arguments="2650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_253.root"
+queue
+arguments="2700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_254.root"
+queue
+arguments="2750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_255.root"
+queue
+arguments="2800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_256.root"
+queue
+arguments="2850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_257.root"
+queue
+arguments="2900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_258.root"
+queue
+arguments="2950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_259.root"
+queue
+arguments="3000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_260.root"
+queue
+arguments="3050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_261.root"
+queue
+arguments="3100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_262.root"
+queue
+arguments="3150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_263.root"
+queue
+arguments="3200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_264.root"
+queue
+arguments="3250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_265.root"
+queue
+arguments="3300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_266.root"
+queue
+arguments="3350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_267.root"
+queue
+arguments="3400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_268.root"
+queue
+arguments="3450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_269.root"
+queue
+arguments="3500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_270.root"
+queue
+arguments="3550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_271.root"
+queue
+arguments="3600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_272.root"
+queue
+arguments="3650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_273.root"
+queue
+arguments="3700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_274.root"
+queue
+arguments="3750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_275.root"
+queue
+arguments="3800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_276.root"
+queue
+arguments="3850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_277.root"
+queue
+arguments="3900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_278.root"
+queue
+arguments="3950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_279.root"
+queue
+arguments="4000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_280.root"
+queue
+arguments="4050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_281.root"
+queue
+arguments="4100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_282.root"
+queue
+arguments="4150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_283.root"
+queue
+arguments="4200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_284.root"
+queue
+arguments="4250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_285.root"
+queue
+arguments="4300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_286.root"
+queue
+arguments="4350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_287.root"
+queue
+arguments="4400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_288.root"
+queue
+arguments="4450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_289.root"
+queue
+arguments="4500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_290.root"
+queue
+arguments="4550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_291.root"
+queue
+arguments="4600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_292.root"
+queue
+arguments="4650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_293.root"
+queue
+arguments="4700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_294.root"
+queue
+arguments="4750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_295.root"
+queue
+arguments="4800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_296.root"
+queue
+arguments="4850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_297.root"
+queue
+arguments="4900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_298.root"
+queue
+arguments="4950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_299.root"
+queue
+arguments="5000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_300.root"
+queue
+arguments="5050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_301.root"
+queue
+arguments="5100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_302.root"
+queue
+arguments="5150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_303.root"
+queue
+arguments="5200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_304.root"
+queue
+arguments="5250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_305.root"
+queue
+arguments="5300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_306.root"
+queue
+arguments="5350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_307.root"
+queue
+arguments="5400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_308.root"
+queue
+arguments="5450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_309.root"
+queue
+arguments="5500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_310.root"
+queue
+arguments="5550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_311.root"
+queue
+arguments="5600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_312.root"
+queue
+arguments="5650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_313.root"
+queue
+arguments="5700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_314.root"
+queue
+arguments="5750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_315.root"
+queue
+arguments="5800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_316.root"
+queue
+arguments="5850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_317.root"
+queue
+arguments="5900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_318.root"
+queue
+arguments="5950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_319.root"
+queue
+arguments="6000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_320.root"
+queue
+arguments="6050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_321.root"
+queue
+arguments="6100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_322.root"
+queue
+arguments="6150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_323.root"
+queue
+arguments="6200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_324.root"
+queue
+arguments="6250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_325.root"
+queue
+arguments="6300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_326.root"
+queue
+arguments="6350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_327.root"
+queue
+arguments="6400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_328.root"
+queue
+arguments="6450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_329.root"
+queue
+arguments="6500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_330.root"
+queue
+arguments="6550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_331.root"
+queue
+arguments="6600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_332.root"
+queue
+arguments="6650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_333.root"
+queue
+arguments="6700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_334.root"
+queue
+arguments="6750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_335.root"
+queue
+arguments="6800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_336.root"
+queue
+arguments="6850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_337.root"
+queue
+arguments="6900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_338.root"
+queue
+arguments="6950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_339.root"
+queue
+arguments="7000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_340.root"
+queue
+arguments="7050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_341.root"
+queue
+arguments="7100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_342.root"
+queue
+arguments="7150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_343.root"
+queue
+arguments="7200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_344.root"
+queue
+arguments="7250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_345.root"
+queue
+arguments="7300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_346.root"
+queue
+arguments="7350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_347.root"
+queue
+arguments="7400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_348.root"
+queue
+arguments="7450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_349.root"
+queue
+arguments="7500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_350.root"
+queue
+arguments="7550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_351.root"
+queue
+arguments="7600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_352.root"
+queue
+arguments="7650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_353.root"
+queue
+arguments="7700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_354.root"
+queue
+arguments="7750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_355.root"
+queue
+arguments="7800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_356.root"
+queue
+arguments="7850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_357.root"
+queue
+arguments="7900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_358.root"
+queue
+arguments="7950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_359.root"
+queue
+arguments="8000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_360.root"
+queue
+arguments="8050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_361.root"
+queue
+arguments="8100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_362.root"
+queue
+arguments="8150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_363.root"
+queue
+arguments="8200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_364.root"
+queue
+arguments="8250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_365.root"
+queue
+arguments="8300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_366.root"
+queue
+arguments="8350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_367.root"
+queue
+arguments="8400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_368.root"
+queue
+arguments="8450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_369.root"
+queue
+arguments="8500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_370.root"
+queue
+arguments="8550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_371.root"
+queue
+arguments="8600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_372.root"
+queue
+arguments="8650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_373.root"
+queue
+arguments="8700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_374.root"
+queue
+arguments="8750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_375.root"
+queue
+arguments="8800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_376.root"
+queue
+arguments="8850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_377.root"
+queue
+arguments="8900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_378.root"
+queue
+arguments="8950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_379.root"
+queue
+arguments="9000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_380.root"
+queue
+arguments="9050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_381.root"
+queue
+arguments="9100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_382.root"
+queue
+arguments="9150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_383.root"
+queue
+arguments="9200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_384.root"
+queue
+arguments="9250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_385.root"
+queue
+arguments="9300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_386.root"
+queue
+arguments="9350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_387.root"
+queue
+arguments="9400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_388.root"
+queue
+arguments="9450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_389.root"
+queue
+arguments="9500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_390.root"
+queue
+arguments="9550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_391.root"
+queue
+arguments="9600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_392.root"
+queue
+arguments="9650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_393.root"
+queue
+arguments="9700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_394.root"
+queue
+arguments="9750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_395.root"
+queue
+arguments="9800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_396.root"
+queue
+arguments="9850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_397.root"
+queue
+arguments="9900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_398.root"
+queue
+arguments="9950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hgg/CLD_o2_v05/rec/*/*/Hgg_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHgg_399.root"
+queue
+arguments="0 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_400.root"
+queue
+arguments="50 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_401.root"
+queue
+arguments="100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_402.root"
+queue
+arguments="150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_403.root"
+queue
+arguments="200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_404.root"
+queue
+arguments="250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_405.root"
+queue
+arguments="300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_406.root"
+queue
+arguments="350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_407.root"
+queue
+arguments="400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_408.root"
+queue
+arguments="450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_409.root"
+queue
+arguments="500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_410.root"
+queue
+arguments="550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_411.root"
+queue
+arguments="600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_412.root"
+queue
+arguments="650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_413.root"
+queue
+arguments="700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_414.root"
+queue
+arguments="750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_415.root"
+queue
+arguments="800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_416.root"
+queue
+arguments="850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_417.root"
+queue
+arguments="900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_418.root"
+queue
+arguments="950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_419.root"
+queue
+arguments="1000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_420.root"
+queue
+arguments="1050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_421.root"
+queue
+arguments="1100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_422.root"
+queue
+arguments="1150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_423.root"
+queue
+arguments="1200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_424.root"
+queue
+arguments="1250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_425.root"
+queue
+arguments="1300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_426.root"
+queue
+arguments="1350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_427.root"
+queue
+arguments="1400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_428.root"
+queue
+arguments="1450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_429.root"
+queue
+arguments="1500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_430.root"
+queue
+arguments="1550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_431.root"
+queue
+arguments="1600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_432.root"
+queue
+arguments="1650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_433.root"
+queue
+arguments="1700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_434.root"
+queue
+arguments="1750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_435.root"
+queue
+arguments="1800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_436.root"
+queue
+arguments="1850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_437.root"
+queue
+arguments="1900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_438.root"
+queue
+arguments="1950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_439.root"
+queue
+arguments="2000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_440.root"
+queue
+arguments="2050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_441.root"
+queue
+arguments="2100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_442.root"
+queue
+arguments="2150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_443.root"
+queue
+arguments="2200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_444.root"
+queue
+arguments="2250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_445.root"
+queue
+arguments="2300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_446.root"
+queue
+arguments="2350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_447.root"
+queue
+arguments="2400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_448.root"
+queue
+arguments="2450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_449.root"
+queue
+arguments="2500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_450.root"
+queue
+arguments="2550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_451.root"
+queue
+arguments="2600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_452.root"
+queue
+arguments="2650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_453.root"
+queue
+arguments="2700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_454.root"
+queue
+arguments="2750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_455.root"
+queue
+arguments="2800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_456.root"
+queue
+arguments="2850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_457.root"
+queue
+arguments="2900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_458.root"
+queue
+arguments="2950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_459.root"
+queue
+arguments="3000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_460.root"
+queue
+arguments="3050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_461.root"
+queue
+arguments="3100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_462.root"
+queue
+arguments="3150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_463.root"
+queue
+arguments="3200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_464.root"
+queue
+arguments="3250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_465.root"
+queue
+arguments="3300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_466.root"
+queue
+arguments="3350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_467.root"
+queue
+arguments="3400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_468.root"
+queue
+arguments="3450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_469.root"
+queue
+arguments="3500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_470.root"
+queue
+arguments="3550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_471.root"
+queue
+arguments="3600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_472.root"
+queue
+arguments="3650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_473.root"
+queue
+arguments="3700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_474.root"
+queue
+arguments="3750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_475.root"
+queue
+arguments="3800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_476.root"
+queue
+arguments="3850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_477.root"
+queue
+arguments="3900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_478.root"
+queue
+arguments="3950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_479.root"
+queue
+arguments="4000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_480.root"
+queue
+arguments="4050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_481.root"
+queue
+arguments="4100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_482.root"
+queue
+arguments="4150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_483.root"
+queue
+arguments="4200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_484.root"
+queue
+arguments="4250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_485.root"
+queue
+arguments="4300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_486.root"
+queue
+arguments="4350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_487.root"
+queue
+arguments="4400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_488.root"
+queue
+arguments="4450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_489.root"
+queue
+arguments="4500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_490.root"
+queue
+arguments="4550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_491.root"
+queue
+arguments="4600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_492.root"
+queue
+arguments="4650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_493.root"
+queue
+arguments="4700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_494.root"
+queue
+arguments="4750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_495.root"
+queue
+arguments="4800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_496.root"
+queue
+arguments="4850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_497.root"
+queue
+arguments="4900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_498.root"
+queue
+arguments="4950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_499.root"
+queue
+arguments="5000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_500.root"
+queue
+arguments="5050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_501.root"
+queue
+arguments="5100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_502.root"
+queue
+arguments="5150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_503.root"
+queue
+arguments="5200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_504.root"
+queue
+arguments="5250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_505.root"
+queue
+arguments="5300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_506.root"
+queue
+arguments="5350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_507.root"
+queue
+arguments="5400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_508.root"
+queue
+arguments="5450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_509.root"
+queue
+arguments="5500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_510.root"
+queue
+arguments="5550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_511.root"
+queue
+arguments="5600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_512.root"
+queue
+arguments="5650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_513.root"
+queue
+arguments="5700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_514.root"
+queue
+arguments="5750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_515.root"
+queue
+arguments="5800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_516.root"
+queue
+arguments="5850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_517.root"
+queue
+arguments="5900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_518.root"
+queue
+arguments="5950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_519.root"
+queue
+arguments="6000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_520.root"
+queue
+arguments="6050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_521.root"
+queue
+arguments="6100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_522.root"
+queue
+arguments="6150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_523.root"
+queue
+arguments="6200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_524.root"
+queue
+arguments="6250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_525.root"
+queue
+arguments="6300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_526.root"
+queue
+arguments="6350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_527.root"
+queue
+arguments="6400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_528.root"
+queue
+arguments="6450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_529.root"
+queue
+arguments="6500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_530.root"
+queue
+arguments="6550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_531.root"
+queue
+arguments="6600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_532.root"
+queue
+arguments="6650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_533.root"
+queue
+arguments="6700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_534.root"
+queue
+arguments="6750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_535.root"
+queue
+arguments="6800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_536.root"
+queue
+arguments="6850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_537.root"
+queue
+arguments="6900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_538.root"
+queue
+arguments="6950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_539.root"
+queue
+arguments="7000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_540.root"
+queue
+arguments="7050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_541.root"
+queue
+arguments="7100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_542.root"
+queue
+arguments="7150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_543.root"
+queue
+arguments="7200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_544.root"
+queue
+arguments="7250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_545.root"
+queue
+arguments="7300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_546.root"
+queue
+arguments="7350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_547.root"
+queue
+arguments="7400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_548.root"
+queue
+arguments="7450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_549.root"
+queue
+arguments="7500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_550.root"
+queue
+arguments="7550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_551.root"
+queue
+arguments="7600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_552.root"
+queue
+arguments="7650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_553.root"
+queue
+arguments="7700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_554.root"
+queue
+arguments="7750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_555.root"
+queue
+arguments="7800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_556.root"
+queue
+arguments="7850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_557.root"
+queue
+arguments="7900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_558.root"
+queue
+arguments="7950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_559.root"
+queue
+arguments="8000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_560.root"
+queue
+arguments="8050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_561.root"
+queue
+arguments="8100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_562.root"
+queue
+arguments="8150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_563.root"
+queue
+arguments="8200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_564.root"
+queue
+arguments="8250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_565.root"
+queue
+arguments="8300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_566.root"
+queue
+arguments="8350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_567.root"
+queue
+arguments="8400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_568.root"
+queue
+arguments="8450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_569.root"
+queue
+arguments="8500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_570.root"
+queue
+arguments="8550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_571.root"
+queue
+arguments="8600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_572.root"
+queue
+arguments="8650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_573.root"
+queue
+arguments="8700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_574.root"
+queue
+arguments="8750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_575.root"
+queue
+arguments="8800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_576.root"
+queue
+arguments="8850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_577.root"
+queue
+arguments="8900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_578.root"
+queue
+arguments="8950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_579.root"
+queue
+arguments="9000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_580.root"
+queue
+arguments="9050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_581.root"
+queue
+arguments="9100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_582.root"
+queue
+arguments="9150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_583.root"
+queue
+arguments="9200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_584.root"
+queue
+arguments="9250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_585.root"
+queue
+arguments="9300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_586.root"
+queue
+arguments="9350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_587.root"
+queue
+arguments="9400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_588.root"
+queue
+arguments="9450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_589.root"
+queue
+arguments="9500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_590.root"
+queue
+arguments="9550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_591.root"
+queue
+arguments="9600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_592.root"
+queue
+arguments="9650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_593.root"
+queue
+arguments="9700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_594.root"
+queue
+arguments="9750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_595.root"
+queue
+arguments="9800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_596.root"
+queue
+arguments="9850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_597.root"
+queue
+arguments="9900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_598.root"
+queue
+arguments="9950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Htautau/CLD_o2_v05/rec/*/*/Htautau_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheckHtautau_599.root"
+queue
