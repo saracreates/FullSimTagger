@@ -37,7 +37,7 @@ def initialize(t):
     t.Branch("recojet_isB", recojet_isB, "recojet_isB/B")
     recojet_isTAU = array("B", [0])
     t.Branch("recojet_isTAU", recojet_isTAU, "recojet_isTAU/B")
-    # charged particles
+    # MC charged particles
     mcpid = ROOT.std.vector("int")()
     t.Branch("mcpid", mcpid)
     mc_pfo_type = ROOT.std.vector("int")() # 0=lost, 1=neutral, 2=track
@@ -48,6 +48,17 @@ def initialize(t):
     t.Branch("momentum", momentum)
     theta = ROOT.std.vector("float")()
     t.Branch("theta", theta)
+    energy = ROOT.std.vector("float")()
+    t.Branch("energy", energy)
+    # reco (pfo) charged particles
+    pfo_recopid = ROOT.std.vector("int")()
+    t.Branch("pfo_recopid", pfo_recopid)
+    pfo_momentum = ROOT.std.vector("float")()
+    t.Branch("pfo_momentum", pfo_momentum)
+    pfo_theta = ROOT.std.vector("float")()
+    t.Branch("pfo_theta", pfo_theta)
+    pfo_energy = ROOT.std.vector("float")()
+    t.Branch("pfo_energy", pfo_energy)
 
     
 
@@ -60,12 +71,19 @@ def initialize(t):
         "recojet_isC": recojet_isC,
         "recojet_isB": recojet_isB,
         "recojet_isTAU": recojet_isTAU,
-        # charged particles
+        # MC charged particles
         "mcpid": mcpid,
         "mc_pfo_type": mc_pfo_type,
         "recopid": recopid,
         "momentum": momentum,
-        "theta": theta
+        "theta": theta,
+        "energy": energy,
+        # reco charged particles
+        "pfo_recopid": pfo_recopid,
+        "pfo_momentum": pfo_momentum,
+        "pfo_theta": pfo_theta,
+        "pfo_energy": pfo_energy
+
         
     }
     return (dic, t)
@@ -81,9 +99,12 @@ def clear_dic(dic):
             dic[key].clear()
     return dic
 
-def store_event(event, dic, t, H_to_xx):
-    # loop over all MC particles
+def store_event(event, dic, t, H_to_xx, i):
+    find_curlers = False
+
+    # loop over all MC particles for efficiency
     for p, MCpart in enumerate(event.get("MCParticles")):
+
         '''
         print(dir(MCpart))
         'addToDaughters', 'addToParents', 'clone', 'colorFlow', 'daughters_begin', 'daughters_end', 'daughters_size', 'endpoint', 'getCharge', 'getColorFlow', 'getDaughters', 'getEndpoint', 'getEnergy', 'getGeneratorStatus', 'getMass', 'getMomentum', 'getMomentumAtEndpoint', 'getObjectID', 'getPDG', 'getParents', 'getSimulatorStatus', 'getSpin', 'getTime', 'getVertex', 'hasLeftDetector', 'id', 'isAvailable', 'isBackscatter', 'isCreatedInSimulation', 'isDecayedInCalorimeter', 'isDecayedInTracker', 'isOverlay', 'isStopped', 'momentum', 'momentumAtEndpoint', 'operator MCParticle', 'parents_begin', 'parents_end', 'parents_size', 'setBackscatter', 'setCharge', 'setColorFlow', 'setCreatedInSimulation', 'setDecayedInCalorimeter', 'setDecayedInTracker', 'setEndpoint', 'setGeneratorStatus', 'setHasLeftDetector', 'setMass', 'setMomentum', 'setMomentumAtEndpoint', 'setOverlay', 'setPDG', 'setSimulatorStatus', 'setSpin', 'setStopped', 'setTime', 'setVertex', 'setVertexIsNotEndpointOfParent', 'set_bit', 'spin', 'unlink', 'vertex', 'vertexIsNotEndpointOfParent'
@@ -103,6 +124,8 @@ def store_event(event, dic, t, H_to_xx):
                 tlv_p = TLorentzVector() # initialize new TLorentzVector for particle
                 tlv_p.SetXYZM(part_p.x, part_p.y, part_p.z, MCpart.getMass())
                 dic["theta"].push_back(tlv_p.Theta()) # save theta of particle
+                dic["energy"].push_back(MCpart.getEnergy()) # save energy of particle
+                
 
                 index = MCpart.getObjectID().index
                 # loop over links to reco particles
@@ -128,11 +151,15 @@ def store_event(event, dic, t, H_to_xx):
                 if count==0: # lost
                     dic["mc_pfo_type"].push_back(0)
                     dic["recopid"].push_back(-999)
+                    if find_curlers:
+                        if np.sqrt(part_p.x**2 +part_p.y**2 + part_p.z**2)< 0.6 and tlv_p.Theta() < 1.67 and tlv_p.Theta() > 1.47:
+                            print(f"Curler found! (event {i})")
                 elif count>0: # reconstructed
                     if np.max(track_weights) > 0.5: # if half of MC track hits are reconstruced
                         dic["mc_pfo_type"].push_back(2)
                     else: # neutral particle
                         dic["mc_pfo_type"].push_back(1)
+
                     # extract reco PID
                     if count==1:
                         link = event.get("MCTruthRecoLink")[int(link_index[0])]
@@ -145,4 +172,21 @@ def store_event(event, dic, t, H_to_xx):
                         dic["recopid"].push_back(reco.getType())
 
                 t.Fill()
+
+    # loop over reco particles for fake rate
+    for p, recopart in enumerate(event.get("PandoraPFOs")):
+        pfo_recopid = recopart.getType()
+        if abs(pfo_recopid) == 11 or abs(pfo_recopid) == 13 or abs(pfo_recopid) == 211: # reco charged particle
+            dic["pfo_recopid"].push_back(pfo_recopid) # save particle mc pid
+            part_p = recopart.getMomentum()
+            dic["pfo_momentum"].push_back(np.sqrt(part_p.x**2 +part_p.y**2 + part_p.z**2)) # save particle momentum
+            tlv_p = TLorentzVector() # initialize new TLorentzVector for particle
+            tlv_p.SetXYZM(part_p.x, part_p.y, part_p.z, recopart.getMass())
+            dic["pfo_theta"].push_back(tlv_p.Theta()) # save theta of particle
+            dic["pfo_energy"].push_back(recopart.getEnergy()) # save energy of particle
+            """ print(dir(recopart))
+            'addToClusters', 'addToParticleIDs', 'addToParticles', 'addToTracks', 'clone', 'clusters_begin', 'clusters_end', 'clusters_size', 'covMatrix', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 'getGoodnessOfPID', 'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 'getReferencePoint', 'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'momentum', 'operator ReconstructedParticle', 'particleIDs_begin', 'particleIDs_end', 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'referencePoint', 'setCharge', 'setCovMatrix', 'setEnergy', 'setGoodnessOfPID', 'setMass', 'setMomentum', 'setParticleIDUsed', 'setReferencePoint', 'setStartVertex', 'setType', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink' """
+            
+
+
     return dic, t
