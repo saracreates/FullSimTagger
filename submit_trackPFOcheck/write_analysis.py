@@ -24,8 +24,8 @@ log                   = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(Clu
 
     # Prepare the content with arguments
     content = ""
-    job_counter = 0
     for pattern in file_patterns:
+        job_counter = 0
         for start_index in start_indices:
             input_pattern = base_command.format(pattern=pattern)
             output_file = f"{output_base}{pattern}_{job_counter}.root"
