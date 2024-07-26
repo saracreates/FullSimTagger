@@ -43,7 +43,8 @@ for i, event in enumerate(reader.get("events")):
         event,
         dic,
         t, 
-        H_to_xx
+        H_to_xx, 
+        i
     )
 
 
