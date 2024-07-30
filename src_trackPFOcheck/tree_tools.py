@@ -271,6 +271,7 @@ def store_event(event, dic, t, H_to_xx, i):
                         dic["mc_track_found"].push_back(1)
                     else: # track not truely reconstructed but splitted to different reco tracks
                         dic["mc_track_found"].push_back(0)
+                #t.Fill() 
 
 
 
