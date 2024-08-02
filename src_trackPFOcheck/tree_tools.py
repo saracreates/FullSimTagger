@@ -126,6 +126,53 @@ def PFO_track_efficiency(event, dic, MCpart, find_curlers, i):
             dic["recopid"].push_back(reco.getType())
     return dic
 
+def track_efficiency(event, dic, MCpart):
+    """'mc_track_found' can be 0,1,2 where 0 means not found, 1 means found, 2 means not reconstrucable bc #hits < 4"""
+
+    # only consider MC particles that leave more than 4 hits in the detector
+    # loop over these 6 collections: InnerTrackerBarrelCollection, InnerTrackerEndcapCollection, OuterTrackerBarrelCollection, OuterTrackerEndcapCollection, VertexBarrelCollection, VertexEndcapCollection
+    # for hit in these collection -> getParticle() -> that's a MC -> check if same as mine, if yes, increase count!
+    count_hits = 0
+    for collection in ["InnerTrackerBarrelCollection", "InnerTrackerEndcapCollection", "OuterTrackerBarrelCollection", "OuterTrackerEndcapCollection", "VertexBarrelCollection", "VertexEndcapCollection"]:
+        for hit in event.get(collection):
+            if hit.getMCParticle().getObjectID().index == MCpart.getObjectID().index:
+                count_hits += 1
+    if count_hits < 4:
+        dic["mc_track_found"].push_back(2)
+    else:
+
+        collection_id = MCpart.getObjectID().collectionID
+        index = MCpart.getObjectID().index
+        count = 0
+        track_weights = []
+        link_index = []
+        for l, link in enumerate(event.get("MCTruthSiTracksLink")):
+            """print(dir(link))
+            'clone', 'getObjectID', 'getRec', 'getSim', 'getWeight', 'id', 'isAvailable', 'operator MCRecoTrackParticleAssociation', 'setRec', 'setSim', 'setWeight', 'unlink'"""
+            mc = link.getSim()
+            if mc.getObjectID().collectionID == collection_id and mc.getObjectID().index == index: # found link from MC particle to reco track
+                reco_track = link.getRec()
+                wgt = link.getWeight()
+                if wgt > 0.5: # at least half of the MC hits are associated to the reco particle
+                    track_weights.append(wgt)
+                    link_index.append(l)
+                    count += 1
+
+                """print(dir(reco_track))
+                'clone', 'dxQuantities_begin', 'dxQuantities_end', 'dxQuantities_size', 'getChi2', 'getDEdx', 'getDEdxError', 'getDxQuantities', 'getNdf', 'getObjectID', 'getRadiusOfInnermostHit', 'getSubdetectorHitNumbers', 'getTrackStates', 'getTrackerHits', 'getTracks', 'getType', 'id', 'isAvailable', 'makeEmpty', 'subdetectorHitNumbers_begin', 'subdetectorHitNumbers_end', 'subdetectorHitNumbers_size', 'trackStates_begin', 'trackStates_end', 'trackStates_size', 'trackerHits_begin', 'trackerHits_end', 'trackerHits_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink'"""
+                #print(reco_track.getTracks().size()) # 0
+                #print(reco_track.getType()) # ??? whats that? 122, 106, 26, 90, 104, 42 ...
+        track_weights = np.array(track_weights)
+        link_index = np.array(link_index)
+        # check if PF0 track, neutral oder lost is associated to the particle
+        if count==0: # lost
+            dic["mc_track_found"].push_back(0)
+        elif count>0: # reconstructed
+            if np.max(track_weights) > 0.5: # if half of MC track hits are reconstruced, doubled here, see above
+                dic["mc_track_found"].push_back(1)
+            else: # track not truely reconstructed but splitted to different reco tracks
+                dic["mc_track_found"].push_back(0)
+    return dic
 
 def initialize(t):
     # MC truth jet IDs
@@ -227,8 +274,6 @@ def store_event(event, dic, t, H_to_xx, i):
         'addToDaughters', 'addToParents', 'clone', 'colorFlow', 'daughters_begin', 'daughters_end', 'daughters_size', 'endpoint', 'getCharge', 'getColorFlow', 'getDaughters', 'getEndpoint', 'getEnergy', 'getGeneratorStatus', 'getMass', 'getMomentum', 'getMomentumAtEndpoint', 'getObjectID', 'getPDG', 'getParents', 'getSimulatorStatus', 'getSpin', 'getTime', 'getVertex', 'hasLeftDetector', 'id', 'isAvailable', 'isBackscatter', 'isCreatedInSimulation', 'isDecayedInCalorimeter', 'isDecayedInTracker', 'isOverlay', 'isStopped', 'momentum', 'momentumAtEndpoint', 'operator MCParticle', 'parents_begin', 'parents_end', 'parents_size', 'setBackscatter', 'setCharge', 'setColorFlow', 'setCreatedInSimulation', 'setDecayedInCalorimeter', 'setDecayedInTracker', 'setEndpoint', 'setGeneratorStatus', 'setHasLeftDetector', 'setMass', 'setMomentum', 'setMomentumAtEndpoint', 'setOverlay', 'setPDG', 'setSimulatorStatus', 'setSpin', 'setStopped', 'setTime', 'setVertex', 'setVertexIsNotEndpointOfParent', 'set_bit', 'spin', 'unlink', 'vertex', 'vertexIsNotEndpointOfParent'
         '''
 
-        # PFO track efficiency
-
         # find chad, e, mu
         mcpid = MCpart.getPDG()
         if abs(mcpid) == 11 or abs(mcpid) == 13 or abs(mcpid) == 211: # found a charged particle
@@ -240,38 +285,8 @@ def store_event(event, dic, t, H_to_xx, i):
                 dic = PFO_track_efficiency(event, dic, MCpart, find_curlers, i)
 
                 # track efficiency
-                collection_id = MCpart.getObjectID().collectionID
-                index = MCpart.getObjectID().index
-                count = 0
-                track_weights = []
-                link_index = []
-                for l, link in enumerate(event.get("MCTruthSiTracksLink")):
-                    """print(dir(link))
-                    'clone', 'getObjectID', 'getRec', 'getSim', 'getWeight', 'id', 'isAvailable', 'operator MCRecoTrackParticleAssociation', 'setRec', 'setSim', 'setWeight', 'unlink'"""
-                    mc = link.getSim()
-                    if mc.getObjectID().collectionID == collection_id and mc.getObjectID().index == index: # found link from MC particle to reco track
-                        reco_track = link.getRec()
-                        wgt = link.getWeight()
-                        if wgt > 0.5: # at least half of the MC hits are associated to the reco particle
-                            track_weights.append(wgt)
-                            link_index.append(l)
-                            count += 1
-
-                        """print(dir(reco_track))
-                        'clone', 'dxQuantities_begin', 'dxQuantities_end', 'dxQuantities_size', 'getChi2', 'getDEdx', 'getDEdxError', 'getDxQuantities', 'getNdf', 'getObjectID', 'getRadiusOfInnermostHit', 'getSubdetectorHitNumbers', 'getTrackStates', 'getTrackerHits', 'getTracks', 'getType', 'id', 'isAvailable', 'makeEmpty', 'subdetectorHitNumbers_begin', 'subdetectorHitNumbers_end', 'subdetectorHitNumbers_size', 'trackStates_begin', 'trackStates_end', 'trackStates_size', 'trackerHits_begin', 'trackerHits_end', 'trackerHits_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink'"""
-                        #print(reco_track.getTracks().size()) # 0
-                        #print(reco_track.getType()) # ??? whats that? 122, 106, 26, 90, 104, 42 ...
-                track_weights = np.array(track_weights)
-                link_index = np.array(link_index)
-                # check if PF0 track, neutral oder lost is associated to the particle
-                if count==0: # lost
-                    dic["mc_track_found"].push_back(0)
-                elif count>0: # reconstructed
-                    if np.max(track_weights) > 0.5: # if half of MC track hits are reconstruced
-                        dic["mc_track_found"].push_back(1)
-                    else: # track not truely reconstructed but splitted to different reco tracks
-                        dic["mc_track_found"].push_back(0)
-
+                dic = track_efficiency(event, dic, MCpart)
+                #t.Fill() 
 
 
     # loop over reco particles for fake rate
@@ -287,7 +302,7 @@ def store_event(event, dic, t, H_to_xx, i):
         'addToClusters', 'addToParticleIDs', 'addToParticles', 'addToTracks', 'clone', 'clusters_begin', 'clusters_end', 'clusters_size', 'covMatrix', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 'getGoodnessOfPID', 'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 'getReferencePoint', 'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'momentum', 'operator ReconstructedParticle', 'particleIDs_begin', 'particleIDs_end', 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'referencePoint', 'setCharge', 'setCovMatrix', 'setEnergy', 'setGoodnessOfPID', 'setMass', 'setMomentum', 'setParticleIDUsed', 'setReferencePoint', 'setStartVertex', 'setType', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink' """
         reco_collection_id = recopart.getObjectID().collectionID
         reco_index = recopart.getObjectID().index
-        MC_pfo_part = get_MCparticle_ID(event, reco_collection_id, reco_index, minfrac = 0.7)
+        MC_pfo_part = get_MCparticle_ID(event, reco_collection_id, reco_index, minfrac = 0.5)
         if MC_pfo_part is not None:
             dic["pfo_MCpid"].push_back(MC_pfo_part.getPDG())
         else:
