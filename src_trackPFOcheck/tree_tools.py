@@ -137,6 +137,7 @@ def track_efficiency(event, dic, MCpart):
         for hit in event.get(collection):
             if hit.getMCParticle().getObjectID().index == MCpart.getObjectID().index:
                 count_hits += 1
+    dic["n_trackerhits"].push_back(count_hits)
     if count_hits < 4:
         dic["mc_track_found"].push_back(2)
     else:
@@ -205,6 +206,8 @@ def initialize(t):
     t.Branch("energy", energy)
     mc_track_found = ROOT.std.vector("int")()
     t.Branch("mc_track_found", mc_track_found)
+    n_trackerhits = ROOT.std.vector("int")()
+    t.Branch("n_trackerhits", n_trackerhits)
     # reco (pfo) charged particles
     pfo_recopid = ROOT.std.vector("int")()
     t.Branch("pfo_recopid", pfo_recopid)
@@ -218,9 +221,6 @@ def initialize(t):
     t.Branch("pfo_MCpid", pfo_MCpid)
     pfo_track = ROOT.std.vector("int")()
     t.Branch("pfo_track", pfo_track)
-
-
-    
 
     dic = {
         # MC truth jet IDs
@@ -239,6 +239,7 @@ def initialize(t):
         "theta": theta,
         "energy": energy,
         "mc_track_found": mc_track_found,
+        "n_trackerhits": n_trackerhits,
         # reco charged particles
         "pfo_recopid": pfo_recopid,
         "pfo_momentum": pfo_momentum,
