@@ -163,6 +163,9 @@ def track_efficiency(event, dic, MCpart):
                 'clone', 'dxQuantities_begin', 'dxQuantities_end', 'dxQuantities_size', 'getChi2', 'getDEdx', 'getDEdxError', 'getDxQuantities', 'getNdf', 'getObjectID', 'getRadiusOfInnermostHit', 'getSubdetectorHitNumbers', 'getTrackStates', 'getTrackerHits', 'getTracks', 'getType', 'id', 'isAvailable', 'makeEmpty', 'subdetectorHitNumbers_begin', 'subdetectorHitNumbers_end', 'subdetectorHitNumbers_size', 'trackStates_begin', 'trackStates_end', 'trackStates_size', 'trackerHits_begin', 'trackerHits_end', 'trackerHits_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink'"""
                 #print(reco_track.getTracks().size()) # 0
                 #print(reco_track.getType()) # ??? whats that? 122, 106, 26, 90, 104, 42 ...
+                #t = reco_track.getTrackStates().at(0)
+                #print(dir(t)) # 'covMatrix', 'location', 'omega', 'phi', 'referencePoint', 'tanLambda', 'time'
+                #print(t.phi) # filled
         track_weights = np.array(track_weights)
         link_index = np.array(link_index)
         # check if PF0 track, neutral oder lost is associated to the particle
@@ -303,7 +306,7 @@ def store_event(event, dic, t, H_to_xx, i):
         'addToClusters', 'addToParticleIDs', 'addToParticles', 'addToTracks', 'clone', 'clusters_begin', 'clusters_end', 'clusters_size', 'covMatrix', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 'getGoodnessOfPID', 'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 'getReferencePoint', 'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'momentum', 'operator ReconstructedParticle', 'particleIDs_begin', 'particleIDs_end', 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'referencePoint', 'setCharge', 'setCovMatrix', 'setEnergy', 'setGoodnessOfPID', 'setMass', 'setMomentum', 'setParticleIDUsed', 'setReferencePoint', 'setStartVertex', 'setType', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink' """
         reco_collection_id = recopart.getObjectID().collectionID
         reco_index = recopart.getObjectID().index
-        MC_pfo_part = get_MCparticle_ID(event, reco_collection_id, reco_index, minfrac = 0.5)
+        MC_pfo_part = get_MCparticle_ID(event, reco_collection_id, reco_index, minfrac = 0.7)
         if MC_pfo_part is not None:
             dic["pfo_MCpid"].push_back(MC_pfo_part.getPDG())
         else:
