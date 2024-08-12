@@ -25,6 +25,10 @@ def extract_hxx(filename):
 ## Input args are the file to read from and the file to write on
 input_file = sys.argv[1]
 output_file = sys.argv[2]
+try:
+    correct_track_cluster_matching = sys.argv[3]
+except:
+    correct_track_cluster_matching = False
 
 H_to_xx = extract_hxx(input_file)
 
@@ -54,7 +58,8 @@ for i, event in enumerate(reader.get("events")):
         dic,
         event_number, 
         t, 
-        H_to_xx
+        H_to_xx,
+        correct_track_cluster_matching
     )
 
 
