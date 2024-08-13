@@ -117,7 +117,7 @@ def get_MCparticle_ID(event, reco_collection_id, reco_index):
     else:
         return None
 
-def calculate_params_wrt_PV(track, primaryVertex, particle, Bz=2):
+def calculate_params_wrt_PV(track, primaryVertex, particle_p, particle_q, Bz=2):
     """
     Recalculate d0. Before it was calculated with respect to (0,0,0), now we will update it with respect to the primary vertex.
     Do it the same as in https://github.com/HEP-FCC/FCCAnalyses/blob/63d346103159c4fc88cdee7884e09b3966cfeca4/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L64 (ReconstrctedParticle2Track.cc XPtoPar_dxy)
@@ -128,10 +128,10 @@ def calculate_params_wrt_PV(track, primaryVertex, particle, Bz=2):
     pv = ROOT.TVector3(primaryVertex.x, primaryVertex.y, primaryVertex.z) # primary vertex
     point_on_track = ROOT.TVector3(- track.D0 * np.sin(track.phi), track.D0 * np.cos(track.phi), track.Z0) # point on particle track
     x = point_on_track - pv # vector from primary vertex to point on track
-    pt = np.sqrt(particle.getMomentum().x**2 + particle.getMomentum().y **2) # transverse momentum of particle
-    a = - particle.getCharge() * Bz * cSpeed # Lorentz force on particle in magnetic field
+    pt = np.sqrt(particle_p.x**2 + particle_p.y **2) # transverse momentum of particle
+    a = - particle_q * Bz * cSpeed # Lorentz force on particle in magnetic field
     r2 = x.x()**2 + x.y()**2
-    cross = x.x() * particle.getMomentum().y - x.y() * particle.getMomentum().x
+    cross = x.x() * particle_p.y - x.y() * particle_p.x
     discrim = pt*pt - 2 * a * cross + a*a * r2
 
     # calculate d0
@@ -149,17 +149,73 @@ def calculate_params_wrt_PV(track, primaryVertex, particle, Bz=2):
     if abs(b)>1:
         b = np.sign(b)
     st = np.arcsin(b) / c
-    ct = particle.getMomentum().z / pt
-    dot = x.x() * particle.getMomentum().x + x.y() * particle.getMomentum().y
+    ct = particle_p.z / pt
+    dot = x.x() * particle_p.x + x.y() * particle_p.y
     if dot>0:
         z0 = x.z() - st * ct
     else:
         z0 = x.z() + st * ct
 
     # calculate phi
-    phi = np.arctan2((particle.getMomentum().y - a * x.x())/np.sqrt(discrim), (particle.getMomentum().x + a * x.y())/np.sqrt(discrim))
+    phi = np.arctan2((particle_p.y - a * x.x())/np.sqrt(discrim), (particle_p.x + a * x.y())/np.sqrt(discrim))
 
     return d0, z0, phi, c, ct
+
+def caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_momentum, track):
+    dic["pfcand_dxy"].push_back(d0) # transverse impact parameter
+    dic["pfcand_dz"].push_back(z0) # longitudinal impact parameter
+    # correct for phi
+    dic["pfcand_phi"].pop_back() # remove the phi calculated with respect to (0,0,0)
+    dic["pfcand_phi"].push_back(phi) # update phi with respect to PV
+    # correct for theta
+    dic["pfcand_theta"].pop_back() # remove the theta calculated with respect to (0,0,0)
+    dic["pfcand_theta"].push_back(arccot(ct)) # update theta with respect to PV
+
+    
+    part_p = ROOT.TVector3(particle_momentum.x, particle_momentum.y, particle_momentum.z)
+    jet_p = ROOT.TVector3(jet_momentum.x, jet_momentum.y, jet_momentum.z)
+    
+    # calculate d_3d as in FCCAnalysis, JetConstituentsUtils.cc in get_JetDistVal() https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2
+    n = part_p.Cross(jet_p).Unit() # distance of closest approach always in direction perpendicular to both (particle and jet). Problem: What if they are parallel?
+    pt_ct = ROOT.TVector3(- d0 * np.sin(phi), d0 * np.cos(phi), z0) # point on particle track
+    pt_jet = ROOT.TVector3(0,0,0) # point on jet
+    d_3d = n.Dot(pt_ct - pt_jet) # distance of closest approach
+    dic["pfcand_btagJetDistVal"].push_back(d_3d)
+    # NOTE: error of distance of closest approach is calculated in the point of closest approach to the origin (0,0,0) and not to the primary vertex - this is in principle wrong!!!
+    err3d = np.sqrt(track.covMatrix[0] + track.covMatrix[9]) # error of distance of closest approach
+    dic["pfcand_btagJetDistSig"].push_back(d_3d/err3d) # significance of distance of closest approach
+    
+    
+    # calculate signed 2D impact parameter - like in get_Sip2dVal_clusterV() in JetConstituentsUtils.cc (https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L450 )
+    p_jet_2d = ROOT.TVector2(jet_momentum.x, jet_momentum.y)
+    pt_ct_2d = ROOT.TVector2(pt_ct.x(), pt_ct.y())
+    sip2d = np.sign(pt_ct_2d * p_jet_2d) * abs(d0) # if angle between track and jet greater 90 deg -> negative sign; if smaller 90 deg -> positive sign
+    dic["pfcand_btagSip2dVal"].push_back(sip2d)
+    dic["pfcand_btagSip2dSig"].push_back(sip2d/np.sqrt(track.covMatrix[0]))
+    
+    # calculate signed 3D impact parameter - like in get_Sip3Val() in JetConstituentsUtils.cc 
+    IP_3d = np.sqrt(d0**2 + z0**2)
+    sip3d = np.sign(pt_ct * jet_p) * abs(IP_3d) 
+    dic["pfcand_btagSip3dVal"].push_back(sip3d)
+    dic["pfcand_btagSip3dSig"].push_back(sip3d/np.sqrt(track.covMatrix[0] + track.covMatrix[9]) )
+    return dic
+
+def mcpid_to_reco(ptype, pmom):
+    """converts MC ptype pid to reco type pid"""
+    num_chad = [3334, 3312, 3222, 3112, 2212, 411, 321, 211, 521, 1000010020, 1000010030, 1000020040] # change to 211
+    num_nhad = [3322, 2112, 3122, 130, 310] # change to 2112
+    if abs(ptype) in num_chad:
+        new_ptype = np.sign(ptype) * 211
+    elif abs(ptype) in num_nhad:
+        new_ptype = 2112
+    elif abs(ptype) in [11, 13]:
+        if pmom<2: # low momenta can't be resolved, so set to 211 (Michele said so)
+            new_ptype = np.sign(ptype) * 211
+        else:
+            new_ptype = ptype
+    else:
+        new_ptype = ptype
+    return new_ptype
 
 def calculate_covariance_matrix(dic, track):
     """
@@ -264,6 +320,41 @@ def V_info(event, dic, p_index, j, V_dic, ev_num, collection):
         raise ValueError(f"Found {ismatch} (more than 1) V0/secondary vertex (collection: {collection}) assosiated with one particle/PFO in jet")
     return dic
         
+def reco_track_ass_to_MC(event, MCpart):
+    """
+    Correct track-cluster matching. Sometimes the pfo is neutral although is was MC charged. 
+    Add track info by hand
+    """
+
+    # find corresponding track to MC particle
+    collection_id = MCpart.getObjectID().collectionID
+    index = MCpart.getObjectID().index
+    count = 0
+    track_weights = []
+    link_index = []
+    for l, link in enumerate(event.get("MCTruthSiTracksLink")):
+        """print(dir(link))
+        'clone', 'getObjectID', 'getRec', 'getSim', 'getWeight', 'id', 'isAvailable', 'operator MCRecoTrackParticleAssociation', 'setRec', 'setSim', 'setWeight', 'unlink'"""
+        mc = link.getSim()
+        if mc.getObjectID().collectionID == collection_id and mc.getObjectID().index == index: # found link from MC particle to reco track
+            wgt = link.getWeight()
+            if wgt > 0.5: # at least half of the MC hits are associated to the reco particle
+                track_weights.append(wgt)
+                link_index.append(l)
+                count += 1
+
+    track_weights = np.array(track_weights)
+    link_index = np.array(link_index)
+    # check if PF0 track, neutral oder lost is associated to the particle
+    if count==0: # no reco track associated to MC particle
+        return None
+    elif count>0: # reco track found
+        best_match = np.argmax(track_weights)
+        best_link_index = link_index[best_match]
+        best_link = event.get("MCTruthSiTracksLink").at(int(best_link_index))
+        reco_track = best_link.getRec() # get reco track
+        track = reco_track.getTrackStates().at(0)
+        return track
         
 def initialize(t):
     event_number = array("i", [0])
@@ -526,7 +617,7 @@ def clear_dic(dic):
     return dic
 
 
-def store_jet(event, debug, dic, event_number, t, H_to_xx):
+def store_jet(event, debug, dic, event_number, t, H_to_xx, correct_track_cluster_matching=False):
     """The yets have the following args that can be accessed with dir(jets)
     ['__add__', '__assign__', '__bool__', '__class__', '__delattr__', '__destruct__',
     '__dict__', '__dir__', '__dispatch__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__',
@@ -603,20 +694,13 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             dic[key][0] = jet_type[key]
 
         for i, part in enumerate(particles_jet):
+            correct_matching = False
             particle = particles_jet.at(i)
             #print("-------- new reco particle ------------")
             #print(dir(particle)) # print all available bindings for particle
             """
-            ['clone', 'clusters_begin', 
-            'clusters_end', 'clusters_size', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 'getGoodnessOfPID', 
-            'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 'getReferencePoint', 
-            'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'makeEmpty', 'particleIDs_begin', 
-            'particleIDs_end', 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'tracks_begin', 'tracks_end', 
-            'tracks_size', 'unlink']
+            ['clone', 'clusters_begin', 'clusters_end', 'clusters_size', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 'getGoodnessOfPID', 'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 'getReferencePoint', 'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'makeEmpty', 'particleIDs_begin', 'particleIDs_end', 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink']
             """
-            #print("ref point particle: ", particle.getReferencePoint().x, particle.getReferencePoint().y, particle.getReferencePoint().z)
-
-
 
             particle_momentum = particle.getMomentum()
             dic["pfcand_e"].push_back(particle.getEnergy())
@@ -658,6 +742,10 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
 
             if MC_part!=None: # if MC particle is found
                 dic["pfcand_MCPID"].push_back(MC_part.getPDG()) # MC PID of particle
+
+                # artificial correction for track-cluster matching
+                if (particle.getType() in [22, 2112]) and (abs(MC_part.getPDG()) in [3334, 3312, 3222, 3112, 2212, 411, 321, 211, 521, 1000010020, 1000010030, 1000020040]): # if reco neutral but MC charged
+                    correct_matching = True
 
                 # debug info
                 tlv_MC = TLorentzVector()
@@ -736,71 +824,51 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
 
 
                 # calculate impact parameter with respect to primary vertex
-                d0, z0, phi, c, ct = calculate_params_wrt_PV(track, primaryVertex, particle, Bz=2)
-                dic["pfcand_dxy"].push_back(d0) # transverse impact parameter
-                dic["pfcand_dz"].push_back(z0) # longitudinal impact parameter
-                # correct for phi
-                dic["pfcand_phi"].pop_back() # remove the phi calculated with respect to (0,0,0)
-                dic["pfcand_phi"].push_back(phi) # update phi with respect to PV
-                # correct for theta
-                dic["pfcand_theta"].pop_back() # remove the theta calculated with respect to (0,0,0)
-                dic["pfcand_theta"].push_back(arccot(ct)) # update theta with respect to PV
-
-                
-                part_p = ROOT.TVector3(particle_momentum.x, particle_momentum.y, particle_momentum.z)
-                jet_p = ROOT.TVector3(jet_momentum.x, jet_momentum.y, jet_momentum.z)
-                
-                # calculate d_3d as in FCCAnalysis, JetConstituentsUtils.cc in get_JetDistVal() https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2
-                n = part_p.Cross(jet_p).Unit() # distance of closest approach always in direction perpendicular to both (particle and jet). Problem: What if they are parallel?
-                pt_ct = ROOT.TVector3(- d0 * np.sin(phi), d0 * np.cos(phi), z0) # point on particle track
-                pt_jet = ROOT.TVector3(0,0,0) # point on jet
-                d_3d = n.Dot(pt_ct - pt_jet) # distance of closest approach
-                dic["pfcand_btagJetDistVal"].push_back(d_3d)
-                # NOTE: error of distance of closest approach is calculated in the point of closest approach to the origin (0,0,0) and not to the primary vertex - this is in principle wrong!!!
-                err3d = np.sqrt(track.covMatrix[0] + track.covMatrix[9]) # error of distance of closest approach
-                dic["pfcand_btagJetDistSig"].push_back(d_3d/err3d) # significance of distance of closest approach
-                
-                
-                # calculate signed 2D impact parameter - like in get_Sip2dVal_clusterV() in JetConstituentsUtils.cc (https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L450 )
-                p_jet_2d = ROOT.TVector2(jet_momentum.x, jet_momentum.y)
-                pt_ct_2d = ROOT.TVector2(pt_ct.x(), pt_ct.y())
-                sip2d = np.sign(pt_ct_2d * p_jet_2d) * abs(d0) # if angle between track and jet greater 90 deg -> negative sign; if smaller 90 deg -> positive sign
-                dic["pfcand_btagSip2dVal"].push_back(sip2d)
-                dic["pfcand_btagSip2dSig"].push_back(sip2d/np.sqrt(track.covMatrix[0]))
-                
-                # calculate signed 3D impact parameter - like in get_Sip3Val() in JetConstituentsUtils.cc 
-                IP_3d = np.sqrt(d0**2 + z0**2)
-                sip3d = np.sign(pt_ct * jet_p) * abs(IP_3d) 
-                dic["pfcand_btagSip3dVal"].push_back(sip3d)
-                dic["pfcand_btagSip3dSig"].push_back(sip3d/np.sqrt(track.covMatrix[0] + track.covMatrix[9]) )
-                
+                d0, z0, phi, c, ct = calculate_params_wrt_PV(track, primaryVertex, particle_momentum, particle.getCharge(), Bz=2)
+                dic = caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_momentum, track)
                 dic = calculate_covariance_matrix(dic, track)
                 
-                
             elif tracks.size() == 0: # neutral particle -> no track -> set them to -9!
-                dic["pfcand_dptdpt"].push_back(-9) # like in ReconstructedParticle2Track.cc line 336 ( https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L335 )
-                dic["pfcand_detadeta"].push_back(-9)
-                dic["pfcand_dphidphi"].push_back(-9)
-                dic["pfcand_dxydxy"].push_back(-9)
-                dic["pfcand_dzdz"].push_back(-9)
-                dic["pfcand_dxydz"].push_back(-9)
-                dic["pfcand_dphidxy"].push_back(-9)
-                dic["pfcand_dlambdadz"].push_back(-9)
-                dic["pfcand_dxyc"].push_back(-9)
-                dic["pfcand_dxyctgtheta"].push_back(-9)
-                dic["pfcand_phic"].push_back(-9)
-                dic["pfcand_phidz"].push_back(-9)
-                dic["pfcand_phictgtheta"].push_back(-9)
-                dic["pfcand_cdz"].push_back(-9)
-                dic["pfcand_cctgtheta"].push_back(-9)
-                dic["pfcand_dxy"].push_back(-9)
-                dic["pfcand_dz"].push_back(-9)
-                dic["pfcand_btagSip2dVal"].push_back(-9)
-                dic["pfcand_btagSip2dSig"].push_back(-200) # set significance to -200 so it's outside of the distribution (FCCAnalyses: -9)
-                dic["pfcand_btagSip3dVal"].push_back(-9)
-                dic["pfcand_btagSip3dSig"].push_back(-200)
-                dic["pfcand_btagJetDistVal"].push_back(-9) # line 641 in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
-                dic["pfcand_btagJetDistSig"].push_back(-200)
+                if correct_matching == True and correct_track_cluster_matching==True: 
+                    track = reco_track_ass_to_MC(event, MC_part)
+                    # NOTE: how to get particle momentum from track? 
+                    d0, z0, phi, c, ct = calculate_params_wrt_PV(track, primaryVertex, particle_momentum, MC_part.getCharge(), Bz=2)
+                    dic = caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_momentum, track)
+                    dic = calculate_covariance_matrix(dic, track)
+                    # correct PID
+                    mc_mom = np.sqrt(MC_part.getMomentum().x**2+ MC_part.getMomentum().y**2 + MC_part.getMomentum().z**2)
+                    new_pid = mcpid_to_reco(MC_part.getPDG(), mc_mom)
+                    dic["pfcand_type"].pop_back()
+                    dic["pfcand_type"].push_back(new_pid)
+                    reco_particle_type = PDG_ID_to_bool_particles(new_pid, 1) 
+                    for key in reco_particle_type:
+                        dic[key].pop_back()
+                        dic[key].push_back(reco_particle_type[key])
+
+                else: 
+                    dic["pfcand_dptdpt"].push_back(-9) # like in ReconstructedParticle2Track.cc line 336 ( https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L335 )
+                    dic["pfcand_detadeta"].push_back(-9)
+                    dic["pfcand_dphidphi"].push_back(-9)
+                    dic["pfcand_dxydxy"].push_back(-9)
+                    dic["pfcand_dzdz"].push_back(-9)
+                    dic["pfcand_dxydz"].push_back(-9)
+                    dic["pfcand_dphidxy"].push_back(-9)
+                    dic["pfcand_dlambdadz"].push_back(-9)
+                    dic["pfcand_dxyc"].push_back(-9)
+                    dic["pfcand_dxyctgtheta"].push_back(-9)
+                    dic["pfcand_phic"].push_back(-9)
+                    dic["pfcand_phidz"].push_back(-9)
+                    dic["pfcand_phictgtheta"].push_back(-9)
+                    dic["pfcand_cdz"].push_back(-9)
+                    dic["pfcand_cctgtheta"].push_back(-9)
+                    dic["pfcand_dxy"].push_back(-9)
+                    dic["pfcand_dz"].push_back(-9)
+                    dic["pfcand_btagSip2dVal"].push_back(-9)
+                    dic["pfcand_btagSip2dSig"].push_back(-200) # set significance to -200 so it's outside of the distribution (FCCAnalyses: -9)
+                    dic["pfcand_btagSip3dVal"].push_back(-9)
+                    dic["pfcand_btagSip3dSig"].push_back(-200)
+                    dic["pfcand_btagJetDistVal"].push_back(-9) # line 641 in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
+                    dic["pfcand_btagJetDistSig"].push_back(-200)
             else:
                 raise ValueError("Particle has more than one track")
             
