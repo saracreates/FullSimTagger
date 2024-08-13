@@ -1,0 +1,211 @@
+Processing  100  events...
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.4545454680919647
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x2b75f5c0> 	 track: None
+MC PID:  -211
+# tracker hits:  11
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.8333333134651184
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x2b568d00> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x2c748280>
+MC PID:  -2212
+# tracker hits:  12
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.8666666746139526
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x2c706090> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x2c73c900>
+MC PID:  211
+# tracker hits:  15
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.8333333134651184
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x17b08e60> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x1275fb90>
+MC PID:  -211
+# tracker hits:  7
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  1.0
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x17ae0920> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x2bd6cb00>
+MC PID:  -321
+# tracker hits:  12
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x221f3da0> 	 track: None
+MC PID:  211
+# tracker hits:  1
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.3333333432674408
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x2c1d4710> 	 track: None
+MC PID:  211
+# tracker hits:  12
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  1.0
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x2c77e2e0> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x16fcfb10>
+MC PID:  -211
+# tracker hits:  5
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  1.0
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x12718910> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x12717b90>
+MC PID:  2212
+# tracker hits:  5
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.8333333134651184
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x2c218f00> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x2c7ddf00>
+MC PID:  211
+# tracker hits:  6
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.6666666865348816
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x12652e00> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x12ebb980>
+MC PID:  211
+# tracker hits:  6
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.8333333134651184
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x197ae3d0> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x25dc2040>
+MC PID:  211
+# tracker hits:  8
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x12755710> 	 track: None
+MC PID:  2212
+# tracker hits:  2
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.6875
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x1575f120> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x25daa1f0>
+MC PID:  -211
+# tracker hits:  16
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.27272728085517883
+found link with weight  0.3636363744735718
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x1665e010> 	 track: None
+MC PID:  -211
+# tracker hits:  11
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.3076923191547394
+found link with weight  0.1538461595773697
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x176af2a0> 	 track: None
+MC PID:  -211
+# tracker hits:  13
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x113480c0> 	 track: None
+MC PID:  211
+# tracker hits:  4
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x12767d70> 	 track: None
+MC PID:  211
+# tracker hits:  2
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.3333333432674408
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x1353ada0> 	 track: None
+MC PID:  -211
+# tracker hits:  12
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.2857142984867096
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x2c7ba4b0> 	 track: None
+MC PID:  211
+# tracker hits:  14
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.75
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x10d551a0> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x10f7d660>
+MC PID:  211
+# tracker hits:  8
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.6666666865348816
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x156be990> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x10e20ce0>
+MC PID:  -211
+# tracker hits:  9
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  1.0
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x17bd0460> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x2c7a8d10>
+MC PID:  -211
+# tracker hits:  13
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.25
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x12724cb0> 	 track: None
+MC PID:  2212
+# tracker hits:  4
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x2c6f1af0> 	 track: None
+MC PID:  -211
+# tracker hits:  10
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x2c7a85e0> 	 track: None
+MC PID:  211
+# tracker hits:  0
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  1.0
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x11462590> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x111c6440>
+MC PID:  211
+# tracker hits:  17
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.5714285969734192
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x132edad0> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x1971edc0>
+MC PID:  -2212
+# tracker hits:  7
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x1918d940> 	 track: None
+MC PID:  211
+# tracker hits:  2
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x15431570> 	 track: None
+MC PID:  -211
+# tracker hits:  1
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x12ca7780> 	 track: None
+MC PID:  -211
+# tracker hits:  4
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x2c214770> 	 track: None
+MC PID:  -211
+# tracker hits:  5
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x12eb8490> 	 track: None
+MC PID:  211
+# tracker hits:  5
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x153f5790> 	 track: None
+MC PID:  211
+# tracker hits:  8
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+found link with weight  0.9230769276618958
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x11af0ff0> 	 track: <cppyy.gbl.edm4hep.TrackState object at 0x1265cfb0>
+MC PID:  211
+# tracker hits:  13
+wuhuuu I ran!
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x15576c40> 	 track: None
+MC PID:  -211
+# tracker hits:  3
+couldn't correct track-cluster matching...
+----------- new MC charged reco neutral particle ---------------------------
+MC:  <cppyy.gbl.edm4hep.MCParticle object at 0x111c6050> 	 track: None
+MC PID:  -211
+# tracker hits:  4
+couldn't correct track-cluster matching...

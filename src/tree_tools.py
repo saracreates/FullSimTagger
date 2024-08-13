@@ -11,6 +11,22 @@ import ctypes
 
 cSpeed = 2.99792458e8 * 1.0e-9
 
+class MomentumVector:
+    def __init__(self, px, py, pz):
+        self.vector = ROOT.TVector3(px, py, pz)
+
+    @property
+    def x(self):
+        return self.vector.X()
+
+    @property
+    def y(self):
+        return self.vector.Y()
+
+    @property
+    def z(self):
+        return self.vector.Z()
+
 def arccot(x, epsilon=1e-10):
     if abs(x) < epsilon:
         return np.pi / 2
@@ -67,7 +83,7 @@ def PDG_ID_to_bool_particles(number: int, ntracks: int) -> dict:
     # mapping for leptons and photon
     return particle_map.get(number, {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": False, "pfcand_isChargedHad": False})
 
-def get_MCparticle_ID(event, reco_collection_id, reco_index):
+def get_MCparticle_ID(event, reco_collection_id, reco_index, min_frac=0.8):
      # get MC particle ID - loop over all MC-Reco-Pairs
     count = 0
     track_weights = []
@@ -102,13 +118,13 @@ def get_MCparticle_ID(event, reco_collection_id, reco_index):
     cluster_weights = np.array(cluster_weights)
     link_index = np.array(link_index)
     # find best matching particle
-    if np.any(track_weights>0.8):
+    if np.any(track_weights>min_frac):
         best_match = np.argmax(track_weights)
         best_link_index = link_index[best_match]
         best_link = event.get("RecoMCTruthLink").at(int(best_link_index))
         MC_part = best_link.getSim()
         return MC_part
-    elif np.any(cluster_weights>0.8):
+    elif np.any(cluster_weights>min_frac):
         best_match = np.argmax(cluster_weights)
         best_link_index = link_index[best_match]
         best_link = event.get("RecoMCTruthLink").at(int(best_link_index))
@@ -200,6 +216,32 @@ def caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_
     dic["pfcand_btagSip3dSig"].push_back(sip3d/np.sqrt(track.covMatrix[0] + track.covMatrix[9]) )
     return dic
 
+def fill_neutrals_track_params(dic):
+    dic["pfcand_dptdpt"].push_back(-9) # like in ReconstructedParticle2Track.cc line 336 ( https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L335 )
+    dic["pfcand_detadeta"].push_back(-9)
+    dic["pfcand_dphidphi"].push_back(-9)
+    dic["pfcand_dxydxy"].push_back(-9)
+    dic["pfcand_dzdz"].push_back(-9)
+    dic["pfcand_dxydz"].push_back(-9)
+    dic["pfcand_dphidxy"].push_back(-9)
+    dic["pfcand_dlambdadz"].push_back(-9)
+    dic["pfcand_dxyc"].push_back(-9)
+    dic["pfcand_dxyctgtheta"].push_back(-9)
+    dic["pfcand_phic"].push_back(-9)
+    dic["pfcand_phidz"].push_back(-9)
+    dic["pfcand_phictgtheta"].push_back(-9)
+    dic["pfcand_cdz"].push_back(-9)
+    dic["pfcand_cctgtheta"].push_back(-9)
+    dic["pfcand_dxy"].push_back(-9)
+    dic["pfcand_dz"].push_back(-9)
+    dic["pfcand_btagSip2dVal"].push_back(-9)
+    dic["pfcand_btagSip2dSig"].push_back(-200) # set significance to -200 so it's outside of the distribution (FCCAnalyses: -9)
+    dic["pfcand_btagSip3dVal"].push_back(-9)
+    dic["pfcand_btagSip3dSig"].push_back(-200)
+    dic["pfcand_btagJetDistVal"].push_back(-9) # line 641 in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
+    dic["pfcand_btagJetDistSig"].push_back(-200)
+    return dic
+
 def mcpid_to_reco(ptype, pmom):
     """converts MC ptype pid to reco type pid"""
     num_chad = [3334, 3312, 3222, 3112, 2212, 411, 321, 211, 521, 1000010020, 1000010030, 1000020040] # change to 211
@@ -215,7 +257,37 @@ def mcpid_to_reco(ptype, pmom):
             new_ptype = ptype
     else:
         new_ptype = ptype
-    return new_ptype
+    return int(new_ptype)
+
+def omega_to_pt(omega):
+    # from Dolores
+    c_light = 2.99792458e8
+    Bz = 2.0
+    a = c_light * 1e3 * 1e-15
+    return a * Bz / abs(omega)
+
+def get_p_from_track(trackstate):
+    # from Dolores
+    mchp = 0.139570
+    pt = omega_to_pt(trackstate.omega)
+    phi = trackstate.phi
+    pz = trackstate.tanLambda * pt
+    px = pt * math.cos(phi)
+    py = pt * math.sin(phi)
+    p = math.sqrt(px * px + py * py + pz * pz)
+    energy = math.sqrt(p * p + mchp * mchp)
+    theta = math.acos(pz / p)
+    # print(p, theta, phi, energy)
+    particle_momentum = MomentumVector(px, py, pz)
+    return particle_momentum
+
+def count_tracker_hits(event, MCpart):
+    count_hits = 0
+    for collection in ["InnerTrackerBarrelCollection", "InnerTrackerEndcapCollection", "OuterTrackerBarrelCollection", "OuterTrackerEndcapCollection", "VertexBarrelCollection", "VertexEndcapCollection"]:
+        for hit in event.get(collection):
+            if hit.getMCParticle().getObjectID().index == MCpart.getObjectID().index:
+                count_hits += 1
+    return count_hits
 
 def calculate_covariance_matrix(dic, track):
     """
@@ -338,6 +410,7 @@ def reco_track_ass_to_MC(event, MCpart):
         mc = link.getSim()
         if mc.getObjectID().collectionID == collection_id and mc.getObjectID().index == index: # found link from MC particle to reco track
             wgt = link.getWeight()
+            print("found link with weight ", wgt)
             if wgt > 0.5: # at least half of the MC hits are associated to the reco particle
                 track_weights.append(wgt)
                 link_index.append(l)
@@ -521,6 +594,9 @@ def initialize(t):
     t.Branch("pfcand_parent_ID", pfcand_parent_ID)
     pfcand_parent_index = ROOT.std.vector("int")()
     t.Branch("pfcand_parent_index", pfcand_parent_index)
+    # track-cluster matching
+    pfcand_track_cluster_matching = ROOT.std.vector("int")()
+    t.Branch("pfcand_track_cluster_matching", pfcand_track_cluster_matching) # 0: no correction (neutral), 1: correction (neutral), 2: couldn't apply correction (neutral), 3: charged (not applicable)
 
    
     
@@ -600,7 +676,9 @@ def initialize(t):
         "pfcand_MC_phi": pfcand_MC_phi,
         "pfcand_MC_phirel": pfcand_MC_phirel,
         "pfcand_parent_ID": pfcand_parent_ID,
-        "pfcand_parent_index": pfcand_parent_index
+        "pfcand_parent_index": pfcand_parent_index,
+        # track-cluster matching
+        "pfcand_track_cluster_matching": pfcand_track_cluster_matching
         
     }
     return (event_number, n_hit, n_part, dic, t)
@@ -619,13 +697,7 @@ def clear_dic(dic):
 
 def store_jet(event, debug, dic, event_number, t, H_to_xx, correct_track_cluster_matching=False):
     """The yets have the following args that can be accessed with dir(jets)
-    ['__add__', '__assign__', '__bool__', '__class__', '__delattr__', '__destruct__',
-    '__dict__', '__dir__', '__dispatch__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__',
-    '__gt__', '__hash__', '__init__', '__init_subclass__', '__invert__', '__le__', '__lt__', '__module__',
-    '__mul__', '__ne__', '__neg__', '__new__', '__pos__', '__python_owns__', '__radd__', '__reduce__',
-    '__reduce_ex__', '__repr__', '__rmul__', '__rsub__', '__rtruediv__', '__setattr__', '__sizeof__',
-    '__smartptr__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__weakref__',
-    'addToClusters', 'addToParticleIDs', 'addToParticles', 'addToTracks', 'clone', 'clusters_begin',
+    ['addToClusters', 'addToParticleIDs', 'addToParticles', 'addToTracks', 'clone', 'clusters_begin',
     'clusters_end', 'clusters_size', 'covMatrix', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy',
     'getGoodnessOfPID', 'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs',
     'getParticles', 'getReferencePoint', 'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable'
@@ -828,47 +900,39 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx, correct_track_cluster
                 dic = caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_momentum, track)
                 dic = calculate_covariance_matrix(dic, track)
                 
+                dic["pfcand_track_cluster_matching"].push_back(3) # charged particle
+                
             elif tracks.size() == 0: # neutral particle -> no track -> set them to -9!
-                if correct_matching == True and correct_track_cluster_matching==True: 
+                if (bool(correct_matching) == True) and (bool(correct_track_cluster_matching)==True):
+                    print("----------- new MC charged reco neutral particle ---------------------------")
+                    #MC_part = get_MCparticle_ID(event, reco_collection_id, reco_index, min_frac=0.5) # search for MC but with more toleranz than before (min_frac=0.5, not 0.8)
                     track = reco_track_ass_to_MC(event, MC_part)
-                    # NOTE: how to get particle momentum from track? 
-                    d0, z0, phi, c, ct = calculate_params_wrt_PV(track, primaryVertex, particle_momentum, MC_part.getCharge(), Bz=2)
-                    dic = caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_momentum, track)
-                    dic = calculate_covariance_matrix(dic, track)
-                    # correct PID
-                    mc_mom = np.sqrt(MC_part.getMomentum().x**2+ MC_part.getMomentum().y**2 + MC_part.getMomentum().z**2)
-                    new_pid = mcpid_to_reco(MC_part.getPDG(), mc_mom)
-                    dic["pfcand_type"].pop_back()
-                    dic["pfcand_type"].push_back(new_pid)
-                    reco_particle_type = PDG_ID_to_bool_particles(new_pid, 1) 
-                    for key in reco_particle_type:
-                        dic[key].pop_back()
-                        dic[key].push_back(reco_particle_type[key])
-
+                    print("MC: ", MC_part, "\t track:", track)
+                    print("MC PID: ", MC_part.getPDG())
+                    print("# tracker hits: ", count_tracker_hits(event, MC_part))
+                    if track!=None:
+                        particle_momentum = get_p_from_track(track) # get momentum from track
+                        d0, z0, phi, c, ct = calculate_params_wrt_PV(track, primaryVertex, particle_momentum, MC_part.getCharge(), Bz=2)
+                        dic = caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_momentum, track)
+                        dic = calculate_covariance_matrix(dic, track)
+                        print("wuhuuu I ran!")
+                        # correct PID
+                        mc_mom = np.sqrt(MC_part.getMomentum().x**2+ MC_part.getMomentum().y**2 + MC_part.getMomentum().z**2)
+                        new_pid = mcpid_to_reco(MC_part.getPDG(), mc_mom)
+                        dic["pfcand_type"].pop_back()
+                        dic["pfcand_type"].push_back(new_pid)
+                        reco_particle_type = PDG_ID_to_bool_particles(new_pid, 1) 
+                        for key in reco_particle_type:
+                            dic[key].pop_back()
+                            dic[key].push_back(reco_particle_type[key])
+                        dic["pfcand_track_cluster_matching"].push_back(1) # corrected neutral
+                    else: # couldn't correct track-cluster matching...
+                        print("couldn't correct track-cluster matching...")
+                        dic = fill_neutrals_track_params(dic)
+                        dic["pfcand_track_cluster_matching"].push_back(2) # couldn't correct neutral
                 else: 
-                    dic["pfcand_dptdpt"].push_back(-9) # like in ReconstructedParticle2Track.cc line 336 ( https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/ReconstructedParticle2Track.cc#L335 )
-                    dic["pfcand_detadeta"].push_back(-9)
-                    dic["pfcand_dphidphi"].push_back(-9)
-                    dic["pfcand_dxydxy"].push_back(-9)
-                    dic["pfcand_dzdz"].push_back(-9)
-                    dic["pfcand_dxydz"].push_back(-9)
-                    dic["pfcand_dphidxy"].push_back(-9)
-                    dic["pfcand_dlambdadz"].push_back(-9)
-                    dic["pfcand_dxyc"].push_back(-9)
-                    dic["pfcand_dxyctgtheta"].push_back(-9)
-                    dic["pfcand_phic"].push_back(-9)
-                    dic["pfcand_phidz"].push_back(-9)
-                    dic["pfcand_phictgtheta"].push_back(-9)
-                    dic["pfcand_cdz"].push_back(-9)
-                    dic["pfcand_cctgtheta"].push_back(-9)
-                    dic["pfcand_dxy"].push_back(-9)
-                    dic["pfcand_dz"].push_back(-9)
-                    dic["pfcand_btagSip2dVal"].push_back(-9)
-                    dic["pfcand_btagSip2dSig"].push_back(-200) # set significance to -200 so it's outside of the distribution (FCCAnalyses: -9)
-                    dic["pfcand_btagSip3dVal"].push_back(-9)
-                    dic["pfcand_btagSip3dSig"].push_back(-200)
-                    dic["pfcand_btagJetDistVal"].push_back(-9) # line 641 in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
-                    dic["pfcand_btagJetDistSig"].push_back(-200)
+                    dic = fill_neutrals_track_params(dic)
+                    dic["pfcand_track_cluster_matching"].push_back(0) # no correction needed
             else:
                 raise ValueError("Particle has more than one track")
             
