@@ -153,6 +153,7 @@ def mcpid_to_reco(ptype, pmom):
     return int(new_ptype)
 
 def store_MC_info(event, dic, MC_part, particle):
+    correct_matching = False
     if MC_part!=None: # if MC particle is found
         dic["pfcand_MCPID"].push_back(MC_part.getPDG()) # MC PID of particle
         dic["pfcand_nMCtrackerhits"].push_back(count_tracker_hits(event, MC_part)) # save number of tracker hits
@@ -387,10 +388,10 @@ def reco_track_ass_to_MC(event, MCpart):
         if mc.getObjectID().collectionID == collection_id and mc.getObjectID().index == index: # found link from MC particle to reco track
             wgt = link.getWeight()
             #print("found link with weight ", wgt)
-            if wgt > 0.1: # at least 10% of the MC hits are associated to the reco particle
-                track_weights.append(wgt)
-                link_index.append(l)
-                count += 1
+            # if wgt > 0.1: # NO! As long as there is any track! 
+            track_weights.append(wgt)
+            link_index.append(l)
+            count += 1
 
     track_weights = np.array(track_weights)
     link_index = np.array(link_index)
@@ -656,9 +657,6 @@ def initialize(t):
     t.Branch("pfcand_track_cluster_matching", pfcand_track_cluster_matching) # 0: no correction (neutral), 1: correction (neutral), 2: couldn't apply correction (neutral), 3: charged (not applicable)
     pfcand_nMCtrackerhits = ROOT.std.vector("int")()
     t.Branch("pfcand_nMCtrackerhits", pfcand_nMCtrackerhits)
-   
-    
-    
 
     dic = {
         "jet_p": jet_p,
@@ -826,7 +824,6 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx, correct_track_cluster
             dic[key][0] = jet_type[key]
 
         for i, part in enumerate(particles_jet):
-            correct_matching = False
             particle = particles_jet.at(i)
             #print("-------- new reco particle ------------")
             #print(dir(particle)) # print all available bindings for particle
@@ -900,7 +897,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx, correct_track_cluster
                 
                 dic["pfcand_track_cluster_matching"].push_back(3) # charged particle
                 
-            elif tracks.size() == 0: # neutral particle -> no track -> set them to -9!
+            elif tracks.size() == 0: # neutral particle -> no track -> set track variables to dummy value!
                 if (bool(correct_matching) == True) and (bool(correct_track_cluster_matching)==True):
                     #print("----------- new MC charged reco neutral particle ---------------------------")
                     track = reco_track_ass_to_MC(event, MC_part)
