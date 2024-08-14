@@ -597,7 +597,8 @@ def initialize(t):
     # track-cluster matching
     pfcand_track_cluster_matching = ROOT.std.vector("int")()
     t.Branch("pfcand_track_cluster_matching", pfcand_track_cluster_matching) # 0: no correction (neutral), 1: correction (neutral), 2: couldn't apply correction (neutral), 3: charged (not applicable)
-
+    pfcand_nMCtrackerhits = ROOT.std.vector("int")()
+    t.Branch("pfcand_nMCtrackerhits", pfcand_nMCtrackerhits)
    
     
     
@@ -678,7 +679,8 @@ def initialize(t):
         "pfcand_parent_ID": pfcand_parent_ID,
         "pfcand_parent_index": pfcand_parent_index,
         # track-cluster matching
-        "pfcand_track_cluster_matching": pfcand_track_cluster_matching
+        "pfcand_track_cluster_matching": pfcand_track_cluster_matching,
+        "pfcand_nMCtrackerhits": pfcand_nMCtrackerhits
         
     }
     return (event_number, n_hit, n_part, dic, t)
@@ -814,6 +816,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx, correct_track_cluster
 
             if MC_part!=None: # if MC particle is found
                 dic["pfcand_MCPID"].push_back(MC_part.getPDG()) # MC PID of particle
+                dic["pfcand_nMCtrackerhits"].push_back(count_tracker_hits(event, MC_part)) # save number of tracker hits
 
                 # artificial correction for track-cluster matching
                 if (particle.getType() in [22, 2112]) and (abs(MC_part.getPDG()) in [3334, 3312, 3222, 3112, 2212, 411, 321, 211, 521, 1000010020, 1000010030, 1000020040]): # if reco neutral but MC charged
@@ -851,11 +854,12 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx, correct_track_cluster
                     dic["pfcand_parent_index"].push_back(parent.getObjectID().index)
                     dic["pfcand_parent_ID"].push_back(parent_ID)
 
-            else: 
+            else: # no MC particle found
                 dic["pfcand_MCPID"].push_back(-999)
                 dic["pfcand_parent_ID"].push_back(-999)
                 dic["pfcand_parent_index"].push_back(-999)
                 dic["pfcand_MC_phi"].push_back(-9)
+                dic["pfcand_nMCtrackerhits"].push_back(-9)
 
 
             # Vertex info
