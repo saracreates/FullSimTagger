@@ -9,8 +9,6 @@ import edm4hep
 import ctypes
 
 
-cSpeed = 2.99792458e8 * 1.0e-9
-
 class MomentumVector:
     def __init__(self, px, py, pz):
         self.vector = ROOT.TVector3(px, py, pz)
@@ -204,17 +202,20 @@ def store_MC_info(event, dic, MC_part, particle):
 
 # track params helper
 
-def omega_to_pt(omega):
+def get_charge(omega, Bz=2):
+    # from https://flc.desy.de/lcnotes/notes/localfsExplorer_read?currentPath=/afs/desy.de/group/flc/lcnotes/LC-DET-2006-004.pdf 
+    return np.sign(Bz/omega)
+
+def omega_to_pt(omega, Bz):
     # from Dolores
     c_light = 2.99792458e8
-    Bz = 2.0
     a = c_light * 1e3 * 1e-15
     return a * Bz / abs(omega)
 
-def get_p_from_track(trackstate):
+def get_p_from_track(trackstate, Bz = 2.0):
     # from Dolores
     mchp = 0.139570
-    pt = omega_to_pt(trackstate.omega)
+    pt = omega_to_pt(trackstate.omega, Bz)
     phi = trackstate.phi
     pz = trackstate.tanLambda * pt
     px = pt * math.cos(phi)
@@ -234,6 +235,8 @@ def calculate_params_wrt_PV(track, primaryVertex, particle_p, particle_q, Bz=2):
 
     Returns d0, z0, phi, c, ct with respect to PV
     """ 
+    cSpeed = 2.99792458e8 * 1.0e-9
+    
     pv = ROOT.TVector3(primaryVertex.x, primaryVertex.y, primaryVertex.z) # primary vertex
     point_on_track = ROOT.TVector3(- track.D0 * np.sin(track.phi), track.D0 * np.cos(track.phi), track.Z0) # point on particle track
     x = point_on_track - pv # vector from primary vertex to point on track
@@ -643,7 +646,7 @@ def initialize(t):
     t.Branch("pfcand_SV_M", pfcand_SV_M)
     pfcand_SV_id = ROOT.std.vector("float")()
     t.Branch("pfcand_SV_id", pfcand_SV_id)
-    # debug
+    # debug phi peaks 
     pfcand_MC_phi = ROOT.std.vector("float")()
     t.Branch("pfcand_MC_phi", pfcand_MC_phi)
     pfcand_MC_phirel = ROOT.std.vector("float")()
@@ -652,7 +655,7 @@ def initialize(t):
     t.Branch("pfcand_parent_ID", pfcand_parent_ID)
     pfcand_parent_index = ROOT.std.vector("int")()
     t.Branch("pfcand_parent_index", pfcand_parent_index)
-    # track-cluster matching
+    # track-cluster matching for neutral pfos 
     pfcand_track_cluster_matching = ROOT.std.vector("int")()
     t.Branch("pfcand_track_cluster_matching", pfcand_track_cluster_matching) # 0: no correction (neutral), 1: correction (neutral), 2: couldn't apply correction (neutral), 3: charged (not applicable)
     pfcand_nMCtrackerhits = ROOT.std.vector("int")()
@@ -773,6 +776,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx, correct_track_cluster
     Returns:
         _type_: _description_
     """
+    Bz = 2.0 # T
     
 
     # calculate PV
@@ -891,7 +895,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx, correct_track_cluster
 
 
                 # calculate impact parameter with respect to primary vertex
-                d0, z0, phi, c, ct = calculate_params_wrt_PV(track, primaryVertex, particle_momentum, particle.getCharge(), Bz=2)
+                d0, z0, phi, c, ct = calculate_params_wrt_PV(track, primaryVertex, particle_momentum, particle.getCharge(),  Bz=Bz)
                 dic = caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_momentum, track)
                 dic = calculate_covariance_matrix(dic, track)
                 
@@ -905,8 +909,16 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx, correct_track_cluster
                     #print("MC PID: ", MC_part.getPDG())
                     #print("# tracker hits: ", count_tracker_hits(event, MC_part))
                     if track!=None:
-                        particle_momentum = get_p_from_track(track) # get momentum from track
-                        d0, z0, phi, c, ct = calculate_params_wrt_PV(track, primaryVertex, particle_momentum, MC_part.getCharge(), Bz=2)
+                        # use track momentum 
+                        particle_momentum = get_p_from_track(track, Bz=Bz) 
+                        dic["pfcand_p"].pop_back()
+                        dic["pfcand_p"].push_back(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2))
+                        # caluclate charge
+                        particle_charge = get_charge(track.omega,  Bz=Bz)
+                        dic["pfcand_charge"].pop_back()
+                        dic["pfcand_charge"].push_back(particle_charge)
+                        # add track params
+                        d0, z0, phi, c, ct = calculate_params_wrt_PV(track, primaryVertex, particle_momentum, particle_charge,  Bz=Bz)
                         dic = caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_momentum, track)
                         dic = calculate_covariance_matrix(dic, track)
                         # correct PID
