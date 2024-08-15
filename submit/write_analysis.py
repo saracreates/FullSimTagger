@@ -5,7 +5,7 @@ def generate_analysis_sub():
     start_indices = range(0, 10000, num_files)
     base_command = "/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/{pattern}/CLD_o2_v05/rec/*/*/{pattern}_rec_*.root"
     #output_base = "/afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/"
-    output_base = "/eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input/"
+    output_base = "/eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_input_artif-track-clusster-matching/"
     
     # Prepare the header of the file
     header = """# run commands for analysis,
@@ -19,7 +19,7 @@ error                 = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(Clu
 log                   = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ClusterId).log
 
 +AccountingGroup = "group_u_FCC.local_gen"
-+JobFlavour    = "workday"
++JobFlavour    = "longlunch"
 """
 
     # Prepare the content with arguments
