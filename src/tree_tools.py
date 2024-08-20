@@ -294,8 +294,6 @@ def caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_
     d_3d = n.Dot(pt_ct - pt_jet) # distance of closest approach
     dic["pfcand_btagJetDistVal"].push_back(d_3d)
     # NOTE: error of distance of closest approach is calculated in the point of closest approach to the origin (0,0,0) and not to the primary vertex - this is in principle wrong!!!
-    err3d = np.sqrt(track.covMatrix[0] + track.covMatrix[9]) # error of distance of closest approach
-    dic["pfcand_btagJetDistSig"].push_back(d_3d/err3d) # significance of distance of closest approach
     
     
     # calculate signed 2D impact parameter - like in get_Sip2dVal_clusterV() in JetConstituentsUtils.cc (https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L450 )
@@ -309,7 +307,16 @@ def caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_
     IP_3d = np.sqrt(d0**2 + z0**2)
     sip3d = np.sign(pt_ct * jet_p) * abs(IP_3d) 
     dic["pfcand_btagSip3dVal"].push_back(sip3d)
-    dic["pfcand_btagSip3dSig"].push_back(sip3d/np.sqrt(track.covMatrix[0] + track.covMatrix[9]) )
+
+    # significance
+    in_sqrt = track.covMatrix[0] + track.covMatrix[9]
+    if in_sqrt>0: # can caluclate sqrt?
+        err3d = np.sqrt(in_sqrt) # error of distance of closest approach
+        dic["pfcand_btagJetDistSig"].push_back(d_3d/err3d) # significance of distance of closest approach
+        dic["pfcand_btagSip3dSig"].push_back(sip3d/np.sqrt(in_sqrt))
+    else: # handle error -> dummy value
+        dic["pfcand_btagJetDistSig"].push_back(-999)
+        dic["pfcand_btagSip3dSig"].push_back(-999)
     return dic
 
 def fill_neutrals_track_params(dic):
