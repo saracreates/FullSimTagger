@@ -412,10 +412,7 @@ def reco_track_ass_to_MC(event, MCpart):
 # vertex info helper
 
 def V_info_dic(event, ev_num, collection):
-    """
-    Retrieve vertex information from event and store it in a dictionary.
-    Calculating invariant mass: https://opendata-education.github.io/en_Physics/Exercises-with-open-data/Warming-up/Calculate-invariant-mass.html 
-    """
+    """Calculating invariant mass: https://opendata-education.github.io/en_Physics/Exercises-with-open-data/Warming-up/Calculate-invariant-mass.html """
     dic = {
         "V_id": [],
         "V_M": [],
@@ -454,8 +451,7 @@ def V_info(event, dic, p_index, j, V_dic, ev_num, collection):
     else:
         raise ValueError(f"{collection} not a supported collection. Choose 'BuildUpVertices' or 'BuildUpVertices_V0'.")
     ismatch = 0
-    v_match = 0
-    for v, vertex in enumerate(event.get(collection)): # loop over all vertices
+    for v, vertex in enumerate(event.get(collection)):
         
         ass_part = vertex.getAssociatedParticle()
         part = ass_part.getParticles()
@@ -467,14 +463,13 @@ def V_info(event, dic, p_index, j, V_dic, ev_num, collection):
             index = p.getObjectID().index
             if index == p_index: # found particle as part of V0 vertex
                 ismatch += 1
-                v_match = v
     if ismatch == 1: 
         # find out v0 index
         if j==0:
-            v0_ind = ev_num*100 + v_match + 1
+            v0_ind = ev_num*100 + v + 1
         else:
-            v0_ind = (ev_num-1)*100 + v_match + 1
-        ind = np.where(np.array(V_dic["V_id"]) == v0_ind) # get correct vertex
+            v0_ind = (ev_num-1)*100 + v + 1
+        ind = np.where(np.array(V_dic["V_id"]) == v0_ind)
         if ind[0].size>1 or ind[0].size==0:
             raise ValueError(f"Found {ind[0].size} indices instead of one.")
         dic[f"pfcand_{t}_x"].push_back(V_dic["V_x"][ind[0][0]])
@@ -761,25 +756,17 @@ def clear_dic(dic):
 
 # main function:
 
-def store_jet(event, debug, dic, event_number, t, H_to_xx, correct_track_cluster_matching=False):
-    """The yets have the following args that can be accessed with dir(jets)
-    ['addToClusters', 'addToParticleIDs', 'addToParticles', 'addToTracks', 'clone', 'clusters_begin',
-    'clusters_end', 'clusters_size', 'covMatrix', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy',
-    'getGoodnessOfPID', 'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs',
-    'getParticles', 'getReferencePoint', 'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable'
-    , 'isCompound', 'momentum', 'operator ReconstructedParticle', 'particleIDs_begin', 'particleIDs_end'
-    , 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'referencePoint',
-    'setCharge', 'setCovMatrix', 'setEnergy', 'setGoodnessOfPID', 'setMass', 'setMomentum',
-    'setParticleIDUsed', 'setReferencePoint', 'setStartVertex', 'setType', 'tracks_begin',
-    'tracks_end', 'tracks_size', 'unlink']
+def store_jet(event, debug, dic, event_number, t, H_to_xx):
+    f"""
+    THE PLAN:
+    - take all reco tracks to describe charged particles
+        -> check pid and map to el, mu, chad. Only do el, mu if p>2 GeV
+    - take pfo neutrals to describe neutral particles
+        check MC if they are really neutral, only keep in that case
 
-    Args:
-        event (_type_): single event from the input rootfile
-        debug (_type_): debug flat
-        dic (_type_): dic with tree information for output root file
+    This should avoid double counting? and correctly using all tracks. 
+    ok, no, one thing: sometimes a track split into smaller parts. 
 
-    Returns:
-        _type_: _description_
     """
     Bz = 2.0 # T
     
