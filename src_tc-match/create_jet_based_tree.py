@@ -26,11 +26,6 @@ def extract_hxx(filename):
 input_file = sys.argv[1]
 output_file = sys.argv[2]
 
-## NOTE: THIS IS BULLSHIT, DON'T USE TRUE 
-#try:
-#    correct_track_cluster_matching = sys.argv[3]
-#except:
-correct_track_cluster_matching = False # LEAVE FALSE (true matches neutral pfos to tracks, even if the neutrals are fake, and just splitted from the cluster of a charged MC)
 
 H_to_xx = extract_hxx(input_file)
 
@@ -60,8 +55,7 @@ for i, event in enumerate(reader.get("events")):
         dic,
         event_number, 
         t, 
-        H_to_xx,
-        correct_track_cluster_matching
+        H_to_xx
     )
 
 
