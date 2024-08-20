@@ -202,6 +202,33 @@ def store_MC_info(event, dic, MC_part, particle):
 
 # track params helper
 
+def assign_track_to_jet(event, RefinedVertexJets):
+    """find out which tracks belong to which jets. Returns array with jet index for each track"""
+    mass = 0
+    which_jet = []
+    for t, track in enumerate(event.get("SiTracks_Refitted")):
+        trackstate = track.getTrackStates().at(0)
+        t_p = get_p_from_track(trackstate)
+
+        rel_theta = []
+        for j, jet in enumerate(event.get(RefinedVertexJets)): # loop over the two jets
+            tlv = TLorentzVector()
+            j_p = jet.getMomentum()
+            tlv.SetXYZM(j_p.x, j_p.y, j_p.z, jet.getMass())
+            jet_phi = tlv.Phi() # done like in ReconstructedParticle.cc in get_phi ( https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/ReconstructedParticle.cc#L3 )
+            jet_theta = tlv.Theta()
+            # initialize new TLorentzVector for particle
+            tlv_p = TLorentzVector()
+            tlv_p.SetXYZM(t_p.x, t_p.y, t_p.z, mass)
+            # rotate the particle by jet angles
+            tlv_p.RotateZ(-jet_phi) # rotate the particle by the jet angle in the xy-plane
+            tlv_p.RotateY(-jet_theta) # rotate the particle by the jet angle in the xz-plane
+
+            rel_theta.append(tlv_p.Theta()) # rel theta should be positive!
+        best_jet = np.argmin(rel_theta)
+        which_jet.append(best_jet)
+    return which_jet
+
 def get_charge(omega, Bz=2):
     # from https://flc.desy.de/lcnotes/notes/localfsExplorer_read?currentPath=/afs/desy.de/group/flc/lcnotes/LC-DET-2006-004.pdf 
     return np.sign(Bz/omega)
@@ -226,6 +253,19 @@ def get_p_from_track(trackstate, Bz = 2.0):
     # print(p, theta, phi, energy)
     particle_momentum = MomentumVector(px, py, pz)
     return particle_momentum
+
+def get_info_from_track(trackstate, Bz = 2.0):
+    # from Dolores
+    mchp = 0.139570
+    pt = omega_to_pt(trackstate.omega, Bz)
+    phi = trackstate.phi
+    pz = trackstate.tanLambda * pt
+    px = pt * math.cos(phi)
+    py = pt * math.sin(phi)
+    p = math.sqrt(px * px + py * py + pz * pz)
+    energy = math.sqrt(p * p + mchp * mchp)
+    theta = math.acos(pz / p)
+    return p, theta, phi, energy
 
 def calculate_params_wrt_PV(track, primaryVertex, particle_p, particle_q, Bz=2):
     """
@@ -408,6 +448,34 @@ def reco_track_ass_to_MC(event, MCpart):
         reco_track = best_link.getRec() # get reco track
         track = reco_track.getTrackStates().at(0)
         return track
+    
+def MC_ass_to_reco_track(event, collection_id, index):
+    count = 0
+    track_weights = []
+    link_index = []
+    for l, link in enumerate(event.get("SiTracksMCTruthLink")):
+        """print(dir(link))
+        'clone', 'getObjectID', 'getRec', 'getSim', 'getWeight', 'id', 'isAvailable', 'operator MCRecoTrackParticleAssociation', 'setRec', 'setSim', 'setWeight', 'unlink'"""
+        reco = link.getRec()
+        if reco.getObjectID().collectionID == collection_id and reco.getObjectID().index == index: # found link from reco track to MC
+            wgt = link.getWeight()
+            #print("found link with weight ", wgt)
+            # if wgt > 0.1: # NO! As long as there is any track! 
+            track_weights.append(wgt)
+            link_index.append(l)
+            count += 1
+
+    track_weights = np.array(track_weights)
+    link_index = np.array(link_index)
+    print("count", count)
+    if count==0: # no MC associated to reco
+        return None
+    elif count>0: # MC found
+        best_match = np.argmax(track_weights)
+        best_link_index = link_index[best_match]
+        best_link = event.get("SiTracksMCTruthLink").at(int(best_link_index))
+        mc = best_link.getSim() # get MC
+        return mc
 
 # vertex info helper
 
@@ -487,7 +555,65 @@ def V_info(event, dic, p_index, j, V_dic, ev_num, collection):
     elif ismatch>1:
         raise ValueError(f"Found {ismatch} (more than 1) V0/secondary vertex (collection: {collection}) assosiated with one particle/PFO in jet")
     return dic
-             
+
+# particle helper
+
+def save_pfo_particle_info(event, dic, particle, MC_part, j, jet_theta, jet_phi, V0_dic, SV_dic, event_number):
+    particle_momentum = particle.getMomentum()
+    dic["pfcand_e"].push_back(particle.getEnergy())
+    tlv_p = TLorentzVector() # initialize new TLorentzVector for particle
+    tlv_p.SetXYZM(particle_momentum.x, particle_momentum.y, particle_momentum.z, particle.getMass())
+    dic["pfcand_p"].push_back(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2))
+    #print("reco PID: ", particle.getType())
+    dic["pfcand_theta"].push_back(tlv_p.Theta())
+    dic["pfcand_phi"].push_back(tlv_p.Phi())
+    dic["pfcand_type"].push_back(particle.getType())
+    dic["pfcand_charge"].push_back(particle.getCharge()) 
+    reco_particle_type = PDG_ID_to_bool_particles(particle.getType(), particle.getTracks().size()) # dictionary with the particle type (bool)
+    for key in reco_particle_type:
+        dic[key].push_back(reco_particle_type[key])
+    # calculate relative values
+    dic["pfcand_erel_log"].push_back(np.log10(dic["pfcand_e"][-1]/dic["jet_e"][0])) # like in JetConstituentsUtils.cc in get_erel_log_cluster ( https://github.com/HEP-FCC/FCCAnalyses/blob/d0abc8d76e37630ea157f9d5c48e7867a86be2e2/analyzers/dataframe/src/JetConstituentsUtils.cc#L4 line 877)
+    
+    # to calculate the angle correctly in 3D, roate the angle by the jet angle first
+
+    tlv_p.RotateZ(-jet_phi) # rotate the particle by the jet angle in the xy-plane
+    tlv_p.RotateY(-jet_theta) # rotate the particle by the jet angle in the xz-plane
+
+    dic["pfcand_phirel"].push_back(tlv_p.Phi()) # same as in  rv::RVec<FCCAnalysesJetConstituentsData> get_phirel_cluster in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
+    dic["pfcand_thetarel"].push_back(tlv_p.Theta()) # rel theta should be positive!  
+
+    # calculate true PID of particles in jet
+    reco_index =  particle.getObjectID().index
+    dic, correct_matching = store_MC_info(event, dic, MC_part, particle)
+
+    # Vertex info
+    dic = V_info(event, dic, reco_index, j, V0_dic, event_number[0], "BuildUpVertices_V0")
+    dic = V_info(event, dic, reco_index, j, SV_dic, event_number[0], "BuildUpVertices")
+
+    return dic, reco_particle_type
+
+def save_track_particle_info(event, dic, track):
+    trackstate = track.getTrackStates().at(0)
+    particle_momentum = get_p_from_track(trackstate)
+    p, theta, phi, energy = get_info_from_track(trackstate)
+    dic["pfcand_e"].push_back(energy)
+    tlv_p = TLorentzVector() # initialize new TLorentzVector for particle
+    tlv_p.SetXYZM(particle_momentum.x, particle_momentum.y, particle_momentum.z, 0.139570) # mass of charged pion
+    dic["pfcand_p"].push_back(p)
+    dic["pfcand_theta"].push_back(theta)
+    dic["pfcand_phi"].push_back(phi)
+    # cheat pid and get it from MC 
+    MC_part = MC_ass_to_reco_track(event, track.getObjectID().collectionID, track.getObjectID().index)
+    if MC_part:
+        print(MC_part.getPDG())
+    else:
+        print("ufff")
+
+    return dic
+
+
+
 # set up dic
 
 def initialize(t):
@@ -782,6 +908,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
     SV_dic = V_info_dic(event, event_number[0], "BuildUpVertices")
 
     RefinedVertexJets = "RefinedVertexJets"
+    ind_which_jet = assign_track_to_jet(event, RefinedVertexJets)
 
     for j, jet in enumerate(event.get(RefinedVertexJets)): # loop over the two jets
         clear_dic(dic) # clear the dictionary for new jet
@@ -819,135 +946,49 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         for key in jet_type:
             dic[key][0] = jet_type[key]
 
+        # neutrals - loop over all pfos
         for i, part in enumerate(particles_jet):
             particle = particles_jet.at(i)
-            #print("-------- new reco particle ------------")
-            #print(dir(particle)) # print all available bindings for particle
-            """
-            ['clone', 'clusters_begin', 'clusters_end', 'clusters_size', 'getCharge', 'getClusters', 'getCovMatrix', 'getEnergy', 'getGoodnessOfPID', 'getMass', 'getMomentum', 'getObjectID', 'getParticleIDUsed', 'getParticleIDs', 'getParticles', 'getReferencePoint', 'getStartVertex', 'getTracks', 'getType', 'id', 'isAvailable', 'isCompound', 'makeEmpty', 'particleIDs_begin', 'particleIDs_end', 'particleIDs_size', 'particles_begin', 'particles_end', 'particles_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink']
-            """
-
-            particle_momentum = particle.getMomentum()
-            dic["pfcand_e"].push_back(particle.getEnergy())
-            tlv_p = TLorentzVector() # initialize new TLorentzVector for particle
-            tlv_p.SetXYZM(particle_momentum.x, particle_momentum.y, particle_momentum.z, particle.getMass())
-            dic["pfcand_p"].push_back(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2))
-            #print("reco PID: ", particle.getType())
-            dic["pfcand_theta"].push_back(tlv_p.Theta())
-            dic["pfcand_phi"].push_back(tlv_p.Phi())
-            dic["pfcand_type"].push_back(particle.getType())
-            dic["pfcand_charge"].push_back(particle.getCharge()) 
-            reco_particle_type = PDG_ID_to_bool_particles(particle.getType(), particle.getTracks().size()) # dictionary with the particle type (bool)
-            for key in reco_particle_type:
-                dic[key].push_back(reco_particle_type[key])
-            # calculate relative values
-            dic["pfcand_erel_log"].push_back(np.log10(dic["pfcand_e"][-1]/dic["jet_e"][0])) # like in JetConstituentsUtils.cc in get_erel_log_cluster ( https://github.com/HEP-FCC/FCCAnalyses/blob/d0abc8d76e37630ea157f9d5c48e7867a86be2e2/analyzers/dataframe/src/JetConstituentsUtils.cc#L4 line 877)
-            
-            # to calculate the angle correctly in 3D, roate the angle by the jet angle first
-
-            tlv_p.RotateZ(-jet_phi) # rotate the particle by the jet angle in the xy-plane
-            tlv_p.RotateY(-jet_theta) # rotate the particle by the jet angle in the xz-plane
-
-            dic["pfcand_phirel"].push_back(tlv_p.Phi()) # same as in  rv::RVec<FCCAnalysesJetConstituentsData> get_phirel_cluster in https://github.com/HEP-FCC/FCCAnalyses/blob/d39a711a703244ee2902f5d2191ad1e2367363ac/analyzers/dataframe/src/JetConstituentsUtils.cc#L2 
-            dic["pfcand_thetarel"].push_back(tlv_p.Theta()) # rel theta should be positive!  
-
-            # calculate true PID of particles in jet
-            reco_obj = particle.getObjectID()
-            reco_collection_id = reco_obj.collectionID # 4196981182
-            reco_index =  reco_obj.index
-            MC_part = get_MCparticle_ID(event, reco_collection_id, reco_index)
-            # print(dir(MC_part))'clone', 'daughters_begin', 'daughters_end', 'daughters_size', 'getCharge', 'getColorFlow', 'getDaughters', 'getEndpoint', 'getEnergy', 'getGeneratorStatus', 'getMass', 'getMomentum', 'getMomentumAtEndpoint', 'getObjectID', 'getPDG', 'getParents', 'getSimulatorStatus', 'getSpin', 'getTime', 'getVertex', 'hasLeftDetector', 'id', 'isAvailable', 'isBackscatter', 'isCreatedInSimulation', 'isDecayedInCalorimeter', 'isDecayedInTracker', 'isOverlay', 'isStopped', 'makeEmpty', 'parents_begin', 'parents_end', 'parents_size', 'unlink', 'vertexIsNotEndpointOfParent']
-            dic, correct_matching = store_MC_info(event, dic, MC_part, particle)
-
-            # Vertex info
-            dic = V_info(event, dic, reco_index, j, V0_dic, event_number[0], "BuildUpVertices_V0")
-            dic = V_info(event, dic, reco_index, j, SV_dic, event_number[0], "BuildUpVertices")
-
-            # get tracks of each particle (should be only one track)
-            tracks = particle.getTracks()
-            #print(dir(tracks)) #['at', 'begin', 'empty', 'end', 'size']
-            #print(dir(tracks.at(0))) ['clone', 'dxQuantities_begin', 'dxQuantities_end', 'dxQuantities_size', 'getChi2', 'getDEdx', 'getDEdxError', 'getDxQuantities', 'getNdf', 'getObjectID', 'getRadiusOfInnermostHit', 'getSubdetectorHitNumbers', 'getTrackStates', 'getTrackerHits', 'getTracks', 'getType', 'id', 'isAvailable', 'makeEmpty', 'subdetectorHitNumbers_begin', 'subdetectorHitNumbers_end', 'subdetectorHitNumbers_size', 'trackStates_begin', 'trackStates_end', 'trackStates_size', 'trackerHits_begin', 'trackerHits_end', 'trackerHits_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink']
-            
-            if tracks.size() == 1: # charged particle
-                #print(dir(tracks.at(0).getTrackStates().at(0))) # -> 'covMatrix', 'location', 'omega', 'phi', 'referencePoint', 'tanLambda', 'time'
-                #print(track.getTrackStates().size()) 
-                """static const int AtOther = 0 ; // any location other than the ones defined below\n
-                static const int AtIP = 1 ;\n
-                static const int AtFirstHit = 2 ;\n
-                static const int AtLastHit = 3 ;\n
-                static const int AtCalorimeter = 4 ;\n
-                static const int AtVertex = 5 ;\n """
-                #print("---- new charged track")
-    
-                track = tracks.at(0).getTrackStates().at(0) # info at IP
-                """dir(track)
-                'covMatrix', 'location', 'omega', 'phi', 'referencePoint', 'tanLambda', 'time'
-                but look at https://github.com/key4hep/EDM4hep/blob/997ab32b886899253c9bc61adea9a21b57bc5a21/edm4hep.yaml#L192 for details of the TrackState object"""
-                #print("track ref point: ", track.referencePoint.x, track.referencePoint.y, track.referencePoint.z) # (0,0,0) for IP
-
-
-                # calculate impact parameter with respect to primary vertex
-                d0, z0, phi, c, ct = calculate_params_wrt_PV(track, primaryVertex, particle_momentum, particle.getCharge(),  Bz=Bz)
-                dic = caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_momentum, track)
-                dic = calculate_covariance_matrix(dic, track)
-                
-                dic["pfcand_track_cluster_matching"].push_back(3) # charged particle
-                
-            elif tracks.size() == 0: # neutral particle -> no track -> set track variables to dummy value!
-                if (bool(correct_matching) == True) and (bool(correct_track_cluster_matching)==True):
-                    #print("----------- new MC charged reco neutral particle ---------------------------")
-                    track = reco_track_ass_to_MC(event, MC_part)
-                    #print("MC: ", MC_part, "\t track:", track)
-                    #print("MC PID: ", MC_part.getPDG())
-                    #print("# tracker hits: ", count_tracker_hits(event, MC_part))
-                    if track!=None:
-                        # use track momentum 
-                        particle_momentum = get_p_from_track(track, Bz=Bz) 
-                        dic["pfcand_p"].pop_back()
-                        dic["pfcand_p"].push_back(np.sqrt(particle_momentum.x**2 + particle_momentum.y**2 + particle_momentum.z**2))
-                        # caluclate charge
-                        particle_charge = get_charge(track.omega,  Bz=Bz)
-                        dic["pfcand_charge"].pop_back()
-                        dic["pfcand_charge"].push_back(particle_charge)
-                        # add track params
-                        d0, z0, phi, c, ct = calculate_params_wrt_PV(track, primaryVertex, particle_momentum, particle_charge,  Bz=Bz)
-                        dic = caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_momentum, track)
-                        dic = calculate_covariance_matrix(dic, track)
-                        # correct PID
-                        mc_mom = np.sqrt(MC_part.getMomentum().x**2+ MC_part.getMomentum().y**2 + MC_part.getMomentum().z**2)
-                        new_pid = mcpid_to_reco(MC_part.getPDG(), mc_mom)
-                        dic["pfcand_type"].pop_back()
-                        dic["pfcand_type"].push_back(new_pid)
-                        reco_particle_type = PDG_ID_to_bool_particles(new_pid, 1) 
-                        for key in reco_particle_type:
-                            dic[key].pop_back()
-                            dic[key].push_back(reco_particle_type[key])
-                        dic["pfcand_track_cluster_matching"].push_back(1) # corrected neutral
-                    else: # couldn't correct track-cluster matching...
-                        #print("couldn't correct track-cluster matching...")
+            # neutrals 
+            if particle.getCharge() == 0:
+                MC_part = get_MCparticle_ID(event, particle.getObjectID().collectionID, particle.getObjectID().index, min_frac=0.5) # at least half of the reco hits should belong to one MC particle
+                if MC_part:
+                    if MC_part.getCharge() == 0:
+                        # now we found a neutral that is truly a neutral! - save
+                        dic, reco_particle_type = save_pfo_particle_info(event, dic, particle, MC_part, j, jet_theta, jet_phi, V0_dic, SV_dic, event_number)
                         dic = fill_neutrals_track_params(dic)
-                        dic["pfcand_track_cluster_matching"].push_back(2) # couldn't correct neutral
-                else: 
-                    dic = fill_neutrals_track_params(dic)
-                    dic["pfcand_track_cluster_matching"].push_back(0) # no correction needed
-            else:
-                raise ValueError("Particle has more than one track")
+
+                        # ignore these because CLD as no drift chamber
+                        dic["pfcand_mtof"].push_back(0)
+                        dic["pfcand_dndx"].push_back(0)
+                        
+                        # count number of particles in jet
+                        if reco_particle_type["pfcand_isMu"]:
+                            dic["jet_nmu"][0] += 1
+                        elif reco_particle_type["pfcand_isEl"]:
+                            dic["jet_nel"][0] += 1
+                        elif reco_particle_type["pfcand_isGamma"]:
+                            dic["jet_ngamma"][0] += 1
+                        elif reco_particle_type["pfcand_isNeutralHad"]:
+                            dic["jet_nnhad"][0] += 1
+                        elif reco_particle_type["pfcand_isChargedHad"]:
+                            dic["jet_nchad"][0] += 1  
+        # charged - loop over all tracks
+        for k, track in enumerate(event.get("SiTracks_Refitted")):
+            # print(dir(track)) 'addToDxQuantities', 'addToSubdetectorHitNumbers', 'addToTrackStates', 'addToTrackerHits', 'addToTracks', 'clone', 'dxQuantities_begin', 'dxQuantities_end', 'dxQuantities_size', 'getChi2', 'getDEdx', 'getDEdxError', 'getDxQuantities', 'getNdf', 'getObjectID', 'getRadiusOfInnermostHit', 'getSubdetectorHitNumbers', 'getTrackStates', 'getTrackerHits', 'getTracks', 'getType', 'id', 'isAvailable', 'operator Track', 'setChi2', 'setDEdx', 'setDEdxError', 'setNdf', 'setRadiusOfInnermostHit', 'setType', 'subdetectorHitNumbers_begin', 'subdetectorHitNumbers_end', 'subdetectorHitNumbers_size', 'trackStates_begin', 'trackStates_end', 'trackStates_size', 'trackerHits_begin', 'trackerHits_end', 'trackerHits_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink'
+
+            # first check if track is in jet - check relative angle to both jets
+            jet_i = ind_which_jet[k]
+            if jet_i != j:
+                continue
             
-            # ignore these because CLD as no drift chamber
-            dic["pfcand_mtof"].push_back(0)
-            dic["pfcand_dndx"].push_back(0)
-            
-            # count number of particles in jet
-            if reco_particle_type["pfcand_isMu"]:
-                dic["jet_nmu"][0] += 1
-            elif reco_particle_type["pfcand_isEl"]:
-                dic["jet_nel"][0] += 1
-            elif reco_particle_type["pfcand_isGamma"]:
-                dic["jet_ngamma"][0] += 1
-            elif reco_particle_type["pfcand_isNeutralHad"]:
-                dic["jet_nnhad"][0] += 1
-            elif reco_particle_type["pfcand_isChargedHad"]:
-                dic["jet_nchad"][0] += 1  
+            # now save the track
+            dic = save_track_particle_info(event, dic, track)
+
+
+
+
+
 
 
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
@@ -956,3 +997,4 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         event_number[0] += 1
 
     return dic, event_number, t
+
