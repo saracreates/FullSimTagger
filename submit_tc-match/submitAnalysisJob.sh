@@ -45,7 +45,7 @@ hadd "./job/merged_input_${pattern}.root" ./job/*.root
 preproc_time=$(date +%s)
 middle_time=$((preproc_time - start_time))
 echo "time before running script: $middle_time seconds" # 13 sec -> x100 = 21 min
-python /afs/cern.ch/work/s/saaumill/public/FullSimTagger/src/create_jet_based_tree.py "./job/merged_input_${pattern}.root" ./job/out.root
+python /afs/cern.ch/work/s/saaumill/public/FullSimTagger/src_tc-match/create_jet_based_tree.py "./job/merged_input_${pattern}.root" ./job/out.root
 echo "job done ... "
 job_endtime=$(date +%s)
 job_time=$((job_endtime - preproc_time)) # 54 sec for 1000 files -> index 0 to 10. So for 0 to 1000 it should be 1.5h 
