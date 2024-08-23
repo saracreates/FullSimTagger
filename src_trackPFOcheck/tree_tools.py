@@ -71,6 +71,18 @@ def get_MCparticle_ID(event, reco_collection_id, reco_index, minfrac = 0.7):
     else:
         return None
 
+def mcpid_to_reco(ptype):
+    """converts MC ptype pid to reco type pid"""
+    num_chad = [3334, 3312, 3222, 3112, 2212, 411, 321, 211, 521, 1000010020, 1000010030, 1000020040] # change to 211
+    num_nhad = [3322, 2112, 3122, 130, 310] # change to 2112
+    if abs(ptype) in num_chad:
+        new_ptype = np.sign(ptype) * 211
+    elif abs(ptype) in num_nhad:
+        new_ptype = 2112
+    else:
+        new_ptype = ptype
+    return int(new_ptype)
+
 def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac = 0.5):
     dic["mcpid"].push_back(MCpart.getPDG()) # save particle mc pid
     part_p = MCpart.getMomentum()
@@ -281,6 +293,7 @@ def store_event(event, dic, t, H_to_xx, i):
 
         # find chad, e, mu
         mcpid = MCpart.getPDG()
+        mcpid = mcpid_to_reco(mcpid) # change to "reco" pid (charged hadrons -> 211, neutral hadrons -> 2112)
         if abs(mcpid) == 11 or abs(mcpid) == 13 or abs(mcpid) == 211: # found a charged particle
             if MCpart.getGeneratorStatus() == 1: #  undecayed particle, stable in the generator. From https://ilcsoft.desy.de/LCIO/current/doc/doxygen_api/html/classEVENT_1_1MCParticle.html 
                 # requirements fullfilled, save attributes
