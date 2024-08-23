@@ -19,7 +19,7 @@ error                 = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(Clu
 log                   = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ClusterId).log
 
 +AccountingGroup = "group_u_FCC.local_gen"
-+JobFlavour    = "microcentury"
++JobFlavour    = "longlunch"
 """
 
     # Prepare the content with arguments
