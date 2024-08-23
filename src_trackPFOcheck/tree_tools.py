@@ -71,7 +71,19 @@ def get_MCparticle_ID(event, reco_collection_id, reco_index, minfrac = 0.7):
     else:
         return None
 
-def PFO_track_efficiency(event, dic, MCpart, find_curlers, i):
+def mcpid_to_reco(ptype):
+    """converts MC ptype pid to reco type pid"""
+    num_chad = [3334, 3312, 3222, 3112, 2212, 411, 321, 211, 521, 1000010020, 1000010030, 1000020040] # change to 211
+    num_nhad = [3322, 2112, 3122, 130, 310] # change to 2112
+    if abs(ptype) in num_chad:
+        new_ptype = np.sign(ptype) * 211
+    elif abs(ptype) in num_nhad:
+        new_ptype = 2112
+    else:
+        new_ptype = ptype
+    return int(new_ptype)
+
+def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac = 0.5):
     dic["mcpid"].push_back(MCpart.getPDG()) # save particle mc pid
     part_p = MCpart.getMomentum()
     dic["momentum"].push_back(np.sqrt(part_p.x**2 +part_p.y**2 + part_p.z**2)) # save particle momentum
@@ -86,7 +98,7 @@ def PFO_track_efficiency(event, dic, MCpart, find_curlers, i):
     count = 0
     track_weights = []
     link_index = []
-    
+    #print("---- new particle ----")
     for l, link in enumerate(event.get("MCTruthRecoLink")): # weights express what fraction of MC particle hits are used in this reco particle
         mc = link.getSim()
         mc_index_link = mc.getObjectID().index
@@ -94,7 +106,8 @@ def PFO_track_efficiency(event, dic, MCpart, find_curlers, i):
             wgt = link.getWeight()
             trackwgt = (int(wgt)%10000)/1000
             clusterwgt = (int(wgt)/10000)/1000
-            if trackwgt > 0.5 or clusterwgt > 0.5: # at least half of the MC hits are associated to the reco particle
+            #print(trackwgt)
+            if trackwgt > min_frac or clusterwgt > min_frac: # at least half of the MC hits are associated to the reco particle
                 track_weights.append(trackwgt)
                 link_index.append(l)
                 count += 1
@@ -109,7 +122,7 @@ def PFO_track_efficiency(event, dic, MCpart, find_curlers, i):
             if np.sqrt(part_p.x**2 +part_p.y**2 + part_p.z**2)< 0.6 and tlv_p.Theta() < 1.67 and tlv_p.Theta() > 1.47:
                 print(f"Curler found! (event {i})")
     elif count>0: # reconstructed
-        if np.max(track_weights) > 0.5: # if half of MC track hits are reconstruced
+        if np.max(track_weights) > min_frac: # if half of MC track hits are reconstruced
             dic["mc_pfo_type"].push_back(2)
         else: # neutral particle
             dic["mc_pfo_type"].push_back(1)
@@ -280,13 +293,14 @@ def store_event(event, dic, t, H_to_xx, i):
 
         # find chad, e, mu
         mcpid = MCpart.getPDG()
+        mcpid = mcpid_to_reco(mcpid) # change to "reco" pid (charged hadrons -> 211, neutral hadrons -> 2112)
         if abs(mcpid) == 11 or abs(mcpid) == 13 or abs(mcpid) == 211: # found a charged particle
             if MCpart.getGeneratorStatus() == 1: #  undecayed particle, stable in the generator. From https://ilcsoft.desy.de/LCIO/current/doc/doxygen_api/html/classEVENT_1_1MCParticle.html 
                 # requirements fullfilled, save attributes
 
 
                 # PFO track efficiency
-                dic = PFO_track_efficiency(event, dic, MCpart, find_curlers, i)
+                dic = PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac=0.1)
 
                 # track efficiency
                 dic = track_efficiency(event, dic, MCpart)

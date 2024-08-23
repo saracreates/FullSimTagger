@@ -9,7 +9,7 @@ error                 = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(Clu
 log                   = /afs/cern.ch/work/s/saaumill/public/std-condor/job.$(ClusterId).$(ClusterId).log
 
 +AccountingGroup = "group_u_FCC.local_gen"
-+JobFlavour    = "microcentury"
++JobFlavour    = "longlunch"
 arguments="0 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck/Hbb_0.root"
 queue
 arguments="50 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Hbb/CLD_o2_v05/rec/*/*/Hbb_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_trackPFOcheck/Hbb_1.root"
