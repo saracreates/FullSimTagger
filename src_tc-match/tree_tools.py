@@ -342,7 +342,10 @@ def caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_
     pt_ct_2d = ROOT.TVector2(pt_ct.x(), pt_ct.y())
     sip2d = np.sign(pt_ct_2d * p_jet_2d) * abs(d0) # if angle between track and jet greater 90 deg -> negative sign; if smaller 90 deg -> positive sign
     dic["pfcand_btagSip2dVal"].push_back(sip2d)
-    dic["pfcand_btagSip2dSig"].push_back(sip2d/np.sqrt(track.covMatrix[0]))
+    sip2d_sig = sip2d / np.sqrt(track.covMatrix[0])
+    if np.isnan(sip2d_sig):
+        sip2d_sig = -999
+    dic["pfcand_btagSip2dSig"].push_back(sip2d_sig)
     
     # calculate signed 3D impact parameter - like in get_Sip3Val() in JetConstituentsUtils.cc 
     IP_3d = np.sqrt(d0**2 + z0**2)
@@ -353,8 +356,14 @@ def caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_
     in_sqrt = track.covMatrix[0] + track.covMatrix[9]
     if in_sqrt>0: # can caluclate sqrt?
         err3d = np.sqrt(in_sqrt) # error of distance of closest approach
-        dic["pfcand_btagJetDistSig"].push_back(d_3d/err3d) # significance of distance of closest approach
-        dic["pfcand_btagSip3dSig"].push_back(sip3d/np.sqrt(in_sqrt))
+        if np.isnan(d_3d / err3d):
+            dic["pfcand_btagJetDistSig"].push_back(-999)
+        else:
+            dic["pfcand_btagJetDistSig"].push_back(d_3d/err3d) # significance of distance of closest approach
+        if np.isnan(sip3d / np.sqrt(in_sqrt)):
+            dic["pfcand_btagSip3dSig"].push_back(-999)
+        else:
+            dic["pfcand_btagSip3dSig"].push_back(sip3d/np.sqrt(in_sqrt))
     else: # handle error -> dummy value
         dic["pfcand_btagJetDistSig"].push_back(-999)
         dic["pfcand_btagSip3dSig"].push_back(-999)
