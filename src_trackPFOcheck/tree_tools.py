@@ -84,6 +84,10 @@ def mcpid_to_reco(ptype):
     return int(new_ptype)
 
 def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac = 0.5):
+    """
+    BEFORE: use min_frac = 0.5 (0.1) for clusters and tracks. This is not good because I loose loopers for example.
+    NOW: use min_frac = 0.3 for clusters. Tracks are "reconstructed" if their purity is more than 70%.
+    """
     dic["mcpid"].push_back(MCpart.getPDG()) # save particle mc pid
     part_p = MCpart.getMomentum()
     dic["momentum"].push_back(np.sqrt(part_p.x**2 +part_p.y**2 + part_p.z**2)) # save particle momentum
@@ -100,17 +104,55 @@ def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac = 0.5):
     link_index = []
     #print("---- new particle ----")
     for l, link in enumerate(event.get("MCTruthRecoLink")): # weights express what fraction of MC particle hits are used in this reco particle
+        flag_cluster_reco = False
+        flag_track_reco = False
+
         mc = link.getSim()
         mc_index_link = mc.getObjectID().index
         if mc_index_link == index: # found link to MC particle that is connected to reco
             wgt = link.getWeight()
             trackwgt = (int(wgt)%10000)/1000
             clusterwgt = (int(wgt)/10000)/1000
-            #print(trackwgt)
+            if clusterwgt > 0.3:
+                flag_cluster_reco = True
+            if trackwgt > 0:
+                # check if track purity is higher than 70%
+                reco = link.getRec()
+                tracks = reco.getTracks()
+                if tracks.size() > 0:
+                    #print(dir(tracks)) # 'at', 'begin', 'empty', 'end', 'size'
+                    if tracks.size() != 1:
+                        raise ValueError("More than one track found for reco particle")
+                    track = tracks.at(0)
+                    hits = track.getTrackerHits()
+                    
+                    # print(dir(hit)): 'clone', 'getCellID', 'getEDep', 'getMCParticle', 'getMomentum', 'getObjectID', 'getPathLength', 'getPosition', 'getQuality', 'getTime', 'id', 'isAvailable', 'isOverlay', 'isProducedBySecondary', 'momentum', 'operator SimTrackerHit', 'position', 'rho', 'setCellID', 'setEDep', 'setMCParticle', 'setMomentum', 'setOverlay', 'setPathLength', 'setPosition', 'setProducedBySecondary', 'setQuality', 'setTime', 'set_bit', 'unlink', 'x', 'y', 'z'
+                    #print("hit size:", hits.size()) # 0
+
+
+                    # get tracker hits
+                    for k, track in enumerate(event.get("SiTracks_Refitted")):
+                        # print(dir(track)) 'addToDxQuantities', 'addToSubdetectorHitNumbers', 'addToTrackStates', 'addToTrackerHits', 'addToTracks', 'clone', 'dxQuantities_begin', 'dxQuantities_end', 'dxQuantities_size', 'getChi2', 'getDEdx', 'getDEdxError', 'getDxQuantities', 'getNdf', 'getObjectID', 'getRadiusOfInnermostHit', 'getSubdetectorHitNumbers', 'getTrackStates', 'getTrackerHits', 'getTracks', 'getType', 'id', 'isAvailable', 'operator Track', 'setChi2', 'setDEdx', 'setDEdxError', 'setNdf', 'setRadiusOfInnermostHit', 'setType', 'subdetectorHitNumbers_begin', 'subdetectorHitNumbers_end', 'subdetectorHitNumbers_size', 'trackStates_begin', 'trackStates_end', 'trackStates_size', 'trackerHits_begin', 'trackerHits_end', 'trackerHits_size', 'tracks_begin', 'tracks_end', 'tracks_size', 'unlink'
+                        track_id = track.getObjectID().index
+                        track_collection_id = track.getObjectID().collectionID
+                        hits = track.getTrackerHits()
+                        #print(hits.size()) #0
+                    for collection in ["InnerTrackerBarrelCollection", "InnerTrackerEndcapCollection", "OuterTrackerBarrelCollection", "OuterTrackerEndcapCollection", "VertexBarrelCollection", "VertexEndcapCollection"]:
+                        for hit in event.get(collection):
+                            # print(dir(hit)): 'clone', 'getCellID', 'getEDep', 'getMCParticle', 'getMomentum', 'getObjectID', 'getPathLength', 'getPosition', 'getQuality', 'getTime', 'id', 'isAvailable', 'isOverlay', 'isProducedBySecondary', 'momentum', 'operator SimTrackerHit', 'position', 'rho', 'setCellID', 'setEDep', 'setMCParticle', 'setMomentum', 'setOverlay', 'setPathLength', 'setPosition', 'setProducedBySecondary', 'setQuality', 'setTime', 'set_bit', 'unlink', 'x', 'y', 'z'
+                            #if hit.getMCParticle().getObjectID().index == MCpart.getObjectID().index:
+                            pass
+            else: 
+                flag_track_reco = False
+
+            '''
             if trackwgt > min_frac or clusterwgt > min_frac: # at least half of the MC hits are associated to the reco particle
                 track_weights.append(trackwgt)
                 link_index.append(l)
                 count += 1
+            '''
+
+    
     #print("# of links to MC particle: ", count) # 0,1,2
     track_weights = np.array(track_weights)
     link_index = np.array(link_index)
