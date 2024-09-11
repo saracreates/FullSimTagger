@@ -342,10 +342,13 @@ def caluclate_charged_track_params(dic, d0, z0, phi, ct, particle_momentum, jet_
     pt_ct_2d = ROOT.TVector2(pt_ct.x(), pt_ct.y())
     sip2d = np.sign(pt_ct_2d * p_jet_2d) * abs(d0) # if angle between track and jet greater 90 deg -> negative sign; if smaller 90 deg -> positive sign
     dic["pfcand_btagSip2dVal"].push_back(sip2d)
-    sip2d_sig = sip2d / np.sqrt(track.covMatrix[0])
-    if np.isnan(sip2d_sig):
-        sip2d_sig = -999
-    dic["pfcand_btagSip2dSig"].push_back(sip2d_sig)
+    if track.covMatrix[0]>0:
+        sip2d_sig = sip2d / np.sqrt(track.covMatrix[0])
+        if np.isnan(sip2d_sig):
+            sip2d_sig = -999
+        dic["pfcand_btagSip2dSig"].push_back(sip2d_sig)
+    else: 
+        dic["pfcand_btagSip2dSig"].push_back(-999)
     
     # calculate signed 3D impact parameter - like in get_Sip3Val() in JetConstituentsUtils.cc 
     IP_3d = np.sqrt(d0**2 + z0**2)
