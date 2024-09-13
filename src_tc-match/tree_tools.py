@@ -944,8 +944,6 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         dic["jet_p"][0] = np.sqrt(jet_momentum.x**2 + jet_momentum.y**2 + jet_momentum.z**2)
         dic["jet_e"][0] = jet.getEnergy()
         dic["jet_mass"][0] = jet.getMass()
-        dic["jet_nconst"][0] = particles_jet.size()
-        dic["jet_npfcand"][0] = particles_jet.size()
         dic["jet_theta"][0] = jet_theta
         dic["jet_phi"][0] = jet_phi
         # reco jet particle IDs
@@ -953,6 +951,8 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         jet_type = which_H_process(H_to_xx) # use file name to determine which Higgs process is being simulated
         for key in jet_type:
             dic[key][0] = jet_type[key]
+
+        n_part = 0
 
         # neutrals - loop over all pfos
         for i, part in enumerate(particles_jet):
@@ -963,6 +963,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                 if MC_part:
                     if MC_part.getCharge() == 0:
                         # now we found a neutral that is truly a neutral! - save
+                        n_part += 1
                         dic, reco_particle_type = save_pfo_particle_info(event, dic, particle, MC_part, j, jet_theta, jet_phi, V0_dic, SV_dic, event_number)
                         dic = fill_neutrals_track_params(dic)
 
@@ -992,6 +993,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
                 continue
             
             # now save the track
+            n_part += 1
             dic, reco_particle_type = save_track_particle_info(event, dic, track, j, jet_theta, jet_phi, V0_dic, SV_dic, event_number)
             # calculate impact parameter with respect to primary vertex
             trackstate = track.getTrackStates().at(0) # at IP 
@@ -1016,7 +1018,14 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
             elif reco_particle_type["pfcand_isChargedHad"]:
                 dic["jet_nchad"][0] += 1  
 
-
+        dic["jet_nconst"][0] = n_part
+        dic["jet_npfcand"][0] = n_part
+        if n_part != dic["pfcand_e"].size():
+            raise ValueError("Number of particles in jet does not match the number of particles saved")
+        # check if there was any particle in this jet saved
+        if n_part == 0:
+            print("No particles in jet")
+            continue
 
         # this needs to be updates to fill the tree with the info as in the fastsim rootfile
         t.Fill()
