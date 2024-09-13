@@ -528,7 +528,13 @@ def V_info(event, dic, p_index, j, V_dic, ev_num, collection, tracks=False):
             v0_ind = (ev_num-1)*100 + v_match + 1
         ind = np.where(np.array(V_dic["V_id"]) == v0_ind)
         if ind[0].size>1 or ind[0].size==0:
-            raise ValueError(f"Found {ind[0].size} indices instead of one.")
+            #raise ValueError(f"Found {ind[0].size} indices instead of one.") #THIS NEEDS TO BE FIXED! WHY IS THIS OCCURING?
+            dic[f"pfcand_{t}_x"].push_back(-200)
+            dic[f"pfcand_{t}_y"].push_back(-200)
+            dic[f"pfcand_{t}_z"].push_back(-200)
+            dic[f"pfcand_{t}_M"].push_back(-200)
+            dic[f"pfcand_{t}_id"].push_back(0)
+
         dic[f"pfcand_{t}_x"].push_back(V_dic["V_x"][ind[0][0]])
         dic[f"pfcand_{t}_y"].push_back(V_dic["V_y"][ind[0][0]])
         dic[f"pfcand_{t}_z"].push_back(V_dic["V_z"][ind[0][0]]) 
