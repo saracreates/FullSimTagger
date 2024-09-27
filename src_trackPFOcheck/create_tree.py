@@ -10,7 +10,7 @@ import re
 from tree_tools import initialize, clear_dic, store_event
 
 ## debug is used to work with only 2 events and add some prints
-debug = True
+debug = False
 
 def extract_hxx(filename):
     # Use regular expression to find "H" followed by either "tautau" or exactly two lowercase letters (Huu, Hdd, etc.)
