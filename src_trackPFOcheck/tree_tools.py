@@ -83,10 +83,19 @@ def mcpid_to_reco(ptype):
         new_ptype = ptype
     return int(new_ptype)
 
-def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac = 0.5):
+def count_tracker_hits(event, MCpart):
+    """counts the number of measured hits in all trackers for a given MC particle"""
+    count_hits = 0
+    for collection in ["InnerTrackerBarrelCollection", "InnerTrackerEndcapCollection", "OuterTrackerBarrelCollection", "OuterTrackerEndcapCollection", "VertexBarrelCollection", "VertexEndcapCollection"]:
+        for hit in event.get(collection):
+            if hit.getMCParticle().getObjectID().index == MCpart.getObjectID().index:
+                count_hits += 1
+    return count_hits
+
+def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_track_frac = 0.3):
     """
     BEFORE: use min_frac = 0.5 (0.1) for clusters and tracks. This is not good because I loose loopers for example.
-    NOW: use min_frac = 0.3 for clusters. Tracks are "reconstructed" if their purity is more than 70%.
+    NOW: use min_frac = 0.3 for clusters. Tracks are "reconstructed" if their purity is more than 70%. -> not possible because I don't have access to the track purity
     """
     dic["mcpid"].push_back(MCpart.getPDG()) # save particle mc pid
     part_p = MCpart.getMomentum()
@@ -95,7 +104,6 @@ def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac = 0.5):
     tlv_p.SetXYZM(part_p.x, part_p.y, part_p.z, MCpart.getMass())
     dic["theta"].push_back(tlv_p.Theta()) # save theta of particle
     dic["energy"].push_back(MCpart.getEnergy()) # save energy of particle
-    
 
     index = MCpart.getObjectID().index
     # loop over links to reco particles
@@ -117,6 +125,7 @@ def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac = 0.5):
                 flag_cluster_reco = True
             if trackwgt > 0:
                 # check if track purity is higher than 70%
+                """ # work in progress. Not possible atm because I can't access track hits from track
                 reco = link.getRec()
                 tracks = reco.getTracks()
                 if tracks.size() > 0:
@@ -142,6 +151,13 @@ def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac = 0.5):
                             # print(dir(hit)): 'clone', 'getCellID', 'getEDep', 'getMCParticle', 'getMomentum', 'getObjectID', 'getPathLength', 'getPosition', 'getQuality', 'getTime', 'id', 'isAvailable', 'isOverlay', 'isProducedBySecondary', 'momentum', 'operator SimTrackerHit', 'position', 'rho', 'setCellID', 'setEDep', 'setMCParticle', 'setMomentum', 'setOverlay', 'setPathLength', 'setPosition', 'setProducedBySecondary', 'setQuality', 'setTime', 'set_bit', 'unlink', 'x', 'y', 'z'
                             #if hit.getMCParticle().getObjectID().index == MCpart.getObjectID().index:
                             pass
+                    """
+
+                    # until I can access track hits, I will just use the track weight
+                    if trackwgt > min_track_frac:
+                        flag_track_reco = True
+
+
             else: 
                 flag_track_reco = False
 
@@ -151,6 +167,12 @@ def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac = 0.5):
                 link_index.append(l)
                 count += 1
             '''
+
+            # if any flags (track or cluster) are true, count as reconstructed
+            if flag_cluster_reco or flag_track_reco:
+                track_weights.append(trackwgt)
+                link_index.append(l)
+                count += 1
 
     
     #print("# of links to MC particle: ", count) # 0,1,2
@@ -164,7 +186,7 @@ def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac = 0.5):
             if np.sqrt(part_p.x**2 +part_p.y**2 + part_p.z**2)< 0.6 and tlv_p.Theta() < 1.67 and tlv_p.Theta() > 1.47:
                 print(f"Curler found! (event {i})")
     elif count>0: # reconstructed
-        if np.max(track_weights) > min_frac: # if half of MC track hits are reconstruced
+        if np.max(track_weights) > min_track_frac: # if half of MC track hits are reconstruced
             dic["mc_pfo_type"].push_back(2)
         else: # neutral particle
             dic["mc_pfo_type"].push_back(1)
@@ -187,14 +209,10 @@ def track_efficiency(event, dic, MCpart):
     # only consider MC particles that leave more than 4 hits in the detector
     # loop over these 6 collections: InnerTrackerBarrelCollection, InnerTrackerEndcapCollection, OuterTrackerBarrelCollection, OuterTrackerEndcapCollection, VertexBarrelCollection, VertexEndcapCollection
     # for hit in these collection -> getParticle() -> that's a MC -> check if same as mine, if yes, increase count!
-    count_hits = 0
-    for collection in ["InnerTrackerBarrelCollection", "InnerTrackerEndcapCollection", "OuterTrackerBarrelCollection", "OuterTrackerEndcapCollection", "VertexBarrelCollection", "VertexEndcapCollection"]:
-        for hit in event.get(collection):
-            if hit.getMCParticle().getObjectID().index == MCpart.getObjectID().index:
-                count_hits += 1
+    count_hits = count_tracker_hits(event, MCpart)
     dic["n_trackerhits"].push_back(count_hits)
     if count_hits < 4:
-        dic["mc_track_found"].push_back(2)
+        dic["mc_track_found"].push_back(2) # this will not happen because I already filter particles with less than 4 hits in the main fuction store_event() 
     else:
 
         collection_id = MCpart.getObjectID().collectionID
@@ -338,15 +356,15 @@ def store_event(event, dic, t, H_to_xx, i):
         mcpid = mcpid_to_reco(mcpid) # change to "reco" pid (charged hadrons -> 211, neutral hadrons -> 2112)
         if abs(mcpid) == 11 or abs(mcpid) == 13 or abs(mcpid) == 211: # found a charged particle
             if MCpart.getGeneratorStatus() == 1: #  undecayed particle, stable in the generator. From https://ilcsoft.desy.de/LCIO/current/doc/doxygen_api/html/classEVENT_1_1MCParticle.html 
-                # requirements fullfilled, save attributes
+                if count_tracker_hits(event, MCpart) > 4: # only consider particles that leave more than 4 hits in the detector, otherwise not reconstructable
+                    # requirements fullfilled, save attributes
 
+                    # PFO track efficiency
+                    dic = PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac=0.1)
 
-                # PFO track efficiency
-                dic = PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac=0.1)
-
-                # track efficiency
-                dic = track_efficiency(event, dic, MCpart)
-                #t.Fill() 
+                    # track efficiency
+                    dic = track_efficiency(event, dic, MCpart)
+                    #t.Fill() 
 
 
     # loop over reco particles for fake rate
