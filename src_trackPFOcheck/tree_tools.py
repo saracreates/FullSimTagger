@@ -153,9 +153,9 @@ def PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_track_frac = 0
                             pass
                     """
 
-                    # until I can access track hits, I will just use the track weight
-                    if trackwgt > min_track_frac:
-                        flag_track_reco = True
+                # until I can access track hits, I will just use the track weight
+                if trackwgt > min_track_frac:
+                    flag_track_reco = True
 
 
             else: 
@@ -360,7 +360,7 @@ def store_event(event, dic, t, H_to_xx, i):
                     # requirements fullfilled, save attributes
 
                     # PFO track efficiency
-                    dic = PFO_track_efficiency(event, dic, MCpart, find_curlers, i, min_frac=0.1)
+                    dic = PFO_track_efficiency(event, dic, MCpart, find_curlers, i)
 
                     # track efficiency
                     dic = track_efficiency(event, dic, MCpart)
