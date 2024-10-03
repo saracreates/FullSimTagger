@@ -4,3 +4,6 @@ fullsim_tree.root
 wrt_PV_tree.root
 Hbb_fullsim_tree.root
 test/Hbb_rec_16562_10.edm4hep.json
+src_trackPFOcheck/__pycache__/tree_tools.cpython-310.pyc
+submit_trackPFOcheck/saaumill.cc
+
