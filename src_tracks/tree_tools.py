@@ -950,36 +950,7 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         for key in jet_type:
             dic[key][0] = jet_type[key]
 
-        n_part = 0
-
-        # neutrals - loop over all pfos
-        for i, part in enumerate(particles_jet):
-            particle = particles_jet.at(i)
-            # neutrals 
-            if particle.getCharge() == 0:
-                MC_part = get_MCparticle_ID(event, particle.getObjectID().collectionID, particle.getObjectID().index, min_frac=0.5) # at least half of the reco hits should belong to one MC particle
-                if MC_part:
-                    if MC_part.getCharge() == 0:
-                        # now we found a neutral that is truly a neutral! - save
-                        n_part += 1
-                        dic, reco_particle_type = save_pfo_particle_info(event, dic, particle, MC_part, j, jet_theta, jet_phi, V0_dic, SV_dic, event_number)
-                        dic = fill_neutrals_track_params(dic)
-
-                        # ignore these because CLD as no drift chamber
-                        dic["pfcand_mtof"].push_back(0)
-                        dic["pfcand_dndx"].push_back(0)
-                        
-                        # count number of particles in jet
-                        if reco_particle_type["pfcand_isMu"]:
-                            dic["jet_nmu"][0] += 1
-                        elif reco_particle_type["pfcand_isEl"]:
-                            dic["jet_nel"][0] += 1
-                        elif reco_particle_type["pfcand_isGamma"]:
-                            dic["jet_ngamma"][0] += 1
-                        elif reco_particle_type["pfcand_isNeutralHad"]:
-                            dic["jet_nnhad"][0] += 1
-                        elif reco_particle_type["pfcand_isChargedHad"]:
-                            dic["jet_nchad"][0] += 1  
+        n_part = 0 # count particles
 
         # charged - loop over all tracks
         for k, track in enumerate(event.get("SiTracks_Refitted")):
