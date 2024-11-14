@@ -73,7 +73,7 @@ def PDG_ID_to_bool_particles(number: int, ntracks: int) -> dict:
     } 
     # {211: 883, -211: 896, 22: 1921, 2112: 543, 11: 66, -11: 73, 13: 24, -13: 22}
     # Mappings for charged and neutral hadrons
-    if number not in [-11, 11, -13, 13, 22]:
+    if number not in [-11, 11, -13, 13, 22, 0]:
         if ntracks == 0:
             return {"pfcand_isEl": False, "pfcand_isMu": False, "pfcand_isGamma": False, "pfcand_isNeutralHad": True, "pfcand_isChargedHad": False}
         else:
