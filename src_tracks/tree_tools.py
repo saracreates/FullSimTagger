@@ -7,7 +7,7 @@ import numpy as np
 from podio import root_io
 import edm4hep
 import ctypes
-
+ 
 
 class MomentumVector:
     def __init__(self, px, py, pz):
@@ -459,6 +459,22 @@ def MC_ass_to_reco_track(event, collection_id, index):
         mc = best_link.getSim() # get MC
         return mc
 
+def find_recoPID_oftrack(track, event):
+    '''Loop over all pfos and access their tracks to find the track with the same index as the one given'''
+    found_track = 0
+    recoPID = 0 # dummy value
+    for pfo in event.get("PandoraPFOs"):
+        for tr in pfo.getTracks():
+            if tr.getObjectID().index == track.getObjectID().index:
+                #print("Found track in PFO with PID: ", pfo.getType())
+                recoPID = pfo.getType()
+                found_track += 1
+    if found_track>1:
+        raise ValueError("Found more than one track with the same index.")
+    #if found_track==0:
+    #    print("No track found in PFOs.")
+    return recoPID
+
 # vertex info helper
 
 def V_info_dic(event, ev_num, collection):
@@ -600,14 +616,23 @@ def save_track_particle_info(event, dic, track, j, jet_theta, jet_phi, V0_dic, S
     dic["pfcand_phi"].push_back(phi)
     # cheat pid and get it from MC 
     MC_part = MC_ass_to_reco_track(event, track.getObjectID().collectionID, track.getObjectID().index)
+
+    # extract reco PID from PFOs 
+    recoPID = find_recoPID_oftrack(track, event)
+    dic["pfcand_type"].push_back(recoPID)
+    '''
     if MC_part:
         MC_p = np.sqrt(MC_part.getMomentum().x**2 + MC_part.getMomentum().y**2 + MC_part.getMomentum().z**2)
         ptype = mcpid_to_reco(MC_part.getPDG(), MC_p)
         dic["pfcand_type"].push_back(ptype)
     else:
         dic["pfcand_type"].push_back(0) # dummy value
+    '''
+
+
     dic["pfcand_charge"].push_back(get_charge(trackstate.omega))
-    reco_particle_type = PDG_ID_to_bool_particles(ptype, 1) # dictionary with the particle type (bool)
+    #reco_particle_type = PDG_ID_to_bool_particles(ptype, 1) # dictionary with the particle type (bool)
+    reco_particle_type = PDG_ID_to_bool_particles(recoPID, 1)
     for key in reco_particle_type:
         dic[key].push_back(reco_particle_type[key])
     dic["pfcand_erel_log"].push_back(np.log10(dic["pfcand_e"][-1]/dic["jet_e"][0])) # like in JetConstituentsUtils.cc in get_erel_log_cluster ( https://github.com/HEP-FCC/FCCAnalyses/blob/d0abc8d76e37630ea157f9d5c48e7867a86be2e2/analyzers/dataframe/src/JetConstituentsUtils.cc#L4 line 877)
