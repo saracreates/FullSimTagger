@@ -351,6 +351,7 @@ def calculate_covariance_matrix(dic, track):
     NOTE: the calculation is in principle not fully correct because the cov matrix is calculated in the point of closest approach to the origin (0,0,0) and not to the primary vertex.
     """
     #print(track.covMatrix.shape) # 21 values: 6 dimensional covariance matrix with values stored in lower triangular form
+    # see https://github.com/key4hep/EDM4hep/blob/997ab32b886899253c9bc61adea9a21b57bc5a21/edm4hep.yaml#L195C9-L200 
     # diagonal: d0 = xy, phi, omega = pt, z0, tanLambda = eta
     dic["pfcand_dxydxy"].push_back(track.covMatrix[0]) 
     dic["pfcand_dphidphi"].push_back(track.covMatrix[2]) 
