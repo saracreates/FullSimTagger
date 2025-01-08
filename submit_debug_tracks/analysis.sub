@@ -1,0 +1,412 @@
+# run commands for analysis,
+
+# here goes your shell script
+executable    = submitAnalysisJob.sh
+#requirements = (OpSysAndVer =?= "CentOS7")
+# here you specify where to put .log, .out and .err files
+output                = /afs/cern.ch/work/s/saaumill/public/condor/std-condor/job.$(ClusterId).$(ProcId).out
+error                 = /afs/cern.ch/work/s/saaumill/public/condor/std-condor/job.$(ClusterId).$(ProcId).err
+log                   = /afs/cern.ch/work/s/saaumill/public/condor/std-condor/job.$(ClusterId).$(ClusterId).log
+
++AccountingGroup = "group_u_FCC.local_gen"
++JobFlavour    = "microcentury"
+arguments="0 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_0.root"
+queue
+arguments="50 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_1.root"
+queue
+arguments="100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_2.root"
+queue
+arguments="150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_3.root"
+queue
+arguments="200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_4.root"
+queue
+arguments="250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_5.root"
+queue
+arguments="300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_6.root"
+queue
+arguments="350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_7.root"
+queue
+arguments="400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_8.root"
+queue
+arguments="450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_9.root"
+queue
+arguments="500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_10.root"
+queue
+arguments="550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_11.root"
+queue
+arguments="600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_12.root"
+queue
+arguments="650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_13.root"
+queue
+arguments="700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_14.root"
+queue
+arguments="750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_15.root"
+queue
+arguments="800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_16.root"
+queue
+arguments="850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_17.root"
+queue
+arguments="900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_18.root"
+queue
+arguments="950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_19.root"
+queue
+arguments="1000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_20.root"
+queue
+arguments="1050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_21.root"
+queue
+arguments="1100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_22.root"
+queue
+arguments="1150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_23.root"
+queue
+arguments="1200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_24.root"
+queue
+arguments="1250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_25.root"
+queue
+arguments="1300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_26.root"
+queue
+arguments="1350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_27.root"
+queue
+arguments="1400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_28.root"
+queue
+arguments="1450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_29.root"
+queue
+arguments="1500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_30.root"
+queue
+arguments="1550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_31.root"
+queue
+arguments="1600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_32.root"
+queue
+arguments="1650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_33.root"
+queue
+arguments="1700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_34.root"
+queue
+arguments="1750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_35.root"
+queue
+arguments="1800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_36.root"
+queue
+arguments="1850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_37.root"
+queue
+arguments="1900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_38.root"
+queue
+arguments="1950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_39.root"
+queue
+arguments="2000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_40.root"
+queue
+arguments="2050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_41.root"
+queue
+arguments="2100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_42.root"
+queue
+arguments="2150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_43.root"
+queue
+arguments="2200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_44.root"
+queue
+arguments="2250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_45.root"
+queue
+arguments="2300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_46.root"
+queue
+arguments="2350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_47.root"
+queue
+arguments="2400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_48.root"
+queue
+arguments="2450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_49.root"
+queue
+arguments="2500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_50.root"
+queue
+arguments="2550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_51.root"
+queue
+arguments="2600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_52.root"
+queue
+arguments="2650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_53.root"
+queue
+arguments="2700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_54.root"
+queue
+arguments="2750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_55.root"
+queue
+arguments="2800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_56.root"
+queue
+arguments="2850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_57.root"
+queue
+arguments="2900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_58.root"
+queue
+arguments="2950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_59.root"
+queue
+arguments="3000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_60.root"
+queue
+arguments="3050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_61.root"
+queue
+arguments="3100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_62.root"
+queue
+arguments="3150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_63.root"
+queue
+arguments="3200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_64.root"
+queue
+arguments="3250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_65.root"
+queue
+arguments="3300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_66.root"
+queue
+arguments="3350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_67.root"
+queue
+arguments="3400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_68.root"
+queue
+arguments="3450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_69.root"
+queue
+arguments="3500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_70.root"
+queue
+arguments="3550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_71.root"
+queue
+arguments="3600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_72.root"
+queue
+arguments="3650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_73.root"
+queue
+arguments="3700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_74.root"
+queue
+arguments="3750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_75.root"
+queue
+arguments="3800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_76.root"
+queue
+arguments="3850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_77.root"
+queue
+arguments="3900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_78.root"
+queue
+arguments="3950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_79.root"
+queue
+arguments="4000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_80.root"
+queue
+arguments="4050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_81.root"
+queue
+arguments="4100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_82.root"
+queue
+arguments="4150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_83.root"
+queue
+arguments="4200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_84.root"
+queue
+arguments="4250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_85.root"
+queue
+arguments="4300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_86.root"
+queue
+arguments="4350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_87.root"
+queue
+arguments="4400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_88.root"
+queue
+arguments="4450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_89.root"
+queue
+arguments="4500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_90.root"
+queue
+arguments="4550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_91.root"
+queue
+arguments="4600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_92.root"
+queue
+arguments="4650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_93.root"
+queue
+arguments="4700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_94.root"
+queue
+arguments="4750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_95.root"
+queue
+arguments="4800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_96.root"
+queue
+arguments="4850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_97.root"
+queue
+arguments="4900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_98.root"
+queue
+arguments="4950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_99.root"
+queue
+arguments="5000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_100.root"
+queue
+arguments="5050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_101.root"
+queue
+arguments="5100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_102.root"
+queue
+arguments="5150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_103.root"
+queue
+arguments="5200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_104.root"
+queue
+arguments="5250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_105.root"
+queue
+arguments="5300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_106.root"
+queue
+arguments="5350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_107.root"
+queue
+arguments="5400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_108.root"
+queue
+arguments="5450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_109.root"
+queue
+arguments="5500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_110.root"
+queue
+arguments="5550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_111.root"
+queue
+arguments="5600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_112.root"
+queue
+arguments="5650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_113.root"
+queue
+arguments="5700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_114.root"
+queue
+arguments="5750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_115.root"
+queue
+arguments="5800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_116.root"
+queue
+arguments="5850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_117.root"
+queue
+arguments="5900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_118.root"
+queue
+arguments="5950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_119.root"
+queue
+arguments="6000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_120.root"
+queue
+arguments="6050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_121.root"
+queue
+arguments="6100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_122.root"
+queue
+arguments="6150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_123.root"
+queue
+arguments="6200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_124.root"
+queue
+arguments="6250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_125.root"
+queue
+arguments="6300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_126.root"
+queue
+arguments="6350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_127.root"
+queue
+arguments="6400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_128.root"
+queue
+arguments="6450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_129.root"
+queue
+arguments="6500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_130.root"
+queue
+arguments="6550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_131.root"
+queue
+arguments="6600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_132.root"
+queue
+arguments="6650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_133.root"
+queue
+arguments="6700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_134.root"
+queue
+arguments="6750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_135.root"
+queue
+arguments="6800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_136.root"
+queue
+arguments="6850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_137.root"
+queue
+arguments="6900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_138.root"
+queue
+arguments="6950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_139.root"
+queue
+arguments="7000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_140.root"
+queue
+arguments="7050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_141.root"
+queue
+arguments="7100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_142.root"
+queue
+arguments="7150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_143.root"
+queue
+arguments="7200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_144.root"
+queue
+arguments="7250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_145.root"
+queue
+arguments="7300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_146.root"
+queue
+arguments="7350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_147.root"
+queue
+arguments="7400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_148.root"
+queue
+arguments="7450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_149.root"
+queue
+arguments="7500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_150.root"
+queue
+arguments="7550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_151.root"
+queue
+arguments="7600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_152.root"
+queue
+arguments="7650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_153.root"
+queue
+arguments="7700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_154.root"
+queue
+arguments="7750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_155.root"
+queue
+arguments="7800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_156.root"
+queue
+arguments="7850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_157.root"
+queue
+arguments="7900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_158.root"
+queue
+arguments="7950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_159.root"
+queue
+arguments="8000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_160.root"
+queue
+arguments="8050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_161.root"
+queue
+arguments="8100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_162.root"
+queue
+arguments="8150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_163.root"
+queue
+arguments="8200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_164.root"
+queue
+arguments="8250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_165.root"
+queue
+arguments="8300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_166.root"
+queue
+arguments="8350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_167.root"
+queue
+arguments="8400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_168.root"
+queue
+arguments="8450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_169.root"
+queue
+arguments="8500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_170.root"
+queue
+arguments="8550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_171.root"
+queue
+arguments="8600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_172.root"
+queue
+arguments="8650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_173.root"
+queue
+arguments="8700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_174.root"
+queue
+arguments="8750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_175.root"
+queue
+arguments="8800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_176.root"
+queue
+arguments="8850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_177.root"
+queue
+arguments="8900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_178.root"
+queue
+arguments="8950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_179.root"
+queue
+arguments="9000 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_180.root"
+queue
+arguments="9050 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_181.root"
+queue
+arguments="9100 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_182.root"
+queue
+arguments="9150 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_183.root"
+queue
+arguments="9200 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_184.root"
+queue
+arguments="9250 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_185.root"
+queue
+arguments="9300 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_186.root"
+queue
+arguments="9350 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_187.root"
+queue
+arguments="9400 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_188.root"
+queue
+arguments="9450 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_189.root"
+queue
+arguments="9500 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_190.root"
+queue
+arguments="9550 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_191.root"
+queue
+arguments="9600 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_192.root"
+queue
+arguments="9650 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_193.root"
+queue
+arguments="9700 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_194.root"
+queue
+arguments="9750 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_195.root"
+queue
+arguments="9800 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_196.root"
+queue
+arguments="9850 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_197.root"
+queue
+arguments="9900 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_198.root"
+queue
+arguments="9950 50 '/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/Huu/CLD_o2_v05/rec/*/*/Huu_rec_*.root' /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/ /eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/Huu_199.root"
+queue
