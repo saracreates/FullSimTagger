@@ -13,7 +13,13 @@ Part of this code is implemented in key4hep, checkout [this repo](https://github
 
 ## Overview of this repository
 
-- the `src` folders contain the code to extract all desired variables from full simulation. There are different variations such as fixing the pandora algorithm by using tracks and not PFOs to describe charged particles (`src_tc-match`) or using tracks only and neglecting neutral particles (`src_tracks`). `src_trackPFOcheck` does a study on lost charged particles is PFOs. Each of these folders has `create_jet_based_tree.py` and `tree_tools.py` where the core of the work lies. 
+- the `src` folders contain the code to extract all desired variables from full simulation. There are different variations such as 
+  - fixing the pandora algorithm by using tracks and not PFOs to describe charged particles (`src_tc-match`) 
+  - using tracks only and neglecting neutral particles (`src_tracks`). 
+  - `src_trackPFOcheck` does a study on lost charged particles is PFOs. 
+  - `src_debug_tracks` performs a study on the 5 helix track parameters and its covariance parameters. 
+  Each of these folders has `create_jet_based_tree.py` and `tree_tools.py` where the core of the work lies. 
+
 - We use condor to submit the jobs for creating desired root files. The submit files (`analysis.sub`) for the different cases are in respective `submit` folders and automatically created by the `write_analysis.py` files. The `analysis.sub` files execute the `submitAnalysisJob.sh` script. 
 
 ## Example usage

@@ -422,6 +422,13 @@ def reco_track_ass_to_MC(event, MCpart):
 
 # vertex info helper
 
+def save_PV_info(dic, primaryVertex, event_number):
+    dic["jet_PV_x"][0] = primaryVertex.x
+    dic["jet_PV_y"][0] = primaryVertex.y
+    dic["jet_PV_z"][0] = primaryVertex.z
+    dic["jet_PV_id"][0] = event_number
+    return dic
+
 def V_info_dic(event, ev_num, collection):
     """
     Retrieve vertex information from event and store it in a dictionary.
@@ -531,6 +538,15 @@ def initialize(t):
     t.Branch("jet_theta", jet_theta, "jet_theta/F")
     jet_phi = array("f", [0])
     t.Branch("jet_phi", jet_phi, "jet_phi/F")
+    # primary vertex info - once per jet
+    jet_PV_x = array("f", [0])
+    t.Branch("jet_PV_x", jet_PV_x, "jet_PV_x/F")
+    jet_PV_y = array("f", [0])
+    t.Branch("jet_PV_y", jet_PV_y, "jet_PV_y/F")
+    jet_PV_z = array("f", [0])
+    t.Branch("jet_PV_z", jet_PV_z, "jet_PV_z/F")
+    jet_PV_id = array("i", [0])
+    t.Branch("jet_PV_id", jet_PV_id, "jet_PV_id/I")
     # MC truth jet IDs
     recojet_isG = array("B", [0])
     t.Branch("recojet_isG", recojet_isG, "recojet_isG/B")
@@ -698,6 +714,11 @@ def initialize(t):
         "recojet_isC": recojet_isC,
         "recojet_isB": recojet_isB,
         "recojet_isTAU": recojet_isTAU,
+        "jet_PV_x": jet_PV_x,
+        "jet_PV_y": jet_PV_y,
+        "jet_PV_z": jet_PV_z,
+        "jet_PV_id": jet_PV_id,
+        # pfcand parameters
         "pfcand_e": pfcand_e,
         "pfcand_p": pfcand_p,
         "pfcand_theta": pfcand_theta,
@@ -771,7 +792,7 @@ def initialize(t):
 def clear_dic(dic):
     scalars = ["jet_p", "jet_e", "jet_mass", "jet_nconst", "jet_npfcand", "jet_theta", "jet_phi", \
         "recojet_isG", "recojet_isU", "recojet_isD", "recojet_isS", "recojet_isC", "recojet_isB", "recojet_isTAU", \
-        "jet_nmu", "jet_nel", "jet_ngamma", "jet_nnhad", "jet_nchad"]
+        "jet_nmu", "jet_nel", "jet_ngamma", "jet_nnhad", "jet_nchad", "jet_PV_x", "jet_PV_y", "jet_PV_z", "jet_PV_id"]
     for key in dic:
         if key in scalars:
             dic[key][0] = 0
@@ -816,8 +837,16 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
 
     RefinedVertexJets = "RefinedVertexJets"
 
+    flag_save_pv = True
     for j, jet in enumerate(event.get(RefinedVertexJets)): # loop over the two jets
         clear_dic(dic) # clear the dictionary for new jet
+
+        # save primary vertex info
+        if flag_save_pv:
+            dic = save_PV_info(dic, primaryVertex, event_number[0])
+            flag_save_pv = False
+        else: 
+            dic = save_PV_info(dic, primaryVertex, event_number[0]-1) # save info with the same event number as the first jet
 
         # Extract the jet momentum
         jet_momentum = jet.getMomentum()
