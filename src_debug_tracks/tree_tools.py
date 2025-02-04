@@ -200,6 +200,25 @@ def store_MC_info(event, dic, MC_part, particle):
         dic["pfcand_nMCtrackerhits"].push_back(-9)
     return dic, correct_matching
 
+def get_MC_quark(event):
+    """checks Higgs -> qq and return one of the MC quarks"""
+    quarks = []
+    higgs_pid = 25
+    expected_flavors = {1, 2, 3, 4, 5, 15, 21}  # u, d, s, c, b, tau, g
+    for MC_part in event.get("MCParticles"):
+        if MC_part.getPDG() == higgs_pid:
+            daughters = MC_part.getDaughters()
+            if daughters.size() != 2:
+                raise ValueError("Higgs has {} daughters. Expected 2.".format(daughters.size()))
+            for daughter in daughters:
+                if abs(daughter.getPDG()) in expected_flavors:
+                    quarks.append(daughter)
+                else:
+                    raise ValueError("Higgs daughter has unexpected PID: {}".format(daughter.getPDG()))
+    if len(quarks) != 2:
+        raise ValueError("Expected 2 quarks from Higgs. Found {}.".format(len(quarks)))
+    return quarks[0] # return one of the quarks, because PV is the same for both
+
 # track params helper
 
 def get_charge(omega, Bz=2):
@@ -510,7 +529,15 @@ def V_info(event, dic, p_index, j, V_dic, ev_num, collection):
     elif ismatch>1:
         raise ValueError(f"Found {ismatch} (more than 1) V0/secondary vertex (collection: {collection}) assosiated with one particle/PFO in jet")
     return dic
-             
+
+def save_MCPV_info(event, dic):
+    MCquark = get_MC_quark(event)
+    vertex = MCquark.getVertex()
+    dic["jet_MCPV_x"][0] = vertex.x
+    dic["jet_MCPV_y"][0] = vertex.y
+    dic["jet_MCPV_z"][0] = vertex.z
+    return dic
+
 # set up dic
 
 def initialize(t):
@@ -547,6 +574,12 @@ def initialize(t):
     t.Branch("jet_PV_z", jet_PV_z, "jet_PV_z/F")
     jet_PV_id = array("i", [0])
     t.Branch("jet_PV_id", jet_PV_id, "jet_PV_id/I")
+    jet_MCPV_x = array("f", [0])
+    t.Branch("jet_MCPV_x", jet_MCPV_x, "jet_MCPV_x/F")
+    jet_MCPV_y = array("f", [0])
+    t.Branch("jet_MCPV_y", jet_MCPV_y, "jet_MCPV_y/F")
+    jet_MCPV_z = array("f", [0])
+    t.Branch("jet_MCPV_z", jet_MCPV_z, "jet_MCPV_z/F")
     # MC truth jet IDs
     recojet_isG = array("B", [0])
     t.Branch("recojet_isG", recojet_isG, "recojet_isG/B")
@@ -718,6 +751,9 @@ def initialize(t):
         "jet_PV_y": jet_PV_y,
         "jet_PV_z": jet_PV_z,
         "jet_PV_id": jet_PV_id,
+        "jet_MCPV_x": jet_MCPV_x,
+        "jet_MCPV_y": jet_MCPV_y,
+        "jet_MCPV_z": jet_MCPV_z,
         # pfcand parameters
         "pfcand_e": pfcand_e,
         "pfcand_p": pfcand_p,
@@ -792,7 +828,7 @@ def initialize(t):
 def clear_dic(dic):
     scalars = ["jet_p", "jet_e", "jet_mass", "jet_nconst", "jet_npfcand", "jet_theta", "jet_phi", \
         "recojet_isG", "recojet_isU", "recojet_isD", "recojet_isS", "recojet_isC", "recojet_isB", "recojet_isTAU", \
-        "jet_nmu", "jet_nel", "jet_ngamma", "jet_nnhad", "jet_nchad", "jet_PV_x", "jet_PV_y", "jet_PV_z", "jet_PV_id"]
+        "jet_nmu", "jet_nel", "jet_ngamma", "jet_nnhad", "jet_nchad", "jet_PV_x", "jet_PV_y", "jet_PV_z", "jet_PV_id", "jet_MCPV_x", "jet_MCPV_y", "jet_MCPV_z"]
     for key in dic:
         if key in scalars:
             dic[key][0] = 0
@@ -844,9 +880,12 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
         # save primary vertex info
         if flag_save_pv:
             dic = save_PV_info(dic, primaryVertex, event_number[0])
+            dic = save_MCPV_info(event, dic)
             flag_save_pv = False
         else: 
             dic = save_PV_info(dic, primaryVertex, event_number[0]-1) # save info with the same event number as the first jet
+            dic = save_MCPV_info(event, dic) # MC PV is the same for both jets
+        # save MC primary vertex info
 
         # Extract the jet momentum
         jet_momentum = jet.getMomentum()
