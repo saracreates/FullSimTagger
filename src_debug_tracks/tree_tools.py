@@ -861,12 +861,18 @@ def store_jet(event, debug, dic, event_number, t, H_to_xx):
     Bz = 2.0 # T
     
 
-    # calculate PV
-    for v, vertex in enumerate(event.get("PrimaryVertices")):
-        if v>0:
-            raise ValueError("More than one primary vertex")
-        primaryVertex = vertex.getPosition()
-        #print("Primary vertex: ", primaryVertex.x, primaryVertex.y, primaryVertex.z)
+    use_MCPV = False
+
+    if use_MCPV:
+        MCquark = get_MC_quark(event)
+        primaryVertex = MCquark.getVertex()
+    else:
+        # calculate PV
+        for v, vertex in enumerate(event.get("PrimaryVertices")):
+            if v>0:
+                raise ValueError("More than one primary vertex")
+            primaryVertex = vertex.getPosition()
+            #print("Primary vertex: ", primaryVertex.x, primaryVertex.y, primaryVertex.z)
 
     V0_dic = V_info_dic(event, event_number[0], "BuildUpVertices_V0") # only calculate once
     SV_dic = V_info_dic(event, event_number[0], "BuildUpVertices")

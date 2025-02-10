@@ -1,11 +1,15 @@
 def generate_analysis_sub():
     # Define file patterns and other fixed values
     file_patterns = ["Huu"]
+    file_dirs = {"Huu": "00016808", "Hcc": "00016810"} 
     num_files = 50
     start_indices = range(0, 10000, num_files)
     base_command = "/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/{pattern}/CLD_o2_v05/rec/*/*/{pattern}_rec_*.root"
-    #output_base = "/afs/cern.ch/work/s/saaumill/public/Hxx-inputNN-largedata_from_batch/"
-    output_base = "/eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/"
+    #base_command = "/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/{pattern}/CLD_o2_v05/rec/{file_dir}/*/{pattern}_rec_*.root" # new data with fixed PV, but does not work
+
+    #output_base = "/eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/"
+    output_base = "/eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/UsingMCPV/"
+    #output_base = "/eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/with_fixesPV/"
     
     # Prepare the header of the file
     header = """# run commands for analysis,
@@ -19,7 +23,7 @@ error                 = /afs/cern.ch/work/s/saaumill/public/condor/std-condor/jo
 log                   = /afs/cern.ch/work/s/saaumill/public/condor/std-condor/job.$(ClusterId).$(ClusterId).log
 
 +AccountingGroup = "group_u_FCC.local_gen"
-+JobFlavour    = "longlunch"
++JobFlavour    = "microcentury"
 """
 
     # Prepare the content with arguments
@@ -27,7 +31,7 @@ log                   = /afs/cern.ch/work/s/saaumill/public/condor/std-condor/jo
     for pattern in file_patterns:
         job_counter = 0
         for start_index in start_indices:
-            input_pattern = base_command.format(pattern=pattern)
+            input_pattern = base_command.format(pattern=pattern, file_dir=file_dirs[pattern])
             output_file = f"{output_base}{pattern}_{job_counter}.root"
             arguments = f"{start_index} {num_files} \'{input_pattern}\' {output_base} {output_file}"
             content += f"arguments=\"{arguments}\"\nqueue\n"
