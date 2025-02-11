@@ -4,12 +4,9 @@ def generate_analysis_sub():
     file_dirs = {"Huu": "00016808", "Hcc": "00016810"} 
     num_files = 50
     start_indices = range(0, 10000, num_files)
-    base_command = "/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/{pattern}/CLD_o2_v05/rec/*/*/{pattern}_rec_*.root"
-    #base_command = "/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/{pattern}/CLD_o2_v05/rec/{file_dir}/*/{pattern}_rec_*.root" # new data with fixed PV, but does not work
-
-    #output_base = "/eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/"
+    base_command = "/eos/experiment/fcc/prod/fcc/ee/test_spring2024/240gev/{pattern}/CLD_o2_v05/rec/*/*/{pattern}_rec_*.root"  # uses 00016553
+    # output_base = "/eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/"
     output_base = "/eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/UsingMCPV/"
-    #output_base = "/eos/experiment/fcc/ee/datasets/CLD_fullsim_tagging_debug_tracks/with_fixesPV/"
     
     # Prepare the header of the file
     header = """# run commands for analysis,

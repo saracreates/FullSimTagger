@@ -207,7 +207,16 @@ def get_MC_quark(event):
     expected_flavors = {1, 2, 3, 4, 5, 15, 21}  # u, d, s, c, b, tau, g
     for MC_part in event.get("MCParticles"):
         if MC_part.getPDG() == higgs_pid:
-            daughters = MC_part.getDaughters()
+            # vertex = MC_part.getVertex()
+            # print("Higgs vertex: ", vertex.x, vertex.y, vertex.z)
+            # daughters = MC_part.getDaughters()
+            # d1 = daughters.at(0)
+            # d2 = daughters.at(1)
+            # d1_vertex = d1.getVertex()
+            # d2_vertex = d2.getVertex()
+            # print("Daughter 1 vertex: ", d1_vertex.x, d1_vertex.y, d1_vertex.z)
+            # print("Daughter 2 vertex: ", d2_vertex.x, d2_vertex.y, d2_vertex.z)
+            # NOTE: Higgs and daughters have the same vertex for Huu 00016553 data
             if daughters.size() != 2:
                 raise ValueError("Higgs has {} daughters. Expected 2.".format(daughters.size()))
             for daughter in daughters:
